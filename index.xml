@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mirco&#39;s Blog</title>
+    <link>http://mircodezorzi.github.io/</link>
+    <description>Recent content on Mirco&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="http://mircodezorzi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>My Doom Emacs configuration files</title>
+      <link>http://mircodezorzi.github.io/doom/</link>
+      <pubDate>Mon, 20 Jul 2020 00:00:00 +0200</pubDate>
+      
+      <guid>http://mircodezorzi.github.io/doom/</guid>
+      <description>;;; config.el -*- lexical-binding: t; -*- General Personal Information (setq user-full-name &amp;#34;Mirco De Zorzi&amp;#34; user-mail-address &amp;#34;mircodezorzi@protonmail.com&amp;#34;) Performance Tweaks (setq scroll-conservatively 101 gc-cons-threshold 100000000) Doom Configuration Font Face (setq doom-font (font-spec :family &amp;#34;Fira Code&amp;#34; :size 20) doom-big-font (font-spec :family &amp;#34;Fira Code&amp;#34; :size 30) doom-mixed-pitch-font (font-spec :family &amp;#34;Overpass&amp;#34; :size 30)) (set-face-attribute &amp;#39;line-number-current-line nil :inherit &amp;#39;(fixed-pitch)) (set-face-attribute &amp;#39;line-number nil :inherit &amp;#39;(fixed-pitch)) Modeline &amp;amp; Theme (setq doom-theme &amp;#39;doom-tomorrow-night) Thanks to tecosaur from whom I stole the following two snippets of code.</description>
+    </item>
+    
+  </channel>
+</rss>
