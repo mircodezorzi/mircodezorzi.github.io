@@ -36,12 +36,15 @@ if (!doNotTrack) {
         <title>My Doom Emacs configuration files</title>
 
         <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/base16-default.dark.css"/>
+
+        <script src="/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </head>
     <body>
         <section id="page-title">
             <h1><a href="/">Mirco&#39;s Blog</a></h1>
         </section>
-
 
 
 <section class="blog-post">
@@ -50,30 +53,30 @@ if (!doNotTrack) {
         July 20, 2020
     </div>
     <div class="blog-post-content">
-        <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span style="color:#75715e">;;; config.el -*- lexical-binding: t; -*-</span>
+        <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; config.el -*- lexical-binding: t; -*-</span>
 </code></pre></div><h2 id="general">General</h2>
 <h3 id="personal-information">Personal Information</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq <span style="color:#a6e22e">user-full-name</span> <span style="color:#e6db74">&#34;Mirco De Zorzi&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#66d9ef">setq</span> user-full-name <span style="color:#e6db74">&#34;Mirco De Zorzi&#34;</span>
       user-mail-address <span style="color:#e6db74">&#34;mircodezorzi@protonmail.com&#34;</span>)
 </code></pre></div><h3 id="performance-tweaks">Performance Tweaks</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq scroll-conservatively <span style="color:#ae81ff">101</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#66d9ef">setq</span> scroll-conservatively <span style="color:#ae81ff">101</span>
       gc-cons-threshold <span style="color:#ae81ff">100000000</span>)
 </code></pre></div><h2 id="doom-configuration">Doom Configuration</h2>
 <h3 id="font-face">Font Face</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq doom-font (<span style="color:#a6e22e">font-spec</span> :family <span style="color:#e6db74">&#34;Fira Code&#34;</span> :size <span style="color:#ae81ff">20</span>)
-      doom-big-font (<span style="color:#a6e22e">font-spec</span> :family <span style="color:#e6db74">&#34;Fira Code&#34;</span> :size <span style="color:#ae81ff">30</span>)
-      doom-mixed-pitch-font (<span style="color:#a6e22e">font-spec</span> :family <span style="color:#e6db74">&#34;Overpass&#34;</span> :size <span style="color:#ae81ff">30</span>))
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(set-face-attribute <span style="color:#e6db74">&#39;line-number-current-line</span> <span style="color:#66d9ef">nil</span> :inherit <span style="color:#f92672">&#39;</span>(fixed-pitch))
-(set-face-attribute <span style="color:#e6db74">&#39;line-number</span> <span style="color:#66d9ef">nil</span> :inherit <span style="color:#f92672">&#39;</span>(fixed-pitch))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#66d9ef">setq</span> doom-font (font-spec <span style="color:#e6db74">:family</span> <span style="color:#e6db74">&#34;Fira Code&#34;</span> <span style="color:#e6db74">:size</span> <span style="color:#ae81ff">20</span>)
+      doom-big-font (font-spec <span style="color:#e6db74">:family</span> <span style="color:#e6db74">&#34;Fira Code&#34;</span> <span style="color:#e6db74">:size</span> <span style="color:#ae81ff">30</span>)
+      doom-mixed-pitch-font (font-spec <span style="color:#e6db74">:family</span> <span style="color:#e6db74">&#34;Overpass&#34;</span> <span style="color:#e6db74">:size</span> <span style="color:#ae81ff">30</span>))
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(set-face-attribute <span style="color:#e6db74">&#39;line-number-current-line</span> <span style="color:#66d9ef">nil</span> <span style="color:#e6db74">:inherit</span> <span style="color:#f92672">&#39;</span>(fixed-pitch))
+(set-face-attribute <span style="color:#e6db74">&#39;line-number</span> <span style="color:#66d9ef">nil</span> <span style="color:#e6db74">:inherit</span> <span style="color:#f92672">&#39;</span>(fixed-pitch))
 </code></pre></div><h3 id="modeline-and-theme">Modeline &amp; Theme</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq doom-theme <span style="color:#e6db74">&#39;doom-tomorrow-night</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#66d9ef">setq</span> doom-theme <span style="color:#e6db74">&#39;doom-tomorrow-night</span>)
 </code></pre></div><p>Thanks to <a href="https://tecosaur.github.io/emacs-config/config.html#theme-modeline">tecosaur</a> from whom I stole the following two snippets of code.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(display-time-mode <span style="color:#ae81ff">1</span>)                        <span style="color:#75715e">; enable time in the mode-line</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(display-time-mode <span style="color:#ae81ff">1</span>)                        <span style="color:#75715e">; enable time in the mode-line</span>
 (unless (<span style="color:#a6e22e">equal</span> <span style="color:#e6db74">&#34;Battery status not avalible&#34;</span> <span style="color:#75715e">; enable battery in the mode-line</span>
                (battery))
   (display-battery-mode <span style="color:#ae81ff">1</span>))
 </code></pre></div><p>This function allows to hide a files&rsquo; encoding whenever there&rsquo;s no need to display it.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(defun doom-modeline-conditional-buffer-encoding ()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(defun doom-modeline-conditional-buffer-encoding ()
   <span style="color:#e6db74">&#34;We expect the encoding to be LF UTF-8, so only show the modeline when this is not the case.&#34;</span>
   (setq-local doom-modeline-buffer-encoding
               (unless (or (<span style="color:#a6e22e">eq</span> buffer-file-coding-system <span style="color:#e6db74">&#39;utf-8-unix</span>)
@@ -82,135 +85,135 @@ if (!doNotTrack) {
 (add-hook <span style="color:#e6db74">&#39;after-change-major-mode-hook</span> <span style="color:#a6e22e">#&#39;</span>doom-modeline-conditional-buffer-encoding)
 </code></pre></div><h3 id="miscellaneous">Miscellaneous</h3>
 <p>Dispaly relative number lines. Essential for any <code>evil</code> user!</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq display-line-numbers-type <span style="color:#e6db74">&#39;relative</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#66d9ef">setq</span> display-line-numbers-type <span style="color:#e6db74">&#39;relative</span>)
 </code></pre></div><p>Display indent guides as dotted lines. We also have to fix an issue with the faces at startup.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(after! highlight-indent-guides
-  (setq highlight-indent-guides-method <span style="color:#e6db74">&#39;bitmap</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(after! highlight-indent-guides
+  (<span style="color:#66d9ef">setq</span> highlight-indent-guides-method <span style="color:#e6db74">&#39;bitmap</span>)
   (highlight-indent-guides-auto-set-faces))
 </code></pre></div><p>I&rsquo;m not a big fan of other conceal characters so I&rsquo;m only keeping the lambda one.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq +pretty-code-symbols <span style="color:#f92672">&#39;</span>(:lambda <span style="color:#e6db74">&#34;λ&#34;</span>))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#66d9ef">setq</span> +pretty-code-symbols <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">:lambda</span> <span style="color:#e6db74">&#34;λ&#34;</span>))
 </code></pre></div><p>More intuitive splits.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq evil-split-window-below <span style="color:#66d9ef">t</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#66d9ef">setq</span> evil-split-window-below <span style="color:#66d9ef">t</span>
       evil-vsplit-window-right <span style="color:#66d9ef">t</span>)
 </code></pre></div><p>Automatically toggle fullscreen mode when loading up Emacs. This applies to <code>emacsclient -c</code> too.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(add-to-list <span style="color:#e6db74">&#39;initial-frame-alist</span> <span style="color:#f92672">&#39;</span>(fullscreen <span style="color:#f92672">.</span> maximized))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(add-to-list <span style="color:#e6db74">&#39;initial-frame-alist</span> <span style="color:#f92672">&#39;</span>(fullscreen <span style="color:#f92672">.</span> maximized))
 </code></pre></div><h2 id="package-configuration">Package Configuration</h2>
 <h3 id="evil-mode">Evil Mode</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(evil-mode <span style="color:#66d9ef">t</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(evil-mode <span style="color:#66d9ef">t</span>)
 </code></pre></div><h3 id="key-chord">Key Chord</h3>
 <p>Enter <code>normal mode</code> whenever <code>u</code> &amp; <code>e</code> are pressed simultaneusly.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq key-chord-two-keys-delay <span style="color:#ae81ff">0.025</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#66d9ef">setq</span> key-chord-two-keys-delay <span style="color:#ae81ff">0.025</span>)
 (key-chord-define evil-insert-state-map <span style="color:#e6db74">&#34;eu&#34;</span> <span style="color:#e6db74">&#39;evil-normal-state</span>)
 (key-chord-mode <span style="color:#ae81ff">1</span>)
 </code></pre></div><h3 id="company">Company</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(after! company
-  (setq company-idle-delay <span style="color:#ae81ff">0.5</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(after! company
+  (<span style="color:#66d9ef">setq</span> company-idle-delay <span style="color:#ae81ff">0.5</span>
         company-minimum-prefix-length <span style="color:#ae81ff">2</span>)
   (add-hook <span style="color:#e6db74">&#39;evil-normal-state-entry-hook</span> <span style="color:#a6e22e">#&#39;</span>company-abort))
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(map!
-  :after company
-  :map company-mode-map
-  :nvm (kbd <span style="color:#e6db74">&#34;C-SPC&#34;</span>) <span style="color:#a6e22e">#&#39;</span>company-complete-selection)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(map!
-  :leader
-  :after company
-  :map company-mode-map
-  :nvm (kbd <span style="color:#e6db74">&#34;C-H&#34;</span>) <span style="color:#a6e22e">#&#39;</span>lsp-ui-doc-show)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(map!
+  <span style="color:#e6db74">:after</span> company
+  <span style="color:#e6db74">:map</span> company-mode-map
+  <span style="color:#e6db74">:nvm</span> (kbd <span style="color:#e6db74">&#34;C-SPC&#34;</span>) <span style="color:#a6e22e">#&#39;</span>company-complete-selection)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(map!
+  <span style="color:#e6db74">:leader</span>
+  <span style="color:#e6db74">:after</span> company
+  <span style="color:#e6db74">:map</span> company-mode-map
+  <span style="color:#e6db74">:nvm</span> (kbd <span style="color:#e6db74">&#34;C-H&#34;</span>) <span style="color:#a6e22e">#&#39;</span>lsp-ui-doc-show)
 </code></pre></div><p>Fancy floating pop-up windows for code documentitation. Stolen from <a href="https://emacs.nasy.moe/#org66a6e8e">Nasy</a>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq lsp-ui-doc-position              <span style="color:#e6db74">&#39;at-point</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#66d9ef">setq</span> lsp-ui-doc-position              <span style="color:#e6db74">&#39;at-point</span>
       lsp-ui-doc-header                <span style="color:#66d9ef">nil</span>
       lsp-ui-doc-border                <span style="color:#e6db74">&#34;violet&#34;</span>
       lsp-ui-doc-include-signature     <span style="color:#66d9ef">t</span>
       lsp-ui-flycheck-enable           <span style="color:#66d9ef">t</span>)
 </code></pre></div><h3 id="yasnippet">Yasnippet</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq yas-snippet-dirs <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;~/.doom.d/snippets&#34;</span>))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#66d9ef">setq</span> yas-snippet-dirs <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;~/.doom.d/snippets&#34;</span>))
 </code></pre></div><h3 id="nerd-commenter">Nerd Commenter</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(map!
-  :leader
-  :nvm (kbd <span style="color:#e6db74">&#34;c c&#34;</span>) <span style="color:#a6e22e">#&#39;</span>evilnc-comment-or-uncomment-lines
-  :nvm (kbd <span style="color:#e6db74">&#34;c p&#34;</span>) <span style="color:#a6e22e">#&#39;</span>evilnc-comment-or-uncomment-paragraphs)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(map!
+  <span style="color:#e6db74">:leader</span>
+  <span style="color:#e6db74">:nvm</span> (kbd <span style="color:#e6db74">&#34;c c&#34;</span>) <span style="color:#a6e22e">#&#39;</span>evilnc-comment-or-uncomment-lines
+  <span style="color:#e6db74">:nvm</span> (kbd <span style="color:#e6db74">&#34;c p&#34;</span>) <span style="color:#a6e22e">#&#39;</span>evilnc-comment-or-uncomment-paragraphs)
 </code></pre></div><h3 id="evil-snipe">Evil Snipe</h3>
 <p>Disable <code>evil-snipe-mode</code> due to key map conflicts.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(after! evil-snipe
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(after! evil-snipe
   (evil-snipe-mode <span style="color:#ae81ff">-1</span>))
 </code></pre></div><h2 id="languages">Languages</h2>
 <h3 id="latex">LaTeX</h3>
 <h4 id="compilation">Compilation</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(after! latex
-  (setq TeX-save-query <span style="color:#66d9ef">nil</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(after! latex
+  (<span style="color:#66d9ef">setq</span> TeX-save-query <span style="color:#66d9ef">nil</span>
         TeX-command-extra-options <span style="color:#e6db74">&#34;-shell-escape&#34;</span>))
 </code></pre></div><h4 id="custom-viewers">Custom Viewers</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(after! latex
-  (setq +latex-viewers <span style="color:#f92672">&#39;</span>(pdf-tools zathura)))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(after! latex
+  (<span style="color:#66d9ef">setq</span> +latex-viewers <span style="color:#f92672">&#39;</span>(pdf-tools zathura)))
 </code></pre></div><h4 id="dictionaries">Dictionaries</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq ispell-dictionary <span style="color:#e6db74">&#34;en-custom&#34;</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#66d9ef">setq</span> ispell-dictionary <span style="color:#e6db74">&#34;en-custom&#34;</span>)
 </code></pre></div><h3 id="org-mode">Org-Mode</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq org-directory <span style="color:#e6db74">&#34;~/org/&#34;</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#66d9ef">setq</span> org-directory <span style="color:#e6db74">&#34;~/org/&#34;</span>)
 </code></pre></div><p>Prettify some symbols.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(after! org
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(after! org
   (appendq! +pretty-code-symbols
-            <span style="color:#f92672">`</span>(:src_block     <span style="color:#e6db74">&#34;»&#34;</span>
-              :src_block_end <span style="color:#e6db74">&#34;«&#34;</span>
-              :results       <span style="color:#e6db74">&#34;⟹&#34;</span>
-              :checkbox      <span style="color:#e6db74">&#34;☐&#34;</span>
-              :pending       <span style="color:#e6db74">&#34;◼&#34;</span>
-              :checkedbox    <span style="color:#e6db74">&#34;☑&#34;</span>
-              :priority_a      <span style="color:#f92672">,</span>(<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;⚑&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#e6db74">&#39;all-the-icons-red</span>)
-              :priority_b      <span style="color:#f92672">,</span>(<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;⚑&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#e6db74">&#39;all-the-icons-orange</span>)
-              :priority_c      <span style="color:#f92672">,</span>(<span style="color:#a6e22e">propertize</span> <span style="color:#e6db74">&#34;⚑&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#e6db74">&#39;all-the-icons-yellow</span>))))
+            <span style="color:#f92672">`</span>(<span style="color:#e6db74">:src_block</span>     <span style="color:#e6db74">&#34;»&#34;</span>
+              <span style="color:#e6db74">:src_block_end</span> <span style="color:#e6db74">&#34;«&#34;</span>
+              <span style="color:#e6db74">:results</span>       <span style="color:#e6db74">&#34;⟹&#34;</span>
+              <span style="color:#e6db74">:checkbox</span>      <span style="color:#e6db74">&#34;☐&#34;</span>
+              <span style="color:#e6db74">:pending</span>       <span style="color:#e6db74">&#34;◼&#34;</span>
+              <span style="color:#e6db74">:checkedbox</span>    <span style="color:#e6db74">&#34;☑&#34;</span>
+              <span style="color:#e6db74">:priority_a</span>      <span style="color:#f92672">,</span>(propertize <span style="color:#e6db74">&#34;⚑&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#e6db74">&#39;all-the-icons-red</span>)
+              <span style="color:#e6db74">:priority_b</span>      <span style="color:#f92672">,</span>(propertize <span style="color:#e6db74">&#34;⚑&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#e6db74">&#39;all-the-icons-orange</span>)
+              <span style="color:#e6db74">:priority_c</span>      <span style="color:#f92672">,</span>(propertize <span style="color:#e6db74">&#34;⚑&#34;</span> <span style="color:#e6db74">&#39;face</span> <span style="color:#e6db74">&#39;all-the-icons-yellow</span>))))
 
 (after! org
   (set-pretty-symbols! <span style="color:#e6db74">&#39;org-mode</span>
-    :merge <span style="color:#66d9ef">t</span>
-    :src_block     <span style="color:#e6db74">&#34;#+BEGIN_SRC&#34;</span>
-    :src_block_end <span style="color:#e6db74">&#34;#+END_SRC&#34;</span>
-    :results       <span style="color:#e6db74">&#34;#+RESULTS:&#34;</span>
-    :checkbox      <span style="color:#e6db74">&#34;[ ]&#34;</span>
-    :pending       <span style="color:#e6db74">&#34;[-]&#34;</span>
-    :checkedbox    <span style="color:#e6db74">&#34;[X]&#34;</span>
-    :priority_a    <span style="color:#e6db74">&#34;[#A]&#34;</span>
-    :priority_b    <span style="color:#e6db74">&#34;[#B]&#34;</span>
-    :priority_c    <span style="color:#e6db74">&#34;[#C]&#34;</span>))
+    <span style="color:#e6db74">:merge</span> <span style="color:#66d9ef">t</span>
+    <span style="color:#e6db74">:src_block</span>     <span style="color:#e6db74">&#34;#+BEGIN_SRC&#34;</span>
+    <span style="color:#e6db74">:src_block_end</span> <span style="color:#e6db74">&#34;#+END_SRC&#34;</span>
+    <span style="color:#e6db74">:results</span>       <span style="color:#e6db74">&#34;#+RESULTS:&#34;</span>
+    <span style="color:#e6db74">:checkbox</span>      <span style="color:#e6db74">&#34;[ ]&#34;</span>
+    <span style="color:#e6db74">:pending</span>       <span style="color:#e6db74">&#34;[-]&#34;</span>
+    <span style="color:#e6db74">:checkedbox</span>    <span style="color:#e6db74">&#34;[X]&#34;</span>
+    <span style="color:#e6db74">:priority_a</span>    <span style="color:#e6db74">&#34;[#A]&#34;</span>
+    <span style="color:#e6db74">:priority_b</span>    <span style="color:#e6db74">&#34;[#B]&#34;</span>
+    <span style="color:#e6db74">:priority_c</span>    <span style="color:#e6db74">&#34;[#C]&#34;</span>))
 
-(<span style="color:#a6e22e">plist-put</span> +pretty-code-symbols :name <span style="color:#e6db74">&#34;foobar&#34;</span>)
+(plist-put +pretty-code-symbols <span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;foobar&#34;</span>)
 </code></pre></div><p>Stolen from <a href="https://tecosaur.github.io/emacs-config/config.html#stolen-from-scimax">tecosaur</a>, which in turn stole it from <a href="https://github.com/jkitchin/scimax">scimax</a>.</p>
 <p>Numbered equations all have (1) as the number for fragments with vanilla org-mode. This code injects the correct numbers into the previews so they look good.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(after! org
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(after! org
   (defun scimax-org-renumber-environment (orig-func <span style="color:#66d9ef">&amp;rest</span> args)
     <span style="color:#e6db74">&#34;A function to inject numbers in LaTeX fragment previews.&#34;</span>
-    (let ((results <span style="color:#f92672">&#39;</span>())
+    (<span style="color:#66d9ef">let</span> ((results <span style="color:#f92672">&#39;</span>())
           (counter <span style="color:#ae81ff">-1</span>)
           (<span style="color:#a6e22e">numberp</span>))
-      (setq results (loop for (begin <span style="color:#f92672">.</span>  env) in
+      (<span style="color:#66d9ef">setq</span> results (loop for (begin <span style="color:#f92672">.</span>  env) in
                           (org-element-map (org-element-parse-buffer) <span style="color:#e6db74">&#39;latex-environment</span>
                             (lambda (env)
                               (<span style="color:#a6e22e">cons</span>
-                               (org-element-property :begin env)
-                               (org-element-property :value env))))
+                               (org-element-property <span style="color:#e6db74">:begin</span> env)
+                               (org-element-property <span style="color:#e6db74">:value</span> env))))
                           collect
                           (cond
-                           ((and (<span style="color:#a6e22e">string-match</span> <span style="color:#e6db74">&#34;\\\\begin{equation}&#34;</span> env)
-                                 (not (<span style="color:#a6e22e">string-match</span> <span style="color:#e6db74">&#34;\\\\tag{&#34;</span> env)))
+                           ((and (string-match <span style="color:#e6db74">&#34;\\\\begin{equation}&#34;</span> env)
+                                 (<span style="color:#a6e22e">not</span> (string-match <span style="color:#e6db74">&#34;\\\\tag{&#34;</span> env)))
                             (incf counter)
                             (<span style="color:#a6e22e">cons</span> begin counter))
-                           ((<span style="color:#a6e22e">string-match</span> <span style="color:#e6db74">&#34;\\\\begin{align}&#34;</span> env)
+                           ((string-match <span style="color:#e6db74">&#34;\\\\begin{align}&#34;</span> env)
                             (prog2
                                 (incf counter)
                                 (<span style="color:#a6e22e">cons</span> begin counter)
                               (with-temp-buffer
-                                (<span style="color:#a6e22e">insert</span> env)
-                                (<span style="color:#a6e22e">goto-char</span> (<span style="color:#a6e22e">point-min</span>))
+                                (insert env)
+                                (goto-char (point-min))
                                 <span style="color:#75715e">;; \\ is used for a new line. Each one leads to a number</span>
                                 (incf counter (count-matches <span style="color:#e6db74">&#34;\\\\$&#34;</span>))
                                 <span style="color:#75715e">;; unless there are nonumbers.</span>
-                                (<span style="color:#a6e22e">goto-char</span> (<span style="color:#a6e22e">point-min</span>))
+                                (goto-char (point-min))
                                 (decf counter (count-matches <span style="color:#e6db74">&#34;\\nonumber&#34;</span>)))))
                            (<span style="color:#66d9ef">t</span>
                             (<span style="color:#a6e22e">cons</span> begin <span style="color:#66d9ef">nil</span>)))))
 
-      (when (setq <span style="color:#a6e22e">numberp</span> (<span style="color:#a6e22e">cdr</span> (<span style="color:#a6e22e">assoc</span> (<span style="color:#a6e22e">point</span>) results)))
+      (when (<span style="color:#66d9ef">setq</span> <span style="color:#a6e22e">numberp</span> (<span style="color:#a6e22e">cdr</span> (<span style="color:#a6e22e">assoc</span> (point) results)))
         (setf (<span style="color:#a6e22e">car</span> args)
-              (<span style="color:#a6e22e">concat</span>
+              (concat
                (<span style="color:#a6e22e">format</span> <span style="color:#e6db74">&#34;\\setcounter{equation}{%s}\n&#34;</span> <span style="color:#a6e22e">numberp</span>)
                (<span style="color:#a6e22e">car</span> args)))))
 
@@ -220,102 +223,102 @@ if (!doNotTrack) {
   (defun scimax-toggle-latex-equation-numbering ()
     <span style="color:#e6db74">&#34;Toggle whether LaTeX fragments are numbered.&#34;</span>
     (interactive)
-    (if (not (<span style="color:#a6e22e">get</span> <span style="color:#e6db74">&#39;scimax-org-renumber-environment</span> <span style="color:#e6db74">&#39;enabled</span>))
-        (progn
-          (advice-add <span style="color:#e6db74">&#39;org-create-formula-image</span> :around <span style="color:#a6e22e">#&#39;</span>scimax-org-renumber-environment)
-          (<span style="color:#a6e22e">put</span> <span style="color:#e6db74">&#39;scimax-org-renumber-environment</span> <span style="color:#e6db74">&#39;enabled</span> <span style="color:#66d9ef">t</span>)
-          (<span style="color:#a6e22e">message</span> <span style="color:#e6db74">&#34;Latex numbering enabled&#34;</span>))
+    (<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">not</span> (<span style="color:#a6e22e">get</span> <span style="color:#e6db74">&#39;scimax-org-renumber-environment</span> <span style="color:#e6db74">&#39;enabled</span>))
+        (<span style="color:#66d9ef">progn</span>
+          (advice-add <span style="color:#e6db74">&#39;org-create-formula-image</span> <span style="color:#e6db74">:around</span> <span style="color:#a6e22e">#&#39;</span>scimax-org-renumber-environment)
+          (put <span style="color:#e6db74">&#39;scimax-org-renumber-environment</span> <span style="color:#e6db74">&#39;enabled</span> <span style="color:#66d9ef">t</span>)
+          (message <span style="color:#e6db74">&#34;Latex numbering enabled&#34;</span>))
       (advice-remove <span style="color:#e6db74">&#39;org-create-formula-image</span> <span style="color:#a6e22e">#&#39;</span>scimax-org-renumber-environment)
-      (<span style="color:#a6e22e">put</span> <span style="color:#e6db74">&#39;scimax-org-renumber-environment</span> <span style="color:#e6db74">&#39;enabled</span> <span style="color:#66d9ef">nil</span>)
-      (<span style="color:#a6e22e">message</span> <span style="color:#e6db74">&#34;Latex numbering disabled.&#34;</span>)))
+      (put <span style="color:#e6db74">&#39;scimax-org-renumber-environment</span> <span style="color:#e6db74">&#39;enabled</span> <span style="color:#66d9ef">nil</span>)
+      (message <span style="color:#e6db74">&#34;Latex numbering disabled.&#34;</span>)))
 
-  (advice-add <span style="color:#e6db74">&#39;org-create-formula-image</span> :around <span style="color:#a6e22e">#&#39;</span>scimax-org-renumber-environment)
-  (<span style="color:#a6e22e">put</span> <span style="color:#e6db74">&#39;scimax-org-renumber-environment</span> <span style="color:#e6db74">&#39;enabled</span> <span style="color:#66d9ef">t</span>))
+  (advice-add <span style="color:#e6db74">&#39;org-create-formula-image</span> <span style="color:#e6db74">:around</span> <span style="color:#a6e22e">#&#39;</span>scimax-org-renumber-environment)
+  (put <span style="color:#e6db74">&#39;scimax-org-renumber-environment</span> <span style="color:#e6db74">&#39;enabled</span> <span style="color:#66d9ef">t</span>))
 </code></pre></div><h2 id="dvorak-mappings">Dvorak Mappings</h2>
 <p>As a Dvorak user I have to manually remap a large amount of keys.</p>
 <h3 id="calendar">Calendar</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(map!
-  :after calendar
-  :map calendar-mode-map
-  :nvm (kbd <span style="color:#e6db74">&#34;d&#34;</span>) <span style="color:#a6e22e">#&#39;</span>calendar-backward-day
-  :nvm (kbd <span style="color:#e6db74">&#34;h&#34;</span>) <span style="color:#a6e22e">#&#39;</span>calendar-forward-week
-  :nvm (kbd <span style="color:#e6db74">&#34;t&#34;</span>) <span style="color:#a6e22e">#&#39;</span>calendar-backward-week
-  :nvm (kbd <span style="color:#e6db74">&#34;n&#34;</span>) <span style="color:#a6e22e">#&#39;</span>calendar-forward-day)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(map!
+  <span style="color:#e6db74">:after</span> calendar
+  <span style="color:#e6db74">:map</span> calendar-mode-map
+  <span style="color:#e6db74">:nvm</span> (kbd <span style="color:#e6db74">&#34;d&#34;</span>) <span style="color:#a6e22e">#&#39;</span>calendar-backward-day
+  <span style="color:#e6db74">:nvm</span> (kbd <span style="color:#e6db74">&#34;h&#34;</span>) <span style="color:#a6e22e">#&#39;</span>calendar-forward-week
+  <span style="color:#e6db74">:nvm</span> (kbd <span style="color:#e6db74">&#34;t&#34;</span>) <span style="color:#a6e22e">#&#39;</span>calendar-backward-week
+  <span style="color:#e6db74">:nvm</span> (kbd <span style="color:#e6db74">&#34;n&#34;</span>) <span style="color:#a6e22e">#&#39;</span>calendar-forward-day)
 </code></pre></div><h3 id="treemacs"><!-- raw HTML omitted -->TODO<!-- raw HTML omitted --> Treemacs</h3>
 <p>For some reason Doom really doesn&rsquo;t want to remap Treemacs keys&hellip;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(map!
-  :after treemacs
-  :map treemacs-mode-map
-  :nvm (kbd <span style="color:#e6db74">&#34;h&#34;</span>) <span style="color:#a6e22e">#&#39;</span>treemacs-next-line
-  :nvm (kbd <span style="color:#e6db74">&#34;t&#34;</span>) <span style="color:#a6e22e">#&#39;</span>treemacs-previous-line)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(map!
+  <span style="color:#e6db74">:after</span> treemacs
+  <span style="color:#e6db74">:map</span> treemacs-mode-map
+  <span style="color:#e6db74">:nvm</span> (kbd <span style="color:#e6db74">&#34;h&#34;</span>) <span style="color:#a6e22e">#&#39;</span>treemacs-next-line
+  <span style="color:#e6db74">:nvm</span> (kbd <span style="color:#e6db74">&#34;t&#34;</span>) <span style="color:#a6e22e">#&#39;</span>treemacs-previous-line)
 </code></pre></div><h3 id="notmuch">Notmuch</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(map!
-  :after notmuch
-  :map notmuch-search-mode-map
-  :nvm <span style="color:#e6db74">&#34;d&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-backward-char
-  :nvm <span style="color:#e6db74">&#34;t&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-previous-line
-  :nvm <span style="color:#e6db74">&#34;C-t&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-window-up)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(map!
+  <span style="color:#e6db74">:after</span> notmuch
+  <span style="color:#e6db74">:map</span> notmuch-search-mode-map
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;d&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-backward-char
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;t&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-previous-line
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;C-t&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-window-up)
 </code></pre></div><h3 id="org-mode">Org-Mode</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(map!
-  :after evil-org
-  :map evil-org-mode-map
-  :nvm <span style="color:#e6db74">&#34;d&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-backward-char
-  :nvm (kbd <span style="color:#e6db74">&#34;M-t&#34;</span>) <span style="color:#a6e22e">#&#39;</span>org-metaup
-  :nvm (kbd <span style="color:#e6db74">&#34;M-h&#34;</span>) <span style="color:#a6e22e">#&#39;</span>org-metadown)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(map!
+  <span style="color:#e6db74">:after</span> evil-org
+  <span style="color:#e6db74">:map</span> evil-org-mode-map
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;d&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-backward-char
+  <span style="color:#e6db74">:nvm</span> (kbd <span style="color:#e6db74">&#34;M-t&#34;</span>) <span style="color:#a6e22e">#&#39;</span>org-metaup
+  <span style="color:#e6db74">:nvm</span> (kbd <span style="color:#e6db74">&#34;M-h&#34;</span>) <span style="color:#a6e22e">#&#39;</span>org-metadown)
 </code></pre></div><h3 id="evil-mode">Evil Mode</h3>
 <h4 id="hjkl-movement">HJKL movement</h4>
 <p>Remap <code>dhtn</code> to <code>hjkl</code> and <code>DHTN</code> to sligthly faster movements.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(map!
-  :nvm <span style="color:#e6db74">&#34;d&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-backward-char
-  :nvm <span style="color:#e6db74">&#34;n&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-forward-char
-  :nvm <span style="color:#e6db74">&#34;h&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-next-line
-  :nvm <span style="color:#e6db74">&#34;t&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-previous-line
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(map!
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;d&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-backward-char
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;n&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-forward-char
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;h&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-next-line
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;t&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-previous-line
 
-  :nvm <span style="color:#e6db74">&#34;D&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-beginning-of-line
-  :nvm <span style="color:#e6db74">&#34;N&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-end-of-line
-  :nvm <span style="color:#e6db74">&#34;H&#34;</span> (kbd <span style="color:#e6db74">&#34;5h&#34;</span>)
-  :nvm <span style="color:#e6db74">&#34;T&#34;</span> (kbd <span style="color:#e6db74">&#34;5t&#34;</span>))
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;D&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-beginning-of-line
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;N&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-end-of-line
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;H&#34;</span> (kbd <span style="color:#e6db74">&#34;5h&#34;</span>)
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;T&#34;</span> (kbd <span style="color:#e6db74">&#34;5t&#34;</span>))
 </code></pre></div><p>We also have to fix some mapping that we overwrote.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(map!
-  :nvm <span style="color:#e6db74">&#34;j&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-delete
-  :nvm <span style="color:#e6db74">&#34;k&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-find-char-to
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(map!
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;j&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-delete
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;k&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-find-char-to
 
-  :nvm <span style="color:#e6db74">&#34;l&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-search-next
-  :nvm <span style="color:#e6db74">&#34;L&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-search-previous)
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;l&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-search-next
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;L&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-search-previous)
 </code></pre></div><h4 id="window-movements">Window Movements</h4>
 <p>Move through splits with <code>C-{DHTN}</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(map!
-  :nvm <span style="color:#e6db74">&#34;C-d&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-window-left
-  :nvm <span style="color:#e6db74">&#34;C-h&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-window-down
-  :nvm <span style="color:#e6db74">&#34;C-t&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-window-up
-  :nvm <span style="color:#e6db74">&#34;C-n&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-window-right)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(map!
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;C-d&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-window-left
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;C-h&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-window-down
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;C-t&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-window-up
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;C-n&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-window-right)
 </code></pre></div><h4 id="other">Other</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(map!
-  :nvm <span style="color:#e6db74">&#34;M-+&#34;</span> <span style="color:#a6e22e">#&#39;</span>doom/increase-font-size
-  :nvm <span style="color:#e6db74">&#34;M--&#34;</span> <span style="color:#a6e22e">#&#39;</span>doom/decrease-font-size
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(map!
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;M-+&#34;</span> <span style="color:#a6e22e">#&#39;</span>doom/increase-font-size
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;M--&#34;</span> <span style="color:#a6e22e">#&#39;</span>doom/decrease-font-size
 
-  :nvm <span style="color:#e6db74">&#34;C-k&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-insert-digraph
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;C-k&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-insert-digraph
 
-  :nvm <span style="color:#e6db74">&#34;s&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-ex)
+  <span style="color:#e6db74">:nvm</span> <span style="color:#e6db74">&#34;s&#34;</span> <span style="color:#a6e22e">#&#39;</span>evil-ex)
 </code></pre></div><h2 id="utility-functions">Utility Functions</h2>
 <h3 id="wrap-selected-code">Wrap Selected Code</h3>
 <p>Wrap text in an org-mode block.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(defun org-wrap-source ()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(defun org-wrap-source ()
   (interactive)
-  (let ((lang (<span style="color:#a6e22e">read-string</span> <span style="color:#e6db74">&#34;Language: &#34;</span>))
-        (start (<span style="color:#a6e22e">min</span> (<span style="color:#a6e22e">point</span>) (mark)))
-        (end (<span style="color:#a6e22e">max</span> (<span style="color:#a6e22e">point</span>) (mark))))
-    (<span style="color:#a6e22e">goto-char</span> end)
-    (unless (<span style="color:#a6e22e">bolp</span>)
+  (<span style="color:#66d9ef">let</span> ((lang (read-string <span style="color:#e6db74">&#34;Language: &#34;</span>))
+        (start (<span style="color:#a6e22e">min</span> (point) (mark)))
+        (end (<span style="color:#a6e22e">max</span> (point) (mark))))
+    (goto-char end)
+    (unless (bolp)
       (newline))
-    (<span style="color:#a6e22e">insert</span> <span style="color:#e6db74">&#34;#+END_SRC\n&#34;</span>)
-    (<span style="color:#a6e22e">goto-char</span> start)
-    (unless (<span style="color:#a6e22e">bolp</span>)
+    (insert <span style="color:#e6db74">&#34;#+END_SRC\n&#34;</span>)
+    (goto-char start)
+    (unless (bolp)
       (newline))
-    (<span style="color:#a6e22e">insert</span> (<span style="color:#a6e22e">format</span> <span style="color:#e6db74">&#34;#+BEGIN_SRC %s\n&#34;</span> lang))))
+    (insert (<span style="color:#a6e22e">format</span> <span style="color:#e6db74">&#34;#+BEGIN_SRC %s\n&#34;</span> lang))))
 
 (map!
-  :v (kbd <span style="color:#e6db74">&#34;C-C C-W&#34;</span>) <span style="color:#a6e22e">#&#39;</span>org-wrap-source)
+  <span style="color:#e6db74">:v</span> (kbd <span style="color:#e6db74">&#34;C-C C-W&#34;</span>) <span style="color:#a6e22e">#&#39;</span>org-wrap-source)
 </code></pre></div>
     </div>
 </section>

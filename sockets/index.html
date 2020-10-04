@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-172736282-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-172736282-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+        <title>Java Sockets: An Introduction</title>
+
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/base16-default.dark.css"/>
+
+        <script src="/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <section id="page-title">
+            <h1><a href="/">Mirco&#39;s Blog</a></h1>
+        </section>
+
+
+<section class="blog-post">
+    <h1>Java Sockets: An Introduction</h1>
+    <div class="blog-post-subheader">
+        September 28, 2020
+    </div>
+    <div class="blog-post-content">
+        <ul>
+<li><a href="#preamble">Preamble</a>
+<ul>
+<li><a href="#downloading-intellij-idea">Downloading IntelliJ IDEA</a></li>
+</ul>
+</li>
+<li><a href="#a-quick-review">A Quick Review</a>
+<ul>
+<li><a href="#classes">Classes</a></li>
+<li><a href="#threads">Threads</a></li>
+<li><a href="#try-with-resource">Try-With-Resource</a></li>
+</ul>
+</li>
+<li><a href="#sockets">Sockets</a>
+<ul>
+<li><a href="#client">Client</a></li>
+<li><a href="#server">Server</a></li>
+<li><a href="#io">I/O</a></li>
+</ul>
+</li>
+<li><a href="#pseudo-irc-chat-implementation">Pseudo-IRC Chat Implementation</a></li>
+</ul>
+<h1 id="preamble">Preamble</h1>
+<p>What follows is a series of lectures given by me during the period of October 2020.</p>
+<h2 id="downloading-intellij-idea">Downloading IntelliJ IDEA</h2>
+<ol>
+<li>Download the portable 7z <a href="https://portapps.io/download/intellij-idea-community-portable-2020.2.1-43.7z/">here</a></li>
+<li>Unzip file in any folder</li>
+<li>Navigate to the <code>bin</code> folder</li>
+<li>Open <code>idea64.exe</code></li>
+</ol>
+<h1 id="a-quick-review">A Quick Review</h1>
+<h2 id="classes">Classes</h2>
+<p>The following code snippet contains most of Java&rsquo;s OOP concepts, from access modifiers to inheritance.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Shape</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">float</span> x <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">float</span> y <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Shape</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Shape</span><span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> x<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> y<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> x<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> y<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">move</span><span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> nx<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> ny<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        x <span style="color:#f92672">=</span> nw<span style="color:#f92672">;</span>
+        y <span style="color:#f92672">=</span> ny<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Rectangle</span> <span style="color:#66d9ef">extends</span> Shape <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">float</span> height<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">float</span> width<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Box</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">super</span><span style="color:#f92672">();</span>
+        height <span style="color:#f92672">=</span> width <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Box</span><span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> size<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">super</span><span style="color:#f92672">(</span>size <span style="color:#f92672">/</span> 2<span style="color:#f92672">,</span> size <span style="color:#f92672">/</span> 2<span style="color:#f92672">);</span>
+        height <span style="color:#f92672">=</span> width <span style="color:#f92672">=</span> size<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Box</span><span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> height<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> width<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">super</span><span style="color:#f92672">(</span>height <span style="color:#f92672">/</span> 2<span style="color:#f92672">,</span> width <span style="color:#f92672">/</span> 2<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">height</span> <span style="color:#f92672">=</span> height<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">width</span> <span style="color:#f92672">=</span> width<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> <span style="color:#a6e22e">area</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> height <span style="color:#f92672">*</span> width<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="threads">Threads</h2>
+<p>There are three ways to create a thread in Java. All three methods yield the same result, but they achieve this in different ways, using different language features.</p>
+<p>The first method uses inheritance to create a class that will inherit methods defined in the parent <code>Thread</code> class. By overriding the <code>run</code> method we can define our threads behavior as we wish.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> <span style="color:#66d9ef">extends</span> Thread <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Then to start the thread:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Foo foo <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Foo<span style="color:#f92672">();</span>
+foo<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+</code></pre></div><p>The second method, on the other hand, uses interfaces to accomplish the same result:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Then to start the thread:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Runnable runnable <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Foo<span style="color:#f92672">();</span>
+Thread thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>runnable<span style="color:#f92672">);</span>
+thread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+</code></pre></div><p>While the third method allows us to create inline threads by using anonymous lambdas:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>
+        <span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+                <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}).</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+
+        <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Documentation: <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.html">Thread</a></p>
+<h2 id="try-with-resource">Try-With-Resource</h2>
+<p>The <code>try-with-resource</code> implements RAII (Resource Acquisition is Initialization) in Java. It allows for automatic resource management, calling all resources <code>close</code> method, guaranteeing a safe cleanup.</p>
+<p>Before Java 7 if we wanted to safely handle a socket cleanup we would have needed to write the following nested <code>try-finally</code> structure:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Socket socket <span style="color:#f92672">=</span> <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>PrintWriter out <span style="color:#f92672">=</span> <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>BufferedReader in <span style="color:#f92672">=</span> <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+        out<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            in<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+            socket<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Fortunately in Java 7 the <code>try-with-resource</code> statement was added, allowing us te emulated the behavior of the previous block of code in a fraction of the lines:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">try</span> <span style="color:#f92672">(</span>
+    Socket socket <span style="color:#f92672">=</span> <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    PrintWriter out <span style="color:#f92672">=</span> <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    BufferedReader in <span style="color:#f92672">=</span> <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>We can build our own &ldquo;closable&rdquo; class by implementing the <code>close</code> function:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClosableResource</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">open</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">/* create our resource */</span>
+        <span style="color:#75715e">/* example: open a connection to the database */</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">close</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">/* close our resource */</span>
+        <span style="color:#75715e">/* example: commit a query and close the connection to the database */</span>
+    <span style="color:#f92672">}</span>
+
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Documentation: <a href="https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html">try-with-resource</a></p>
+<h1 id="sockets">Sockets</h1>
+<h2 id="client">Client</h2>
+<p>To create a socket that connects to a specified ip and port, we can use the following line of code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Socket socket <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Socket<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;127.0.0.1&#34;</span><span style="color:#f92672">,</span> 8080<span style="color:#f92672">);</span>
+</code></pre></div><p>Documentation: <a href="https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html">Socket</a></p>
+<h2 id="server">Server</h2>
+<p>Meanwhile, if we want to create a socket that will listen to a specified port:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">ServerSocket serverSocket <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ServerSocket<span style="color:#f92672">(</span>8080<span style="color:#f92672">);</span>
+Socket clientSocket <span style="color:#f92672">=</span> serverSocket<span style="color:#f92672">.</span><span style="color:#a6e22e">accept</span><span style="color:#f92672">();</span>
+</code></pre></div><p>Documentation: <a href="https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html">ServerSocket</a></p>
+<h2 id="io">I/O</h2>
+<p>To send and receive data through the socket we have to first create objects that allow us to interact with the <code>I/O</code> streams that the socket API provides us:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">PrintWriter out <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PrintWriter<span style="color:#f92672">(</span>socket<span style="color:#f92672">.</span><span style="color:#a6e22e">getOutputStream</span><span style="color:#f92672">(),</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+BufferedReader in <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> InputStreamReader<span style="color:#f92672">(</span>socket<span style="color:#f92672">.</span><span style="color:#a6e22e">getInputStream</span><span style="color:#f92672">()));</span>
+</code></pre></div><p>We can then use <code>out.println</code> to send data through the socket, while <code>in.nextLine</code> will wait until data is sent back to the socket. The latter two functions behave much like the <code>System.out.println</code> and <code>scanner.nextLine</code> counterparts that we&rsquo;ve already seen last year, as all 4 of these function handle stream <code>I/O</code>.</p>
+<p>Documentation: <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/PrintWriter.html">PrintWriter</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/BufferedReader.html">BufferedReader</a></p>
+<h1 id="pseudo-irc-chat-implementation">Pseudo-IRC Chat Implementation</h1>
+<ol>
+<li><a href="./1-Client.java.html">Client.java</a></li>
+<li><a href="./2-Server.java.html">Server.java</a></li>
+<li><a href="./3-ServerThreaded.java.html">ServerThreaded.java</a></li>
+<li><a href="./5-ServerBroadcast.java.html">ServerBroadcast.java</a></li>
+<li><a href="./4-ClientThreaded.java.html">ClientThreaded.java</a></li>
+<li><a href="./6-ServerUsers.java.html">ServerUsers.java</a></li>
+<li><a href="./7-ServerRooms.java.html">ServerRooms.java</a></li>
+</ol>
+
+    </div>
+</section>
+
+    </body>
+</html>

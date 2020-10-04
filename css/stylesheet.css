@@ -1,6 +1,7 @@
 body {
     font-family: 'Ubuntu', sans-serif;
-    color: black;
+    background-color: #151515;
+    color: #d0d0d0;
     margin: auto;
     max-width: 50em;
 }
@@ -11,10 +12,12 @@ body {
 
 #page-title h1 a, .post a {
     color: black;
+    color: #F4BF75;
 }
 
 a {
     text-decoration: none;
+    color: #f4bf75;
 }
 
 #page-title a:hover, .post a:hover {
@@ -23,6 +26,7 @@ a {
 
 .date-time-title {
     display: inline-block;
+    min-width: 100px;
 }
 
 #posts {
