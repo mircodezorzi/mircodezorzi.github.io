@@ -5,21 +5,7 @@
     <link>http://mircodezorzi.github.io/</link>
     <description>Recent content on Mirco&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="http://mircodezorzi.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Java Sockets: An Introduction</title>
-      <link>http://mircodezorzi.github.io/sockets/</link>
-      <pubDate>Mon, 28 Sep 2020 21:30:15 +0200</pubDate>
-      
-      <guid>http://mircodezorzi.github.io/sockets/</guid>
-      <description>Preamble  Downloading IntelliJ IDEA   A Quick Review  Classes Threads Try-With-Resource   Sockets  Client Server I/O   Pseudo-IRC Chat Implementation  Preamble What follows is a series of lectures given by me during the period of October 2020.
-Downloading IntelliJ IDEA  Download the portable 7z here Unzip file in any folder Navigate to the bin folder Open idea64.exe  A Quick Review Classes The following code snippet contains most of Java&amp;rsquo;s OOP concepts, from access modifiers to inheritance.</description>
-    </item>
-    
+    <language>en-us</language><atom:link href="http://mircodezorzi.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My Doom Emacs configuration files</title>
       <link>http://mircodezorzi.github.io/doom/</link>
