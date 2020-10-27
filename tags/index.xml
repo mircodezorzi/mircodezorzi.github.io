@@ -5,6 +5,34 @@
     <link>http://mircodezorzi.github.io/tags/</link>
     <description>Recent content in Tags on Mirco&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="http://mircodezorzi.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://mircodezorzi.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>doom,</title>
+      <link>http://mircodezorzi.github.io/tags/doom/</link>
+      <pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://mircodezorzi.github.io/tags/doom/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dotfiles</title>
+      <link>http://mircodezorzi.github.io/tags/dotfiles/</link>
+      <pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://mircodezorzi.github.io/tags/dotfiles/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>emacs,</title>
+      <link>http://mircodezorzi.github.io/tags/emacs/</link>
+      <pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://mircodezorzi.github.io/tags/emacs/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
