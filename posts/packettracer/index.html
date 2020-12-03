@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Reverse Engineering Packet Tracer Network Simulation Files - mircodz</title><meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta property="og:description" content="" />
+	<meta name="twitter:description" content="" />
+	<meta name="description" content="" />
+	<meta name="description" content="" />
+
+	<meta property="og:title" content="Reverse Engineering Packet Tracer Network Simulation Files | mircodz" />
+	<meta name="twitter:title" content="Reverse Engineering Packet Tracer Network Simulation Files | mircodz" />
+
+	<meta property="og:image" content=""/>
+	<meta itemprop="name" content="Reverse Engineering Packet Tracer Network Simulation Files | mircodz" />
+	<meta name="application-name" content="Reverse Engineering Packet Tracer Network Simulation Files | mircodz" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:title" content="Reverse Engineering Packet Tracer Network Simulation Files" />
+<meta property="og:description" content="Reversing  Thankfully Cisco developers seem to have forgotten to strip the binary&#39;s symbols; this will help up tremendouly in the reversing process and it will save us a huge amount of time as we won&#39;t have to locate the functions that were interested in." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://mircodezorzi.github.io/posts/packettracer/" />
+<meta property="article:published_time" content="2020-11-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-27T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Reverse Engineering Packet Tracer Network Simulation Files"/>
+<meta name="twitter:description" content="Reversing  Thankfully Cisco developers seem to have forgotten to strip the binary&#39;s symbols; this will help up tremendouly in the reversing process and it will save us a huge amount of time as we won&#39;t have to locate the functions that were interested in."/>
+
+
+  <link rel="preconnect" href="//fonts.gstatic.com">
+  <link href="//fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="//fonts.gstatic.com">
+  <link href="//fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+
+
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/github.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/languages/x86asm.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://mircodezorzi.github.io/css/main.css" />
+	
+</head>
+<body>
+        <div class="content"><header>
+  <div class="main">
+    <a href="https://mircodezorzi.github.io/">mircodz</a>
+  </div>
+  <nav>
+    
+      <a href="/tags/">tags</a>
+    
+  </nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Reverse Engineering Packet Tracer Network Simulation Files</h1>
+			<div class="meta">Posted on Nov 27, 2020</div>
+		</div>
+		
+
+		<section class="body">
+			
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Reversing
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>Thankfully Cisco developers seem to have forgotten to strip the binary&#39;s symbols; this will help up tremendouly in the reversing process and it will save us a huge amount of time as we won&#39;t have to locate the functions that were interested in. After opening up the binary in IDA and giving it some time to analyze it we can start looking at all the declared functions inside the program. The one that stands out the most is <code class="verbatim">decryptFileBytes</code>; if we try to run PacketTracer under a debugger and we add a breakpoint onto said function, opening any <code class="verbatim">pka</code> or <code class="verbatim">pkt</code> file we immideately trigger the breakepoint and will halt the program with the following backtrace:</p>
+<div class="src src-text">
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">[#0] 0x5555589f9560 → Util::decryptFileBytes(QByteArray const&amp;, QByteArray&amp;, QString)()
+[#1] 0x555558b7762f → CAppWindow::fileOpenFromBytes(QByteArray const&amp;, QString const&amp;)()
+[#2] 0x555558b7b5eb → CAppWindow::fileOpen(QString)()
+[#3] 0x555558b7b138 → CAppWindow::fileOpenFolder(QString const&amp;)()
+[#4] 0x555558b4f646 → CAppWindow::fileOpen()()
+[#5] 0x55555937a1f5 → CAppWindow::qt_static_metacall(QObject*, QMetaObject::Call, int, void**)()
+[#6] 0x7fffeed0dd85 → QMetaObject::activate(QObject*, int, int, void**)()
+[#7] 0x7ffff739f792 → QAction::triggered(bool)()
+[#8] 0x7ffff73a1dac → QAction::activate(QAction::ActionEvent)()
+[#9] 0x7ffff73a2701 → QAction::event(QEvent*)()</code></pre></div>
+</div>
+<p>
+Looking at the decompiled pseudo-code generated by IDA we immediately find another three functions with really interesting names: <code class="verbatim">decryptPTSave</code>, <code class="verbatim">deobfuscateBytes</code>, and <code class="verbatim">qUncompress</code>. Because the function uses <code class="verbatim">QDomDocument</code> we can also deduce that the simulation files are actually XML files decrypted and probably obfuscated.</p>
+<div class="src src-c++">
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="kr">__fastcall</span> <span class="n">Util</span><span class="o">::</span><span class="n">decryptFileBytes</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">*</span><span class="n">a1</span><span class="p">,</span> <span class="n">QByteArray</span> <span class="o">*</span><span class="n">a2</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">QByteArray</span> <span class="o">*</span><span class="n">buf</span><span class="p">;</span> <span class="c1">// [rsp+18h] [rbp-50h] MAPDST
+</span><span class="c1"></span>  <span class="n">QByteArray</span> <span class="n">plain</span><span class="p">;</span> <span class="c1">// [rsp+20h] [rbp-48h]
+</span><span class="c1"></span>
+  <span class="n">v2</span> <span class="o">=</span> <span class="n">a2</span><span class="p">;</span>
+  <span class="n">v17</span> <span class="o">=</span> <span class="n">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+  <span class="n">QDomDocument</span><span class="o">::</span><span class="n">QDomDocument</span><span class="p">(</span><span class="o">&amp;</span><span class="n">v12</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">QDomDocument</span><span class="o">::</span><span class="n">setContent</span><span class="p">(</span><span class="o">&amp;</span><span class="n">v12</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="mi">0LL</span><span class="p">,</span> <span class="mi">0LL</span><span class="p">,</span> <span class="mi">0LL</span><span class="p">)</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">QByteArray</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">a2</span><span class="p">,</span> <span class="n">original</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+  <span class="p">{</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="n">QArrayData</span><span class="o">::</span><span class="n">shared_null</span><span class="p">;</span>
+    <span class="n">Util</span><span class="o">::</span><span class="n">decryptPTSave</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span> <span class="n">input</span><span class="p">);</span> <span class="c1">// buf = decryptedPTSave(input)
+</span><span class="c1"></span>    <span class="n">QByteArray</span><span class="o">::~</span><span class="n">QByteArray</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="o">!*</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+        <span class="n">QByteArray</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span> <span class="n">input</span><span class="p">);</span>
+    <span class="n">Util</span><span class="o">::</span><span class="n">deobfuscateBytes</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span> <span class="n">input</span><span class="p">);</span> <span class="c1">// second parameter won&#39;t be used here
+</span><span class="c1"></span>    <span class="n">v5</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">qUncompress</span><span class="p">(</span><span class="n">plain</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">var_50</span><span class="p">);</span>
+    <span class="n">v6</span> <span class="o">=</span> <span class="o">*</span><span class="n">v2</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">v2</span> <span class="o">=</span> <span class="o">*</span><span class="n">plain</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">plain</span> <span class="o">=</span> <span class="n">v6</span><span class="p">;</span>
+    <span class="n">QByteArray</span><span class="o">::~</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">plain</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="o">!*</span><span class="p">(</span><span class="o">*</span><span class="n">v2</span> <span class="o">+</span> <span class="mi">4LL</span><span class="p">)</span> <span class="p">)</span>
+    <span class="p">{</span>
+      <span class="c1">// fail
+</span><span class="c1"></span>    <span class="p">}</span>
+    <span class="c1">// parse xml document
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div>
+</div>
+<p>
+One little detail that might stand out when reading the decompiled code is that the program seems to call the <code class="verbatim">QByteArray</code> destructor on <code class="verbatim">buf</code> before ever reading from it after the decrypted result has been started in it, which is really weird. Looking at the disassembly we discovered that this is just an error in the decompiled, caused by the weird memory management. What actually happens is that the address of <code class="verbatim">input</code> is stored in <code class="verbatim">r12</code>, then <code class="verbatim">buf</code> and <code class="verbatim">input</code> are swapped on the stack, after which the destructor is called on the address inside of <code class="verbatim">r12</code>, which is still <code class="verbatim">input</code>.</p>
+<div class="src src-x86asm">
+<pre><code class="language-x86asm" data-lang="x86asm">.text:00000000034A55A9                 mov     rax, cs:_ZN10QArrayData11shared_nullE_ptr
+.text:00000000034A55B0                 lea     r12, [rsp+68h+var_50] ; var_50 = input of decryptPTSave
+.text:00000000034A55B5                 mov     rsi, rbp
+.text:00000000034A55B8                 lea     r14, [rsp+68h+var_60]
+.text:00000000034A55BD                 mov     rdi, r12
+.text:00000000034A55C0                 mov     [rsp+68h+var_60], rax ; var_60 = output of decryptPTSave
+.text:00000000034A55C5                 call    _ZN4Util13decryptPTSaveERK10QByteArray ; Util::decryptPTSave(QByteArray const&amp;)
+.text:00000000034A55CA                 mov     rax, [rsp+68h+var_60]
+.text:00000000034A55CF                 mov     rdx, [rsp+68h+var_50]
+.text:00000000034A55D4                 mov     rdi, r12
+.text:00000000034A55D7                 lea     r14, [rsp+68h+var_60]
+.text:00000000034A55DC                 mov     [rsp+68h+var_60], rdx ; swap var_50 and var_60
+.text:00000000034A55E1                 mov     [rsp+68h+var_50], rax
+.text:00000000034A55E6                 call    _ZN10QByteArrayD2Ev ; QByteArray::~QByteArray()
+.text:00000000034A55EB                 mov     rax, [rsp+68h+var_60]
+.text:00000000034A55F0                 mov     edx, [rax+4]
+.text:00000000034A55F3                 test    edx, edx
+.text:00000000034A55F5                 jz      loc_34A5870
+.text:00000000034A55FB
+.text:00000000034A55FB loc_34A55FB:
+.text:00000000034A55FB                 mov     rdi, r14 ; r14 = output of decryptPTSave
+.text:00000000034A55FE                 call    _ZN4Util16deobfuscateBytesER10QByteArray ; Util::deobfuscateBytes(QByteArray &amp;)
+.text:00000000034A5603                 mov     rsi, [rsp+68h+var_60] ; var_60 = input of qUncompress
+.text:00000000034A5608                 lea     rbp, [rsp+68h+var_48] ; var_48 = output of qUncompress
+.text:00000000034A560D                 mov     rdi, rbp        ; unsigned __int8 *
+.text:00000000034A5610                 mov     edx, [rsi+4]
+.text:00000000034A5613                 add     rsi, [rsi+10h]  ; int
+.text:00000000034A5617                 call    __Z11qUncompressPKhi ; qUncompress(uchar const*,int)
+.text:00000000034A561C                 mov     rdx, qword ptr [rsp+68h+var_48] ; rdx now contains our decrypted input string</code></pre>
+</div>
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+Stage 1 &amp; 2: <code class="verbatim">decryptPTSave</code>
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>The first of the three functions of interest is <code class="verbatim">decryptPTSave</code> , an intermediary function which calls <code class="verbatim">Util::decrypt&lt;CryptoPP::Twofish&gt;</code>, passing it it&#39;s two parameters and a pair of integers, 137 and 16, which we&#39;ll soon discover are the defeat values of the key and initialization vectors.</p>
+<div class="src src-c++">
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">_QWORD</span> <span class="o">*</span><span class="kr">__fastcall</span> <span class="n">Util</span><span class="o">::</span><span class="n">decryptPTSave</span><span class="p">(</span><span class="n">QByteArray</span> <span class="o">*</span><span class="n">a1</span><span class="p">,</span> <span class="k">const</span> <span class="n">QByteArray</span> <span class="o">*</span><span class="n">a2</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="n">v2</span><span class="p">;</span> <span class="c1">// ST08_8
+</span><span class="c1"></span>  <span class="n">_QWORD</span> <span class="o">*</span><span class="n">v1</span><span class="p">;</span> <span class="c1">// rax
+</span><span class="c1"></span>
+  <span class="n">v2</span> <span class="o">=</span> <span class="n">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+  <span class="n">v1</span> <span class="o">=</span> <span class="n">Util</span><span class="o">::</span><span class="n">decrypt</span><span class="o">&lt;</span><span class="n">CryptoPP</span><span class="o">::</span><span class="n">Twofish</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="mi">137u</span><span class="p">,</span> <span class="mi">16u</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">)</span> <span class="o">==</span> <span class="n">v2</span> <span class="p">)</span>
+    <span class="n">v1</span> <span class="o">=</span> <span class="n">a1</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">v1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<p>
+Analyzing <code class="verbatim">Util::decrypt&lt;CryptoPP::Twofish&gt;</code> find our first real layer of obfuscation. Before actually decrypting our input data.</p>
+<div class="src src-c++">
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">_QWORD</span> <span class="o">*</span><span class="kr">__fastcall</span> <span class="n">Util</span><span class="o">::</span><span class="n">decrypt</span><span class="o">&lt;</span><span class="n">CryptoPP</span><span class="o">::</span><span class="n">Twofish</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_QWORD</span> <span class="o">*</span><span class="n">a1</span><span class="p">,</span> <span class="kr">__int64</span> <span class="o">*</span><span class="n">a2</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kr">__int8</span> <span class="n">key_value</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kr">__int8</span> <span class="n">iv_value</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">length</span><span class="p">;</span> <span class="c1">// ebx
+</span><span class="c1"></span>  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// ebp
+</span><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">offset</span><span class="p">;</span> <span class="c1">// rdx
+</span><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">data</span><span class="p">;</span> <span class="c1">// [rsp+10h] [rbp-78h] MAPDST
+</span><span class="c1"></span>  <span class="kt">char</span> <span class="n">key</span><span class="p">;</span> <span class="c1">// [rsp+20h] [rbp-68h]
+</span><span class="c1"></span>  <span class="kt">char</span> <span class="n">iv</span><span class="p">;</span> <span class="c1">// [rsp+30h] [rbp-58h]
+</span><span class="c1"></span>
+  <span class="c1">// ...
+</span><span class="c1"></span>
+  <span class="n">v18</span> <span class="o">=</span> <span class="n">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+  <span class="n">QByteArray</span><span class="o">::</span><span class="n">QByteArray</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">a2</span> <span class="o">+</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">v5</span> <span class="o">=</span> <span class="o">*</span><span class="n">a2</span><span class="p">;</span>
+  <span class="n">length</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">a2</span> <span class="o">+</span> <span class="mi">4</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">length</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">do</span>
+    <span class="p">{</span>
+      <span class="n">v11</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">v5</span> <span class="o">+</span> <span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="n">v5</span> <span class="o">+</span> <span class="p">(</span><span class="n">length</span> <span class="o">+</span> <span class="o">~</span><span class="n">i</span><span class="p">))</span> <span class="o">^</span> <span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="n">i</span> <span class="o">*</span> <span class="n">length</span><span class="p">);</span> <span class="c1">// v11 = data[length - i - 1] ^ (length - i * length)
+</span><span class="c1"></span>      <span class="c1">// Qt5 buffer size checks...
+</span><span class="c1"></span>      <span class="n">offset</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">data</span> <span class="o">+</span> <span class="mi">16</span><span class="p">);</span>
+      <span class="n">v10</span> <span class="o">=</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+      <span class="o">*</span><span class="p">(</span><span class="n">offset</span> <span class="o">+</span> <span class="n">data</span> <span class="o">+</span> <span class="n">v10</span><span class="p">)</span> <span class="o">=</span> <span class="n">v11</span><span class="p">;</span> <span class="c1">// buf[i] = v11
+</span><span class="c1"></span>      <span class="n">v5</span> <span class="o">=</span> <span class="o">*</span><span class="n">a2</span><span class="p">;</span>
+      <span class="n">length</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">a2</span> <span class="o">+</span> <span class="mi">4</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">while</span> <span class="p">(</span> <span class="n">length</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">memset_s</span><span class="p">(</span><span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="mi">16LL</span><span class="p">,</span> <span class="n">key_value</span><span class="p">,</span> <span class="mi">16LL</span><span class="p">);</span> <span class="c1">// 137
+</span><span class="c1"></span>  <span class="n">memset_s</span><span class="p">(</span><span class="o">&amp;</span><span class="n">iv</span><span class="p">,</span> <span class="mi">16LL</span><span class="p">,</span> <span class="n">iv_value</span><span class="p">,</span> <span class="mi">16LL</span><span class="p">);</span>   <span class="c1">// 16
+</span><span class="c1"></span>  <span class="n">Util</span><span class="o">::</span><span class="n">decipher</span><span class="o">&lt;</span><span class="n">CryptoPP</span><span class="o">::</span><span class="n">Twofish</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">v15</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">iv</span><span class="p">);</span>
+  <span class="o">*</span><span class="n">a1</span> <span class="o">=</span> <span class="n">v15</span><span class="p">;</span>
+  <span class="n">v15</span> <span class="o">=</span> <span class="n">QArrayData</span><span class="o">::</span><span class="n">shared_null</span><span class="p">;</span>
+  <span class="n">QByteArray</span><span class="o">::~</span><span class="n">QByteArray</span><span class="p">(</span><span class="o">&amp;</span><span class="n">v15</span><span class="p">);</span>
+  <span class="n">QByteArray</span><span class="o">::~</span><span class="n">QByteArray</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">);</span>
+  <span class="c1">// try-catch block ...
+</span><span class="c1"></span>  <span class="k">return</span> <span class="n">v1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<p>
+We could write this neatly in C++ in the following form:</p>
+<div class="src src-c++">
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">processed</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="sc">&#39;\0&#39;</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">processed</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">input</span><span class="p">[</span><span class="n">length</span> <span class="o">+</span> <span class="o">~</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="n">i</span> <span class="o">*</span> <span class="n">length</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<p>
+Now, let&#39;s analyze <code class="verbatim">Util::decipher</code>! We have finally reached the bottom of this rabbit hole. I won&#39;t bother to include the entire decompiled function as it is quite straightforward. It takes a <code class="verbatim">QByteArray</code>, a key, and an initialization vector; it decrypts the input using the <code class="verbatim">CryptoPP</code> library, returning a second <code class="verbatim">QByteArray</code> containing our decrypted input. </p>
+<div class="src src-c++">
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">QByteArray</span> <span class="o">*</span><span class="kr">__fastcall</span> <span class="n">Util</span><span class="o">::</span><span class="n">decipher</span><span class="o">&lt;</span><span class="n">CryptoPP</span><span class="o">::</span><span class="n">Twofish</span><span class="o">&gt;</span><span class="p">(</span><span class="n">QByteArray</span> <span class="o">*</span><span class="n">a1</span><span class="p">,</span> <span class="kr">__int64</span> <span class="n">a2</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kr">__int8</span> <span class="o">*</span><span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kr">__int8</span> <span class="o">*</span><span class="n">iv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="c1"></span>  <span class="n">CryptoPP</span><span class="o">::</span><span class="n">EAX_Base</span><span class="o">::</span><span class="n">EAX_Base</span><span class="p">(</span><span class="o">&amp;</span><span class="n">decryptor</span><span class="p">);</span>
+  <span class="c1">// ...
+</span><span class="c1"></span>  <span class="n">CryptoPP</span><span class="o">::</span><span class="n">SimpleKeyingInterface</span><span class="o">::</span><span class="n">SetKeyWithIV</span><span class="p">(</span><span class="o">&amp;</span><span class="n">decryptor</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="mi">16uLL</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="mi">16uLL</span><span class="p">);</span>
+  <span class="c1">// ...
+</span><span class="c1"></span>  <span class="n">CryptoPP</span><span class="o">::</span><span class="n">AuthenticatedDecryptionFilter</span><span class="o">::</span><span class="n">AuthenticatedDecryptionFilter</span><span class="p">(</span><span class="n">filter</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">decryptor</span><span class="p">,</span> <span class="n">sink</span><span class="p">,</span> <span class="mi">16LL</span><span class="p">,</span> <span class="mh">0xFFFFFFFFLL</span><span class="p">,</span> <span class="mi">5LL</span><span class="p">);</span>                               
+  <span class="n">CryptoPP</span><span class="o">::</span><span class="n">StringSource</span><span class="o">::</span><span class="n">StringSource</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stringsource</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">a2</span> <span class="o">+</span> <span class="mi">16LL</span><span class="p">)</span> <span class="o">+</span> <span class="o">*</span><span class="n">a2</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">a2</span> <span class="o">+</span> <span class="mi">4LL</span><span class="p">),</span> <span class="mi">1LL</span><span class="p">,</span> <span class="n">filter</span><span class="p">);</span>
+  <span class="c1">// ...
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div>
+</div>
+<p>
+If you&#39;re interesting in looking at the entire decompiled function I&#39;ll include all the decompiled functions featured in this article in the Github directory containing all the PacketTracer tools.</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+Stage 3: <code class="verbatim">deobfuscateBytes</code>
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>This second function iterates over the entire buffer and xors each byte with the size of the buffer - it&#39;s position.</p>
+<div class="src src-c++">
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">QByteArray</span> <span class="o">*</span><span class="kr">__fastcall</span> <span class="n">Util</span><span class="o">::</span><span class="n">deobfuscateBytes</span><span class="p">(</span><span class="n">QByteArray</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="n">QByteArray</span> <span class="o">*</span><span class="n">unused</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">QByteArray</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span> <span class="c1">// rax
+</span><span class="c1"></span>  <span class="kt">int</span> <span class="n">length</span><span class="p">;</span> <span class="c1">// edx
+</span><span class="c1"></span>  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// ebx
+</span><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">offset</span><span class="p">;</span> <span class="c1">// rcx
+</span><span class="c1"></span>  <span class="kt">char</span> <span class="n">v8</span><span class="p">;</span> <span class="c1">// bp
+</span><span class="c1"></span>
+  <span class="n">ptr</span> <span class="o">=</span> <span class="o">*</span><span class="n">buf</span><span class="p">;</span>
+  <span class="n">length</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">buf</span> <span class="o">+</span> <span class="mi">4LL</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">length</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">do</span>
+    <span class="p">{</span>
+      <span class="n">v2</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+      <span class="n">offset</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">ptr</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// offset of the data relative to ptr
+</span><span class="c1"></span>      <span class="n">v8</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">ptr</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="n">i</span><span class="p">);</span> <span class="c1">// char v8 = buf[i] ^ sizeof(buf) - i
+</span><span class="c1"></span>      <span class="c1">// Qt5 buffer size checks...
+</span><span class="c1"></span>      <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+      <span class="o">*</span><span class="p">(</span><span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span> <span class="o">=</span> <span class="n">v8</span><span class="p">;</span> <span class="c1">// buf[i] = v8
+</span><span class="c1"></span>      <span class="n">ptr</span> <span class="o">=</span> <span class="o">*</span><span class="n">buf</span><span class="p">;</span>
+      <span class="n">length</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">buf</span> <span class="o">+</span> <span class="mi">4LL</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">while</span> <span class="p">(</span> <span class="n">length</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">ptr</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<p>
+Converting it into a neater form in C++</p>
+<div class="src src-c++">
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">output</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="p">(</span><span class="n">output</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+Stage 4: <code class="verbatim">qUncompress</code>
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>Lucky for us, the last step of the decoding function is quite trivial. <code class="verbatim">qUncompress</code> is a Qt5 function, and after a quick glange at the librarys&#39; documentatino we discovered that it takes in a <code class="verbatim">QByteBuffer</code> and decompresses its contents using zlib. The only catch to it is that the first 4 bytes of the buffer must contain the size of the decompressed data, so we can write a small function to calculate the output size and discard the unneeded bytes.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-2">
+<h2 id="headline-5">
+Putting it All Together
+</h2>
+<div id="outline-text-headline-5" class="outline-text-2">
+<div class="src src-c++">
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">/// \brief Reimplementation of qUncompress
+</span><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">uncompress</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nbytes</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">len</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">)</span>
+                    <span class="o">|</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span>
+                    <span class="o">|</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span>  <span class="mi">8</span><span class="p">)</span>
+                    <span class="o">|</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>      <span class="p">);</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span> <span class="n">buf</span><span class="p">(</span><span class="n">len</span><span class="p">);</span>
+
+  <span class="c1">// call zlibs&#39; uncompress
+</span><span class="c1"></span>  <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="o">::</span><span class="n">uncompress</span><span class="p">(</span><span class="n">buf</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="o">&amp;</span><span class="n">len</span><span class="p">,</span> <span class="n">data</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="n">nbytes</span> <span class="o">-</span> <span class="mi">4</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">!=</span> <span class="n">Z_OK</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle error gracefully...
+</span><span class="c1"></span>  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">buf</span><span class="p">.</span><span class="n">data</span><span class="p">()));</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">decrypt</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">input</span><span class="p">)</span>
+  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">key</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">137</span> <span class="p">};</span>
+  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">iv</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span>  <span class="o">=</span> <span class="p">{</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span> <span class="p">};</span>
+
+  <span class="k">typename</span> <span class="n">CryptoPP</span><span class="o">::</span><span class="n">EAX</span><span class="o">&lt;</span><span class="n">CryptoPP</span><span class="o">::</span><span class="n">TwoFish</span><span class="o">&gt;::</span><span class="n">Decryption</span> <span class="n">d</span><span class="p">;</span>
+  <span class="n">d</span><span class="p">.</span><span class="n">SetKeyWithIV</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">iv</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">iv</span><span class="p">));</span>
+
+  <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">input</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">processed</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="sc">&#39;\0&#39;</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">output</span><span class="p">;</span>
+
+  <span class="c1">// Stage 1 - deobfuscation
+</span><span class="c1"></span>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">processed</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">input</span><span class="p">[</span><span class="n">length</span> <span class="o">+</span> <span class="o">~</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="n">i</span> <span class="o">*</span> <span class="n">length</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Stage 2 - decryption
+</span><span class="c1"></span>  <span class="n">CryptoPP</span><span class="o">::</span><span class="n">StringSource</span> <span class="n">ss</span><span class="p">(</span><span class="n">processed</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span>
+    <span class="k">new</span> <span class="n">CryptoPP</span><span class="o">::</span><span class="n">AuthenticatedDecryptionFilter</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="k">new</span> <span class="n">CryptoPP</span><span class="o">::</span><span class="n">StringSink</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+  <span class="p">);</span>
+
+  <span class="c1">// Stage 3 - deobfuscation
+</span><span class="c1"></span>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">output</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="p">(</span><span class="n">output</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="n">i</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Stage 4 - decompression
+</span><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">decompressed</span> <span class="o">=</span> <span class="n">uncompress</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">output</span><span class="p">.</span><span class="n">data</span><span class="p">()),</span> <span class="n">output</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+  <span class="k">return</span> <span class="n">decompressed</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+
+		</section>
+
+    
+
+    
+	</article>
+</main>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-172736282-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</div>
+    </body>
+</html>
