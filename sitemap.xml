@@ -3,8 +3,43 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://mircodezorzi.github.io/tags/aws/</loc>
+    <lastmod>2020-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mircodezorzi.github.io/tags/c&#43;&#43;/</loc>
+    <lastmod>2020-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://mircodezorzi.github.io/</loc>
-    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mircodezorzi.github.io/tags/pka2xml/</loc>
+    <lastmod>2020-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mircodezorzi.github.io/posts/</loc>
+    <lastmod>2020-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mircodezorzi.github.io/tags/reversing/</loc>
+    <lastmod>2020-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mircodezorzi.github.io/tags/</loc>
+    <lastmod>2020-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mircodezorzi.github.io/posts/pka2xml-aws/</loc>
+    <lastmod>2020-12-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -13,22 +48,7 @@
   </url>
   
   <url>
-    <loc>https://mircodezorzi.github.io/posts/</loc>
-    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://mircodezorzi.github.io/posts/packettracer/</loc>
-    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://mircodezorzi.github.io/tags/reversing/</loc>
-    <lastmod>2020-11-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://mircodezorzi.github.io/tags/</loc>
     <lastmod>2020-11-27T00:00:00+00:00</lastmod>
   </url>
   

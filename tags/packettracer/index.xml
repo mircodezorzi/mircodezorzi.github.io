@@ -13,7 +13,7 @@
       <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://mircodezorzi.github.io/posts/packettracer/</guid>
-      <description>Reversing  Thankfully Cisco developers seem to have forgotten to strip the binary&amp;#39;s symbols; this will help up tremendouly in the reversing process and it will save us a huge amount of time as we won&amp;#39;t have to locate the functions that were interested in.</description>
+      <description>Preface  As a high school IT student I often find myself using Packet Tracer as a surrogate to &amp;#34;real life networking&amp;#34;.</description>
     </item>
     
   </channel>

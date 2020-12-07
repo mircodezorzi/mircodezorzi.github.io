@@ -6,14 +6,23 @@
     <description>Recent content in reversing on mircodz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://mircodezorzi.github.io/tags/reversing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://mircodezorzi.github.io/tags/reversing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>tl;dr: pka2xml-aws</title>
+      <link>https://mircodezorzi.github.io/posts/pka2xml-aws/</link>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://mircodezorzi.github.io/posts/pka2xml-aws/</guid>
+      <description>After having more or less finished working on pka2xml I&#39;ve decided embark on a new jurney; porting the tool to the aws C++ lambda runtime and create a small frontend to go with it.</description>
+    </item>
+    
     <item>
       <title>Reverse Engineering Packet Tracer Network Simulation Files</title>
       <link>https://mircodezorzi.github.io/posts/packettracer/</link>
       <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://mircodezorzi.github.io/posts/packettracer/</guid>
-      <description>Reversing  Thankfully Cisco developers seem to have forgotten to strip the binary&amp;#39;s symbols; this will help up tremendouly in the reversing process and it will save us a huge amount of time as we won&amp;#39;t have to locate the functions that were interested in.</description>
+      <description>Preface  As a high school IT student I often find myself using Packet Tracer as a surrogate to &amp;#34;real life networking&amp;#34;.</description>
     </item>
     
   </channel>

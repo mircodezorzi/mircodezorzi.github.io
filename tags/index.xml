@@ -6,22 +6,49 @@
     <description>Recent content in Tags on mircodz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://mircodezorzi.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://mircodezorzi.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>packettracer</title>
-      <link>https://mircodezorzi.github.io/tags/packettracer/</link>
-      <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+      <title>aws</title>
+      <link>https://mircodezorzi.github.io/tags/aws/</link>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://mircodezorzi.github.io/tags/packettracer/</guid>
+      <guid>https://mircodezorzi.github.io/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>c&#43;&#43;</title>
+      <link>https://mircodezorzi.github.io/tags/c&#43;&#43;/</link>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://mircodezorzi.github.io/tags/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pka2xml</title>
+      <link>https://mircodezorzi.github.io/tags/pka2xml/</link>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://mircodezorzi.github.io/tags/pka2xml/</guid>
       <description></description>
     </item>
     
     <item>
       <title>reversing</title>
       <link>https://mircodezorzi.github.io/tags/reversing/</link>
-      <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://mircodezorzi.github.io/tags/reversing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>packettracer</title>
+      <link>https://mircodezorzi.github.io/tags/packettracer/</link>
+      <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://mircodezorzi.github.io/tags/packettracer/</guid>
       <description></description>
     </item>
     

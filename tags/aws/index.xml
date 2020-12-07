@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>aws on mircodz</title>
+    <link>https://mircodezorzi.github.io/tags/aws/</link>
+    <description>Recent content in aws on mircodz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 04 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://mircodezorzi.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>tl;dr: pka2xml-aws</title>
+      <link>https://mircodezorzi.github.io/posts/pka2xml-aws/</link>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://mircodezorzi.github.io/posts/pka2xml-aws/</guid>
+      <description>After having more or less finished working on pka2xml I&#39;ve decided embark on a new jurney; porting the tool to the aws C++ lambda runtime and create a small frontend to go with it.</description>
+    </item>
+    
+  </channel>
+</rss>

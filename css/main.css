@@ -75,7 +75,7 @@ ul {
 }
 
 ul li {
-  text-indent: -2ch; 
+  /*text-indent: -2ch;*/
 }
 
 ul li::before {
@@ -136,8 +136,9 @@ code {
 /* Containers */
 .content {
   margin-bottom: 4em;
-  margin: auto;
-  max-width: 80%;
+  /*margin: auto;*/
+  max-width: 70%;
+  margin-left: 100px;
   word-wrap: break-word;
 }
 
@@ -256,4 +257,87 @@ nav a::before {
 
 .tags li {
   padding: 5px;
+}
+
+li p {
+  display: inline
+}
+
+.hugotoc {
+  font-family: var(--secondary-font);
+  display: none;
+  position: fixed;
+  right: 1%;
+  top: 110px;
+  width: 300px;
+  overflow-y: auto;
+  min-height: 85%;
+  padding: 0;
+}
+
+.hugotoc li {
+  list-style: none;
+}
+
+.hugotoc ul>li {
+  margin-bottom: 0.4rem;
+}
+
+.hugotoc ul>li>ul>li {
+  font-size: 0.9em;
+  margin-bottom: 0.4rem;
+}
+
+.hugotoc ul>li>ul>li>ul>li {
+  font-size: 0.9em;
+  margin-bottom: 0.3rem;
+}
+
+.hugotoc ul {
+  padding-left: 1rem;
+}
+
+.hugotoc nav>ul {
+  padding-left: 0;
+}
+
+.hugotoc a:hover {
+  color: var(--theme-color);
+}
+
+.hugotoc a.current {
+  color: var(--theme-color);
+  font-weight: bold;
+}
+
+.hugotoc code {
+  padding: 0;
+}
+
+.hugotoc a {
+  border: none;
+}
+
+.hugotoc a::before {
+  content: '';
+}
+
+
+.hugotoc a:hover {
+  color: white;
+}
+
+.hugotoc ul:not(.navbar):not(.no-bullets) li::before {
+  content: '';
+}
+
+.hugotoc .back-to-top {
+  font-size: 0.8em;
+  padding-left: 1rem;
+}
+
+@media screen and (min-width: 1400px) {
+  .hugotoc {
+    display: block;
+  }
 }
