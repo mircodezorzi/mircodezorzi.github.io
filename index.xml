@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>mircodz</title>
+    <title>(&gt;&gt;=) :: mircodz</title>
     <link>https://mircodezorzi.github.io/</link>
-    <description>Recent content on mircodz</description>
+    <description>Recent content on (&gt;&gt;=) :: mircodz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 04 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://mircodezorzi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 Dec 2020 00:00:00 +0100</lastBuildDate><atom:link href="https://mircodezorzi.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>tl;dr: pka2xml-aws</title>
-      <link>https://mircodezorzi.github.io/posts/pka2xml-aws/</link>
-      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
+      <title>Reversing Packet Tracer Part 2: Shenanigans</title>
+      <link>https://mircodezorzi.github.io/doc/reversing-packet-tracer-part-2/</link>
+      <pubDate>Sat, 05 Dec 2020 00:00:00 +0100</pubDate>
       
-      <guid>https://mircodezorzi.github.io/posts/pka2xml-aws/</guid>
-      <description>After having more or less finished working on pka2xml I&#39;ve decided embark on a new jurney; porting the tool to the aws C++ lambda runtime and create a small frontend to go with it.</description>
+      <guid>https://mircodezorzi.github.io/doc/reversing-packet-tracer-part-2/</guid>
+      <description>Table of Contents  Bypassing Login 100%    Bypassing Login TODO everything
+1606495110527~K501UW~{a46d0802-d1d6-4341-adf4-3acacef612cb}~a0a1523a-a35b-41a7-b8ad-4cdc9f70e3f0~1615148676 v143 = 2LL; if ( v218 &amp;amp;&amp;amp; (v218 = 0, v143 = 2LL, !CAppWindow::IS_PTSA) ) { QWidget::hide(&amp;amp;v284); v180 = (CNetspaceLogin *)operator new(0x80uLL); CNetspaceLogin::CNetspaceLogin(v180, 0LL); 1500 lines prior</description>
     </item>
     
     <item>
-      <title>Reverse Engineering Packet Tracer Network Simulation Files</title>
-      <link>https://mircodezorzi.github.io/posts/packettracer/</link>
-      <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+      <title>Reversing Packet Tracer a parte: pka2xml-aws</title>
+      <link>https://mircodezorzi.github.io/doc/pka2xml-aws/</link>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0100</pubDate>
       
-      <guid>https://mircodezorzi.github.io/posts/packettracer/</guid>
-      <description>Preface  As a high school IT student I often find myself using Packet Tracer as a surrogate to &amp;#34;real life networking&amp;#34;.</description>
+      <guid>https://mircodezorzi.github.io/doc/pka2xml-aws/</guid>
+      <description>Table of Contents  Backend  Installing the C++ Lambda Runtime Setting up CMake The code Compiling   Frontend    After having finally finished writing a small tool based on the research from part 1 - which can be found here - I decided to distract myself even further and I&#39;ve decided embark on a new jurney; porting the tool to the aws C++ lambda runtime and create a small frontend to go with it.</description>
+    </item>
+    
+    <item>
+      <title>Reversing Packet Tracer Part 1: Network Simulation Files</title>
+      <link>https://mircodezorzi.github.io/doc/reversing-packet-tracer-part-1/</link>
+      <pubDate>Fri, 27 Nov 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://mircodezorzi.github.io/doc/reversing-packet-tracer-part-1/</guid>
+      <description>Table of Contents  Preface Reversing  Stage 1: decryptPTSave Stage 2: decipher Stage 3: deobfuscateBytes Stage 4: qUncompress   Putting it All Together Resources    Preface As a high school IT student I find myself using Packet Tracer almost on a daily basis.</description>
     </item>
     
   </channel>

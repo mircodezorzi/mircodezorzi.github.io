@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html><head>
   <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>packettracer - mircodz</title><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>packettracer - (&gt;&gt;=) :: mircodz</title><meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="description" content="" />
 
-  <link rel="alternate" type="application/rss+xml" href="https://mircodezorzi.github.io/tags/packettracer/index.xml" title="mircodz" />
+  <link rel="alternate" type="application/rss+xml" href="https://mircodezorzi.github.io/tags/packettracer/index.xml" title="(>>=) :: mircodz" />
   <script src="https://mircodezorzi.github.io/js/main.js"></script>
 
   <link rel="preconnect" href="//fonts.gstatic.com">
@@ -44,7 +44,7 @@ if (!doNotTrack) {
 <body>
         <div class="content"><header>
   <div class="main">
-    <a href="https://mircodezorzi.github.io/">mircodz</a>
+    <a href="https://mircodezorzi.github.io/">(&gt;&gt;=) :: mircodz</a>
   </div>
   <nav>
     
@@ -58,8 +58,52 @@ if (!doNotTrack) {
 
 
 <ul class="posts"><li class="post">
-      <a href="/posts/packettracer/">Reverse Engineering Packet Tracer Network Simulation Files</a> <span class="meta">Nov 27, 2020 <span class="draft-label">DRAFT</span> </span>
+      <a href="/doc/reversing-packet-tracer-part-2/">Reversing Packet Tracer Part 2: Shenanigans</a> <span class="meta">Dec 5, 2020</span>
+    </li><li class="post">
+      <a href="/doc/pka2xml-aws/">Reversing Packet Tracer a parte: pka2xml-aws</a> <span class="meta">Dec 4, 2020</span>
+    </li><li class="post">
+      <a href="/doc/reversing-packet-tracer-part-1/">Reversing Packet Tracer Part 1: Network Simulation Files</a> <span class="meta">Nov 27, 2020</span>
     </li></ul>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="application/javascript">(function() {
+     var $window = $(window);
+     if ($window.width() >= 1400) { 
+         var $toc = $('#TableOfContents');
+         if ($toc.length > 0) {
+             function onScroll(){
+                 var currentScroll = $window.scrollTop();
+                 var h = $('.content h1, .content h2, .content h3, .content h4, .content h5, .content h6, .h-feed h2');
+                 var id = "";
+                 h.each(function (i, e) {
+                     e = $(e);
+                     if (e.offset().top - 10 <= currentScroll) {
+                         id = e.attr('id');
+                     }
+                 });
+                 var current = $toc.find('a.current');
+                 if (current.length == 1 && current.eq(0).attr('href') == '#' + id) return true;
+
+                 current.each(function (i, e) {
+                     $(e).removeClass('current').siblings('ul').hide();
+                 });
+                 $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+                     $(e).children('a').addClass('current').siblings('ul').show();
+                 });
+             }
+             $window.on('scroll', onScroll);
+             $(document).ready(function() {
+                 $toc.find('a').parent('li').find('ul').hide();
+                 onScroll();
+                 document.getElementsByClassName('hugotoc')[0].style.display = '';
+             });}}})();</script>
+
+
+
+
+
+
 
 
 <script type="application/javascript">

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-	<meta name="generator" content="Hugo 0.78.2" />
+	<meta name="generator" content="Hugo 0.79.1" />
   <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>mircodz | Home </title><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>(&gt;&gt;=) :: mircodz | Home </title><meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="description" content="" />
 
-  <link rel="alternate" type="application/rss+xml" href="https://mircodezorzi.github.io/index.xml" title="mircodz" />
+  <link rel="alternate" type="application/rss+xml" href="https://mircodezorzi.github.io/index.xml" title="(>>=) :: mircodz" />
   <script src="https://mircodezorzi.github.io/js/main.js"></script>
 
   <link rel="preconnect" href="//fonts.gstatic.com">
@@ -48,7 +48,7 @@ if (!doNotTrack) {
     <div class="content">
       <header>
   <div class="main">
-    <a href="https://mircodezorzi.github.io/">mircodz</a>
+    <a href="https://mircodezorzi.github.io/">(&gt;&gt;=) :: mircodz</a>
   </div>
   <nav>
     
@@ -57,39 +57,105 @@ if (!doNotTrack) {
   </nav>
 </header>
 
-      
+
       <main class="list">
         <div class="site-description"></div>
+        <h1 class="title">Blog</h1>
         
         
         
         <section class="list-item">
-          <h1 class="title"><a href="/posts/pka2xml-aws/">tl;dr: pka2xml-aws</a></h1>
-          <time>Dec 4, 2020 <span class="draft-label">DRAFT</span> </time>
-          <br><div class="description">
-            
-            After having more or less finished working on pka2xml I've decided embark on a new jurney; porting the tool to the aws C++ lambda runtime and create a small frontend to go with it.&hellip;
-            
-          </div>
-          <a href="/posts/pka2xml-aws/">Read more ⟶</a>
+          <time>2020-05-12</time>
+          <a href="/doc/reversing-packet-tracer-part-2/">Reversing Packet Tracer Part 2: Shenanigans</a>
         </section>
         
         <section class="list-item">
-          <h1 class="title"><a href="/posts/packettracer/">Reverse Engineering Packet Tracer Network Simulation Files</a></h1>
-          <time>Nov 27, 2020 <span class="draft-label">DRAFT</span> </time>
-          <br><div class="description">
-            
-            Preface  As a high school IT student I often find myself using Packet Tracer as a surrogate to &#34;real life networking&#34;.&hellip;
-            
-          </div>
-          <a href="/posts/packettracer/">Read more ⟶</a>
+          <time>2020-04-12</time>
+          <a href="/doc/pka2xml-aws/">Reversing Packet Tracer a parte: pka2xml-aws</a>
+        </section>
+        
+        <section class="list-item">
+          <time>2020-27-11</time>
+          <a href="/doc/reversing-packet-tracer-part-1/">Reversing Packet Tracer Part 1: Network Simulation Files</a>
         </section>
         
         
 
 
+				<div id="projects">
+					<h1 class="title">Projects</h1>
+					<section class="list-item">
+  <a href="https://github.com/mircodezorzi/loki-cpp"><b>loki-cpp</b></a>: C++ 17 driver for Loki
+</section>
+<section class="list-item">
+  <a href="https://github.com/mircodezorzi/pka2xml"><b>pka2xml</b></a>: Convert Packet Tracer network simulation pka and pkt files into XML and vice versa.
+</section>
+<section class="list-item">
+  <a href="https://github.com/hort/daemon"><b>hort</b></a>: data scraping framework on steroids
+</section>
+<section class="list-item">
+  <a href="https://github.com/mircodezorzi/sigol"><b>sigol</b></a>: simple go aws lambda management tool
+</section>
+
+				</div>
+				<div id="skills">
+					<h1 class="title">Skills</h1>
+					<section class="list-item">
+	<b>Languages</b>: C++, Go, Python, C, Assembly, {Type,Java}Script, Angular, PHP
+</section>
+<section class="list-item">
+	<b>Other Tools</b>: MongoDB, Prometheus, Loki, MySQL, Emacs
+</section>
+<section class="list-item">
+	<b>Administrative Tools</b>: AWS, Serverless, Git, Docker, docker-compose, Ansible, Linux, *BSD
+</section>
+<section class="list-item">
+	<b>Natural Languages</b> Italian (native), English (proficient), Slovakian (second language)
+</section>
+
+				</div>
       </main>
       
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="application/javascript">(function() {
+     var $window = $(window);
+     if ($window.width() >= 1400) { 
+         var $toc = $('#TableOfContents');
+         if ($toc.length > 0) {
+             function onScroll(){
+                 var currentScroll = $window.scrollTop();
+                 var h = $('.content h1, .content h2, .content h3, .content h4, .content h5, .content h6, .h-feed h2');
+                 var id = "";
+                 h.each(function (i, e) {
+                     e = $(e);
+                     if (e.offset().top - 10 <= currentScroll) {
+                         id = e.attr('id');
+                     }
+                 });
+                 var current = $toc.find('a.current');
+                 if (current.length == 1 && current.eq(0).attr('href') == '#' + id) return true;
+
+                 current.each(function (i, e) {
+                     $(e).removeClass('current').siblings('ul').hide();
+                 });
+                 $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+                     $(e).children('a').addClass('current').siblings('ul').show();
+                 });
+             }
+             $window.on('scroll', onScroll);
+             $(document).ready(function() {
+                 $toc.find('a').parent('li').find('ul').hide();
+                 onScroll();
+                 document.getElementsByClassName('hugotoc')[0].style.display = '';
+             });}}})();</script>
+
+
+
+
+
+
+
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -104,6 +170,6 @@ if (!doNotTrack) {
 
 
     </div>
-    
+
   </body>
 </html>

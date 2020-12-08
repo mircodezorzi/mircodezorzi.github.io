@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>aws on (&gt;&gt;=) :: mircodz</title>
-    <link>https://mircodezorzi.github.io/tags/aws/</link>
-    <description>Recent content in aws on (&gt;&gt;=) :: mircodz</description>
+    <title>clang on (&gt;&gt;=) :: mircodz</title>
+    <link>https://mircodezorzi.github.io/tags/clang/</link>
+    <description>Recent content in clang on (&gt;&gt;=) :: mircodz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 04 Dec 2020 00:00:00 +0100</lastBuildDate><atom:link href="https://mircodezorzi.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Dec 2020 00:00:00 +0100</lastBuildDate><atom:link href="https://mircodezorzi.github.io/tags/clang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reversing Packet Tracer a parte: pka2xml-aws</title>
       <link>https://mircodezorzi.github.io/doc/pka2xml-aws/</link>
