@@ -6,7 +6,16 @@
     <description>Recent content on (&gt;&gt;=) :: mircodz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 05 Dec 2020 00:00:00 +0100</lastBuildDate><atom:link href="https://mircodezorzi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0100</lastBuildDate><atom:link href="https://mircodezorzi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Emacs Configuration</title>
+      <link>https://mircodezorzi.github.io/doc/emacs-configuration/</link>
+      <pubDate>Tue, 26 Jan 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://mircodezorzi.github.io/doc/emacs-configuration/</guid>
+      <description>Table of Contents  Meta Packages General  Personal information Reduce filesystem clutter Cleanup UI Better defaults Beacon Font Theme Display battery in modeline Indent guides Cursorline Indentation Windows Relative line numbers Key chords Workgroups   Evil Mode Language Server  lsp-mode lsp-ui   Auto Complete Languages  C++ Python Golang Haskell Javascript/Typescript Web   File Types  Org LaTeX   Configuration Files Spelling Snippets Tools  PDF Tools Undo Tree Ivy, Counsel, Swiper, and Projectile Magit Org Export   Terminal Emulator Miscellaneous dz/functions  Wrap org source code blocks Open configuration      Meta Enable lexical scoping for the current file.</description>
+    </item>
+    
     <item>
       <title>Reversing Packet Tracer Part 2: Shenanigans</title>
       <link>https://mircodezorzi.github.io/doc/reversing-packet-tracer-part-2/</link>

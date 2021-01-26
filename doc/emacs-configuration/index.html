@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>My Emacs Configuration - (&gt;&gt;=) :: mircodz</title><meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" content="" />
+
+  <script src="https://mircodezorzi.github.io/js/main.js"></script>
+
+  <link rel="preconnect" href="//fonts.gstatic.com">
+  <link href="//fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+  <link href="//fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/github.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/languages/x86asm.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/languages/cmake.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/languages/lisp.min.js"></script>
+  <script charset="utf-8">
+    hljs.registerLanguage("emacs-lisp", hljs.getLanguage("lisp").rawDefinition);
+  </script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-172736282-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  <link rel="stylesheet" type="text/css" media="screen" href="https://mircodezorzi.github.io/css/main.css" />
+  
+</head>
+<body>
+        <div class="content"><header>
+  <div class="main">
+    <a href="https://mircodezorzi.github.io/">(&gt;&gt;=) :: mircodz</a>
+  </div>
+  <nav>
+    
+      <a href="/tags/">tags</a>
+    
+  </nav>
+</header>
+
+<main>
+  <article>
+    <div class="title">
+      <h1 class="title">My Emacs Configuration</h1>
+      <div class="meta date-posted">Posted on Jan 26, 2021
+      
+        <div class="meta date-updated">(Updated on Jan 26, 2021)</div>
+      
+      </div>
+    </div>
+
+    <div class="post-tags">
+      
+      
+      
+    </div>
+
+    
+      
+        <div class="hugotoc no-text-decoration">
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#meta">Meta</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#general">General</a>
+      <ul>
+        <li><a href="#personal-information">Personal information</a></li>
+        <li><a href="#reduce-filesystem-clutter">Reduce filesystem clutter</a></li>
+        <li><a href="#cleanup-ui">Cleanup UI</a></li>
+        <li><a href="#better-defaults">Better defaults</a></li>
+        <li><a href="#beacon">Beacon</a></li>
+        <li><a href="#font">Font</a></li>
+        <li><a href="#theme">Theme</a></li>
+        <li><a href="#display-battery-in-modeline">Display battery in modeline</a></li>
+        <li><a href="#indent-guides">Indent guides</a></li>
+        <li><a href="#cursorline">Cursorline</a></li>
+        <li><a href="#indentation">Indentation</a></li>
+        <li><a href="#windows">Windows</a></li>
+        <li><a href="#relative-line-numbers">Relative line numbers</a></li>
+        <li><a href="#key-chords">Key chords</a></li>
+        <li><a href="#workgroups">Workgroups</a></li>
+      </ul>
+    </li>
+    <li><a href="#evil-mode">Evil Mode</a></li>
+    <li><a href="#language-server">Language Server</a>
+      <ul>
+        <li><a href="#lsp-mode">lsp-mode</a></li>
+        <li><a href="#lsp-ui">lsp-ui</a></li>
+      </ul>
+    </li>
+    <li><a href="#auto-complete">Auto Complete</a></li>
+    <li><a href="#languages">Languages</a>
+      <ul>
+        <li><a href="#c-plus-plus">C++</a></li>
+        <li><a href="#python">Python</a></li>
+        <li><a href="#golang">Golang</a></li>
+        <li><a href="#haskell">Haskell</a></li>
+        <li><a href="#javascript-typescript">Javascript/Typescript</a></li>
+        <li><a href="#web">Web</a></li>
+      </ul>
+    </li>
+    <li><a href="#file-types">File Types</a>
+      <ul>
+        <li><a href="#org">Org</a></li>
+        <li><a href="#latex">LaTeX</a></li>
+      </ul>
+    </li>
+    <li><a href="#configuration-files">Configuration Files</a></li>
+    <li><a href="#spelling">Spelling</a></li>
+    <li><a href="#snippets">Snippets</a></li>
+    <li><a href="#tools">Tools</a>
+      <ul>
+        <li><a href="#pdf-tools">PDF Tools</a></li>
+        <li><a href="#undo-tree">Undo Tree</a></li>
+        <li><a href="#ivy-counsel-swiper-and-projectile">Ivy, Counsel, Swiper, and Projectile</a></li>
+        <li><a href="#magit">Magit</a></li>
+        <li><a href="#org-export">Org Export</a></li>
+      </ul>
+    </li>
+    <li><a href="#terminal-emulator">Terminal Emulator</a></li>
+    <li><a href="#miscellaneous-dz-functions">Miscellaneous dz/functions</a>
+      <ul>
+        <li><a href="#wrap-org-source-code-blocks">Wrap org source code blocks</a></li>
+        <li><a href="#open-configuration">Open configuration</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+          <a href="#" class="back-to-top">Back to top</a>
+        </div>
+      
+      <script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
+<script type="application/javascript">(function() {
+     var $window = $(window);
+     if ($window.width() >= 1400) { 
+         var $toc = $('#TableOfContents');
+         if ($toc.length > 0) {
+             function onScroll(){
+                 var currentScroll = $window.scrollTop();
+                 var h = $('[id^="headline"]');
+                 var id = "";
+                 h.each(function (i, e) {
+                     e = $(e);
+                     if (e.offset().top - 10 <= currentScroll) {
+                         id = e.attr('id');
+                     }
+                 });
+                 var current = $toc.find('a.current');
+                 if (current.length == 1 && current.eq(0).attr('href') == '#' + id) return true;
+
+                 current.each(function (i, e) {
+                     $(e).removeClass('current').siblings('ul').hide();
+                 });
+                 $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+                     $(e).children('a').addClass('current').siblings('ul').show();
+                 });
+             }
+             $window.on('scroll', onScroll);
+             $(document).ready(function() {
+                 $toc.find('a').parent('li').find('ul').hide();
+                 onScroll();
+                 document.getElementsByClassName('hugotoc')[0].style.display = '';
+             });}}})();</script>
+
+    
+
+    <section class="body">
+      <div class="ox-hugo-toc toc">
+<div></div>
+<div class="heading">Table of Contents</div>
+<ul>
+<li><a href="#meta">Meta</a></li>
+<li><a href="#packages">Packages</a></li>
+<li><a href="#general">General</a>
+<ul>
+<li><a href="#personal-information">Personal information</a></li>
+<li><a href="#reduce-filesystem-clutter">Reduce filesystem clutter</a></li>
+<li><a href="#cleanup-ui">Cleanup UI</a></li>
+<li><a href="#better-defaults">Better defaults</a></li>
+<li><a href="#beacon">Beacon</a></li>
+<li><a href="#font">Font</a></li>
+<li><a href="#theme">Theme</a></li>
+<li><a href="#display-battery-in-modeline">Display battery in modeline</a></li>
+<li><a href="#indent-guides">Indent guides</a></li>
+<li><a href="#cursorline">Cursorline</a></li>
+<li><a href="#indentation">Indentation</a></li>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#relative-line-numbers">Relative line numbers</a></li>
+<li><a href="#key-chords">Key chords</a></li>
+<li><a href="#workgroups">Workgroups</a></li>
+</ul>
+</li>
+<li><a href="#evil-mode">Evil Mode</a></li>
+<li><a href="#language-server">Language Server</a>
+<ul>
+<li><a href="#lsp-mode">lsp-mode</a></li>
+<li><a href="#lsp-ui">lsp-ui</a></li>
+</ul>
+</li>
+<li><a href="#auto-complete">Auto Complete</a></li>
+<li><a href="#languages">Languages</a>
+<ul>
+<li><a href="#c-plus-plus">C++</a></li>
+<li><a href="#python">Python</a></li>
+<li><a href="#golang">Golang</a></li>
+<li><a href="#haskell">Haskell</a></li>
+<li><a href="#javascript-typescript">Javascript/Typescript</a></li>
+<li><a href="#web">Web</a></li>
+</ul>
+</li>
+<li><a href="#file-types">File Types</a>
+<ul>
+<li><a href="#org">Org</a></li>
+<li><a href="#latex">LaTeX</a></li>
+</ul>
+</li>
+<li><a href="#configuration-files">Configuration Files</a></li>
+<li><a href="#spelling">Spelling</a></li>
+<li><a href="#snippets">Snippets</a></li>
+<li><a href="#tools">Tools</a>
+<ul>
+<li><a href="#pdf-tools">PDF Tools</a></li>
+<li><a href="#undo-tree">Undo Tree</a></li>
+<li><a href="#ivy-counsel-swiper-and-projectile">Ivy, Counsel, Swiper, and Projectile</a></li>
+<li><a href="#magit">Magit</a></li>
+<li><a href="#org-export">Org Export</a></li>
+</ul>
+</li>
+<li><a href="#terminal-emulator">Terminal Emulator</a></li>
+<li><a href="#miscellaneous-dz-functions">Miscellaneous dz/functions</a>
+<ul>
+<li><a href="#wrap-org-source-code-blocks">Wrap org source code blocks</a></li>
+<li><a href="#open-configuration">Open configuration</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<!--endtoc-->
+<p><img src="https://mircodezorzi.github.io/doc/emacs-configuration/210126-2248-25.png" alt="">
+<img src="https://mircodezorzi.github.io/doc/emacs-configuration/210126-2249-03.png" alt="">
+<img src="https://mircodezorzi.github.io/doc/emacs-configuration/210126-2250-03.png" alt=""></p>
+<h2 id="meta">Meta</h2>
+<p>Enable lexical scoping for the current file.</p>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;; -*- lexical-binding: t -*-</span>
+</code></pre></div><p>Automatically update configuration file when saving the document.</p>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">setq</span> <span class="nv">user-emacs-directory</span> <span class="s">&#34;~/code/dotfiles/roles/emacs/files/.emacs.d/&#34;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">tangle-init</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">equal</span> <span class="p">(</span><span class="nf">buffer-file-name</span><span class="p">)</span>
+               <span class="p">(</span><span class="nf">expand-file-name</span> <span class="p">(</span><span class="nf">concat</span> <span class="nv">user-emacs-directory</span> <span class="s">&#34;init.org&#34;</span><span class="p">)))</span>
+    <span class="c1">;; Avoid running hooks when tangling.</span>
+    <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">prog-mode-hook</span> <span class="no">nil</span><span class="p">))</span>
+      <span class="p">(</span><span class="nv">org-babel-tangle</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">byte-compile-file</span> <span class="p">(</span><span class="nf">concat</span> <span class="nv">user-emacs-directory</span> <span class="s">&#34;init.el&#34;</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;after-save-hook</span> <span class="ss">&#39;tangle-init</span><span class="p">)</span>
+</code></pre></div><p>Tweak garbage collection configuration during initialization.</p>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">last-file-name-handler-alist</span> <span class="nv">file-name-handler-alist</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">setq</span> <span class="nv">gc-cons-threshold</span> <span class="mi">402653184</span>
+      <span class="nv">gc-cons-percentage</span> <span class="mf">0.6</span>
+      <span class="nv">file-name-handler-alist</span> <span class="no">nil</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;emacs-startup-hook</span>
+  <span class="p">(</span><span class="nb">setq</span> <span class="nv">gc-cons-threshold</span> <span class="mi">16777216</span>
+        <span class="nv">gc-cons-percentage</span> <span class="mf">0.1</span>
+        <span class="nv">file-name-handler-alist</span> <span class="nv">last-file-name-handler-alist</span><span class="p">))</span>
+</code></pre></div><h2 id="packages">Packages</h2>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+</code></pre></div><p>Include extra package repositories.</p>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">setq</span> <span class="nv">package-archives</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&#34;elpa&#34;</span> <span class="o">.</span> <span class="s">&#34;https://elpa.gnu.org/packages/&#34;</span><span class="p">)</span>
+                         <span class="p">(</span><span class="s">&#34;melpa&#34;</span> <span class="o">.</span> <span class="s">&#34;https://melpa.org/packages/&#34;</span><span class="p">)))</span>
+</code></pre></div><p>Install <code>use-package</code> package manager.</p>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="ss">&#39;use-package</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">package-install</span> <span class="ss">&#39;use-package</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;use-package</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">setf</span> <span class="nv">use-package-always-ensure</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div><p>In case some packages are missing, install them.</p>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">package--builtins</span> <span class="no">nil</span><span class="p">)</span>
+       <span class="p">(</span><span class="nv">packages</span>
+        <span class="o">&#39;</span><span class="p">(</span><span class="nv">auctex</span>
+          <span class="nv">beacon</span>
+          <span class="nv">ccls</span>
+          <span class="nv">company-auctex</span>
+          <span class="nv">company-box</span>
+          <span class="nv">company-go</span>
+          <span class="nv">company-lsp</span>
+          <span class="nv">company-math</span>
+          <span class="nv">company-web</span>
+          <span class="nv">counsel</span>
+          <span class="nv">counsel-projectile</span>
+          <span class="nv">dockerfile-mode</span>
+          <span class="nv">protobuf-mode</span>
+          <span class="nv">emmet-mode</span>
+          <span class="nv">evil</span>
+          <span class="nv">org</span>
+          <span class="nv">general</span>
+          <span class="nv">go-eldoc</span>
+          <span class="nv">go-guru</span>
+          <span class="nv">go-mode</span>
+          <span class="nv">base16-theme</span>
+          <span class="nv">highlight-indent-guides</span>
+          <span class="nv">ivy-xref</span>
+          <span class="nv">lsp-haskell</span>
+          <span class="nv">lsp-mode</span>
+          <span class="nv">lsp-python-ms</span>
+          <span class="nv">lsp-ui</span>
+          <span class="nv">magit</span>
+          <span class="nv">org-bullets</span>
+          <span class="nv">ormolu</span>
+          <span class="nv">ox-hugo</span>
+          <span class="nv">ox-reveal</span>
+          <span class="nv">mixed-pitch</span>
+          <span class="nv">pdf-tools</span>
+          <span class="nv">projectile</span>
+          <span class="nv">tide</span>
+          <span class="nv">toml-mode</span>
+          <span class="nv">transient</span>
+          <span class="nv">undo-tree</span>
+          <span class="nb">use-package</span>
+          <span class="nv">vterm</span>
+          <span class="nv">vterm-toggle</span>
+          <span class="nv">vue-mode</span>
+          <span class="nv">web-mode</span>
+          <span class="nv">workgroups2</span>
+          <span class="nv">yaml-mode</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">packages</span> <span class="p">(</span><span class="nv">seq-remove</span> <span class="ss">&#39;package-installed-p</span> <span class="nv">packages</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nb">when</span> <span class="nv">packages</span>
+      <span class="c1">;; Install uninstalled packages.</span>
+      <span class="p">(</span><span class="nv">package-refresh-contents</span><span class="p">)</span>
+      <span class="p">(</span><span class="nf">mapc</span> <span class="ss">&#39;package-install</span> <span class="nv">packages</span><span class="p">))))</span>
+</code></pre></div><h2 id="general">General</h2>
+<h3 id="personal-information">Personal information</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">setq</span> <span class="nf">user-full-name</span>    <span class="s">&#34;Mirco De Zorzi&#34;</span>
+      <span class="nv">user-mail-address</span> <span class="s">&#34;mircodezorzi@protonmail.com&#34;</span><span class="p">)</span>
+</code></pre></div><h3 id="reduce-filesystem-clutter">Reduce filesystem clutter</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">emacs-autosave-directory</span>
+  <span class="p">(</span><span class="nf">concat</span> <span class="nv">user-emacs-directory</span> <span class="s">&#34;autosaves/&#34;</span><span class="p">))</span>
+
+<span class="c1">;; Sets all files to be backed up and auto saved in a single directory.</span>
+<span class="p">(</span><span class="nb">setq</span> <span class="nv">backup-directory-alist</span>
+      <span class="o">`</span><span class="p">((</span><span class="s">&#34;.*&#34;</span> <span class="o">.</span> <span class="o">,</span><span class="nv">emacs-autosave-directory</span><span class="p">))</span>
+      <span class="nv">auto-save-file-name-transforms</span>
+      <span class="o">`</span><span class="p">((</span><span class="s">&#34;.*&#34;</span> <span class="o">,</span><span class="nv">emacs-autosave-directory</span> <span class="no">t</span><span class="p">)))</span>
+
+<span class="c1">;; Don&#39;t generate lock files. Prevents Angular from breaking.</span>
+<span class="p">(</span><span class="nb">setq</span> <span class="nv">create-lockfiles</span> <span class="no">nil</span><span class="p">)</span>
+</code></pre></div><h3 id="cleanup-ui">Cleanup UI</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">mode</span>
+         <span class="o">&#39;</span><span class="p">(</span><span class="nv">menu-bar-mode</span>
+           <span class="nv">tool-bar-mode</span>
+           <span class="nv">tooltip-mode</span>
+           <span class="nv">scroll-bar-mode</span>
+           <span class="nv">blink-cursor-mode</span><span class="p">))</span>
+  <span class="p">(</span><span class="nf">funcall</span> <span class="nv">mode</span> <span class="mi">0</span><span class="p">))</span>
+</code></pre></div><h3 id="better-defaults">Better defaults</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">setq</span> <span class="nv">inhibit-startup-screen</span>    <span class="no">t</span>
+      <span class="nv">initial-scratch-message</span>   <span class="no">nil</span>
+      <span class="nv">sentence-end-double-space</span> <span class="no">nil</span>
+      <span class="nv">use-dialog-box</span>            <span class="no">nil</span>
+      <span class="nv">mark-even-if-inactive</span>     <span class="no">nil</span>
+      <span class="nv">kill-whole-line</span>           <span class="no">t</span>
+      <span class="nv">case-fold-search</span>          <span class="no">nil</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">setq-default</span> <span class="nv">indent-tabs-mode</span> <span class="no">nil</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defalias</span> <span class="ss">&#39;yes-or-no-p</span> <span class="ss">&#39;y-or-n-p</span><span class="p">)</span> <span class="c1">;; Accept &#39;y&#39; in lieu of &#39;yes&#39;.</span>
+</code></pre></div><h3 id="beacon">Beacon</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">beacon</span>
+  <span class="nb">:config</span>
+  <span class="p">(</span><span class="nv">beacon-mode</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="nb">:custom</span>
+  <span class="p">(</span><span class="nv">beacon-blink-when-window-changes</span> <span class="no">t</span><span class="p">)</span> <span class="c1">;; Only flash on window/buffer changes.</span>
+  <span class="p">(</span><span class="nv">beacon-blink-when-window-scrolls</span> <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">beacon-blink-when-point-moves</span>    <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">beacon-blink-duration</span>            <span class="mf">.2</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">beacon-blink-delay</span>               <span class="mf">.2</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">beacon-size</span>                      <span class="mi">20</span><span class="p">))</span>
+</code></pre></div><h3 id="font">Font</h3>
+<p>Hello there how are you doing?</p>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">mixed-pitch</span>
+  <span class="nb">:hook</span>
+  <span class="p">((</span><span class="nv">text-mode</span> <span class="o">.</span> <span class="nv">mixed-pitch-mode</span><span class="p">)</span>
+   <span class="p">(</span><span class="nv">text-mode</span> <span class="o">.</span> <span class="nv">visual-line-mode</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;default</span>        <span class="no">nil</span> <span class="nb">:font</span> <span class="s">&#34;Hack 14&#34;</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;fixed-pitch</span>    <span class="no">nil</span> <span class="nb">:font</span> <span class="s">&#34;Hack 14&#34;</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;variable-pitch</span> <span class="no">nil</span> <span class="nb">:font</span> <span class="s">&#34;Optima 18&#34;</span><span class="p">)</span>
+</code></pre></div><h3 id="theme">Theme</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;color</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/dark-theme</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">load-theme</span> <span class="ss">&#39;base16-tomorrow-night</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-block</span> <span class="no">nil</span>
+    <span class="nb">:extend</span> <span class="no">t</span>
+    <span class="nb">:background</span> <span class="s">&#34;#181818&#34;</span><span class="p">))</span>
+</code></pre></div><p>When working on org and latex documents I like to use the default Emacs light theme.</p>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/light-theme</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">mapcar</span> <span class="nf">#&#39;</span><span class="nv">disable-theme</span> <span class="nv">custom-enabled-themes</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-level-1</span> <span class="no">nil</span>
+    <span class="nb">:height</span> <span class="mf">1.3</span> <span class="nb">:weight</span> <span class="ss">&#39;bold</span> <span class="nb">:overline</span> <span class="s">&#34;#A7A7A7&#34;</span> <span class="nb">:foreground</span> <span class="s">&#34;#3C3C3C&#34;</span> <span class="nb">:background</span> <span class="s">&#34;#F0F0F0&#34;</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-level-2</span> <span class="no">nil</span>
+    <span class="nb">:height</span> <span class="mf">1.0</span> <span class="nb">:weight</span> <span class="ss">&#39;bold</span> <span class="nb">:overline</span> <span class="s">&#34;#123555&#34;</span> <span class="nb">:foreground</span> <span class="s">&#34;#123555&#34;</span> <span class="nb">:background</span> <span class="s">&#34;#E5F4FB&#34;</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-level-3</span> <span class="no">nil</span>
+    <span class="nb">:height</span> <span class="mf">1.0</span> <span class="nb">:weight</span> <span class="ss">&#39;bold</span> <span class="nb">:foreground</span> <span class="s">&#34;#005522&#34;</span> <span class="nb">:background</span> <span class="s">&#34;#EFFFEF&#34;</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-level-4</span> <span class="no">nil</span>
+    <span class="nb">:height</span> <span class="mf">1.0</span> <span class="nb">:weight</span> <span class="ss">&#39;bold</span> <span class="nb">:slant</span> <span class="ss">&#39;normal</span> <span class="nb">:foreground</span> <span class="s">&#34;#EA6300&#34;</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-level-5</span> <span class="no">nil</span>
+    <span class="nb">:height</span> <span class="mf">1.0</span> <span class="nb">:weight</span> <span class="ss">&#39;bold</span> <span class="nb">:slant</span> <span class="ss">&#39;normal</span> <span class="nb">:foreground</span> <span class="s">&#34;#E3258D&#34;</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-level-6</span> <span class="no">nil</span>
+    <span class="nb">:height</span> <span class="mf">1.0</span> <span class="nb">:weight</span> <span class="ss">&#39;bold</span> <span class="nb">:slant</span> <span class="ss">&#39;italic</span> <span class="nb">:foreground</span> <span class="s">&#34;#0077CC&#34;</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-level-7</span> <span class="no">nil</span>
+    <span class="nb">:height</span> <span class="mf">1.0</span> <span class="nb">:weight</span> <span class="ss">&#39;bold</span> <span class="nb">:slant</span> <span class="ss">&#39;italic</span> <span class="nb">:foreground</span> <span class="s">&#34;#2EAE2C&#34;</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-level-8</span> <span class="no">nil</span>
+    <span class="nb">:height</span> <span class="mf">1.0</span> <span class="nb">:weight</span> <span class="ss">&#39;bold</span> <span class="nb">:slant</span> <span class="ss">&#39;italic</span> <span class="nb">:foreground</span> <span class="s">&#34;#FD8008&#34;</span><span class="p">)</span>
+
+
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-block</span> <span class="no">nil</span>
+    <span class="nb">:extend</span> <span class="no">t</span>
+    <span class="nb">:background</span> <span class="s">&#34;#FFFFEA&#34;</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-block-begin-line</span> <span class="no">nil</span>
+    <span class="nb">:extend</span> <span class="no">t</span>
+    <span class="nb">:foreground</span> <span class="s">&#34;#008ED1&#34;</span>
+    <span class="nb">:background</span> <span class="s">&#34;#EAEAFF&#34;</span>
+    <span class="nb">:overline</span> <span class="s">&#34;#A7A6AA&#34;</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-block-end-line</span> <span class="no">nil</span>
+    <span class="nb">:extend</span> <span class="no">t</span>
+    <span class="nb">:foreground</span> <span class="s">&#34;#008ED1&#34;</span>
+    <span class="nb">:background</span> <span class="s">&#34;#EAEAFF&#34;</span> <span class="nb">:overline</span> <span class="s">&#34;#A7A6AA&#34;</span><span class="p">))</span>
+</code></pre></div><p>Use dark theme by default.</p>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">base16-theme</span>
+  <span class="nb">:config</span> <span class="p">(</span><span class="nv">dz/dark-theme</span><span class="p">))</span>
+</code></pre></div><h3 id="display-battery-in-modeline">Display battery in modeline</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">display-time-mode</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nf">equal</span> <span class="s">&#34;Battery status not avalible&#34;</span>
+               <span class="p">(</span><span class="nv">battery</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">display-battery-mode</span> <span class="mi">1</span><span class="p">))</span>
+</code></pre></div><h3 id="indent-guides">Indent guides</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">highlight-indent-guides</span>
+  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">prog-mode</span> <span class="o">.</span> <span class="nv">highlight-indent-guides-mode</span><span class="p">)</span>
+  <span class="nb">:custom</span>
+  <span class="p">(</span><span class="nv">highlight-indent-guides-method</span>    <span class="ss">&#39;character</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">highlight-indent-guides-character</span> <span class="sc">?\|</span><span class="p">))</span>
+</code></pre></div><h3 id="cursorline">Cursorline</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">global-hl-line-mode</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div><h3 id="indentation">Indentation</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">setq-default</span>
+    <span class="nv">electric-indent-inhibit</span> <span class="no">t</span> <span class="c1">;; Disable annoying indentation behaviour.</span>
+    <span class="nv">indent-tabs-mode</span>        <span class="no">nil</span>
+    <span class="nv">tab-width</span>               <span class="mi">2</span>
+    <span class="nv">evil-shift-width</span>        <span class="mi">2</span><span class="p">)</span>
+</code></pre></div><p>Stolen from <a href="http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html">binchen</a></p>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/indent-setup</span> <span class="p">(</span><span class="nv">n</span><span class="p">)</span>
+  <span class="c1">;; java/c/c++</span>
+  <span class="p">(</span><span class="nb">setq-local</span> <span class="nv">c-basic-offset</span> <span class="nv">n</span><span class="p">)</span>
+  <span class="c1">;; web development</span>
+  <span class="p">(</span><span class="nb">setq-local</span> <span class="nv">web-mode-markup-indent-offset</span> <span class="nv">n</span>
+              <span class="nv">web-mode-css-indent-offset</span>    <span class="nv">n</span>
+              <span class="nv">web-mode-code-indent-offset</span>   <span class="nv">n</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/indent-tabs</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">setq-local</span> <span class="nv">indent-tabs-mode</span> <span class="no">t</span><span class="p">)</span> <span class="c1">;; Use tab instead of space.</span>
+  <span class="p">(</span><span class="nv">dz/indent-setup</span> <span class="mi">4</span><span class="p">))</span>            <span class="c1">;; Indent 4 spaces width.</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/indent-spaces</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">setq-local</span> <span class="nv">indent-tabs-mode</span> <span class="no">nil</span><span class="p">)</span> <span class="c1">;; Use space instead of tab.</span>
+  <span class="p">(</span><span class="nv">dz/indent-setup</span> <span class="mi">2</span><span class="p">))</span>              <span class="c1">;; Indent 2 spaces width.</span>
+</code></pre></div><h3 id="windows">Windows</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">highlight-selected-window</span> <span class="p">()</span>
+  <span class="s">&#34;Highlight selected window with a different background color.&#34;</span>
+  <span class="p">(</span><span class="nv">walk-windows</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">w</span><span class="p">)</span>
+                  <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nf">eq</span> <span class="nv">w</span> <span class="p">(</span><span class="nf">selected-window</span><span class="p">))</span>
+                    <span class="p">(</span><span class="nb">with-current-buffer</span> <span class="p">(</span><span class="nf">window-buffer</span> <span class="nv">w</span><span class="p">)</span>
+                      <span class="p">(</span><span class="nv">buffer-face-set</span> <span class="o">&#39;</span><span class="p">(</span><span class="nb">:background</span> <span class="s">&#34;#292b2b&#34;</span><span class="p">))))))</span>
+  <span class="p">(</span><span class="nv">buffer-face-set</span> <span class="ss">&#39;default</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;buffer-list-update-hook</span> <span class="ss">&#39;highlight-selected-window</span><span class="p">)</span>
+</code></pre></div><h3 id="relative-line-numbers">Relative line numbers</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">linum-relative</span>
+  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">prog-mode</span> <span class="o">.</span> <span class="nv">display-line-numbers-mode</span><span class="p">)</span>
+  <span class="nb">:custom</span>
+  <span class="p">(</span><span class="nv">linum-relative-backend</span>        <span class="ss">&#39;display-line-numbers-mode</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">linum-relative-current-symbol</span> <span class="s">&#34;&#34;</span><span class="p">))</span>
+</code></pre></div><h3 id="key-chords">Key chords</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">key-chord</span>
+  <span class="nb">:config</span>
+  <span class="p">(</span><span class="nv">key-chord-mode</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">setq</span> <span class="nv">key-chord-two-keys-delay</span> <span class="mf">0.05</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">key-chord-define-global</span> <span class="s">&#34;eu&#34;</span> <span class="ss">&#39;evil-normal-state</span><span class="p">))</span>
+</code></pre></div><h3 id="workgroups">Workgroups</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">workgroups2</span><span class="p">)</span>
+</code></pre></div><h2 id="evil-mode">Evil Mode</h2>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">evil</span>
+  <span class="nb">:config</span>
+  <span class="p">(</span><span class="nv">evil-mode</span><span class="p">)</span>
+
+  <span class="nb">:custom</span>
+  <span class="p">(</span><span class="nv">scroll-step</span>                            <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">scroll-conservatively</span>                  <span class="mi">10000</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">evil-search-module</span>                     <span class="ss">&#39;evil-search</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">evil-ex-complete-emacs-commands</span>        <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">evil-shift-round</span>                       <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">evil-vsplit-window-right</span>               <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">evil-split-window-below</span>                <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">evil-want-C-u-scroll</span>                   <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">popup-use-optimized-column-computation</span> <span class="no">nil</span><span class="p">)</span>
+
+  <span class="nb">:config</span>
+  <span class="p">(</span><span class="nb">use-package</span> <span class="nv">general</span>
+    <span class="nb">:config</span> <span class="p">(</span><span class="nv">general-override-mode</span><span class="p">))</span>
+
+
+  <span class="p">(</span><span class="nv">general-define-key</span>
+    <span class="nb">:states</span> <span class="o">&#39;</span><span class="p">(</span><span class="nf">insert</span><span class="p">)</span>
+      <span class="s">&#34;TAB&#34;</span> <span class="ss">&#39;tab-to-tab-stop</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">general-define-key</span>
+    <span class="nb">:states</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">normal</span> <span class="nv">visual</span> <span class="nv">motion</span><span class="p">)</span>
+      <span class="s">&#34;d&#34;</span> <span class="ss">&#39;evil-backward-char</span>
+      <span class="s">&#34;n&#34;</span> <span class="ss">&#39;evil-forward-char</span>
+      <span class="s">&#34;h&#34;</span> <span class="ss">&#39;evil-next-line</span>
+      <span class="s">&#34;t&#34;</span> <span class="ss">&#39;evil-previous-line</span>
+
+      <span class="s">&#34;s&#34;</span> <span class="ss">&#39;evil-ex</span>
+
+      <span class="s">&#34;j&#34;</span> <span class="ss">&#39;evil-delete</span>
+      <span class="s">&#34;k&#34;</span> <span class="ss">&#39;evil-find-char-to</span>
+
+      <span class="s">&#34;l&#34;</span> <span class="ss">&#39;evil-search-next</span>
+      <span class="s">&#34;L&#34;</span> <span class="ss">&#39;evil-search-previous</span>
+
+      <span class="s">&#34;D&#34;</span> <span class="ss">&#39;evil-beginning-of-line</span>
+      <span class="s">&#34;N&#34;</span> <span class="ss">&#39;evil-end-of-line</span>
+      <span class="s">&#34;H&#34;</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;5h&#34;</span><span class="p">)</span>
+      <span class="s">&#34;T&#34;</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;5t&#34;</span><span class="p">)</span>
+
+      <span class="s">&#34;C-d&#34;</span> <span class="ss">&#39;evil-window-left</span>
+      <span class="s">&#34;C-h&#34;</span> <span class="ss">&#39;evil-window-down</span>
+      <span class="s">&#34;C-t&#34;</span> <span class="ss">&#39;evil-window-up</span>
+      <span class="s">&#34;C-n&#34;</span> <span class="ss">&#39;evil-window-right</span><span class="p">))</span>
+</code></pre></div><h2 id="language-server">Language Server</h2>
+<h3 id="lsp-mode">lsp-mode</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">lsp-mode</span>
+  <span class="nb">:commands</span> <span class="nv">lsp</span>
+  <span class="nb">:bind</span> <span class="p">(</span><span class="nb">:map</span> <span class="nv">evil-normal-state-map</span>
+          <span class="p">(</span><span class="s">&#34;g r&#34;</span> <span class="o">.</span> <span class="nv">lsp-find-references</span><span class="p">)</span>
+          <span class="p">(</span><span class="s">&#34;g d&#34;</span> <span class="o">.</span> <span class="nv">lsp-find-definition</span><span class="p">)</span>
+
+          <span class="p">(</span><span class="s">&#34;g D&#34;</span> <span class="o">.</span> <span class="nv">lsp-ui-peek-find-definitions</span><span class="p">)</span>
+          <span class="p">(</span><span class="s">&#34;g R&#34;</span> <span class="o">.</span> <span class="nv">lsp-ui-peek-find-references</span><span class="p">)</span>
+          <span class="p">(</span><span class="s">&#34;g I&#34;</span> <span class="o">.</span> <span class="nv">lsp-ui-peek-find-implementation</span><span class="p">)</span>
+
+          <span class="p">(</span><span class="s">&#34;SPC s&#34;</span> <span class="o">.</span> <span class="nv">swiper-isearch</span><span class="p">))</span>
+  <span class="nb">:custom</span> <span class="p">(</span><span class="nv">lsp-eldoc-hook</span> <span class="no">nil</span><span class="p">)</span>
+  <span class="nb">:hook</span> <span class="p">((</span><span class="nv">haskell-mode</span> <span class="nv">typescript-mode</span> <span class="nv">c++-mode</span> <span class="nv">c-mode</span> <span class="nv">go-mode</span> <span class="nv">latex-mode</span> <span class="nv">python-mode</span><span class="p">)</span> <span class="o">.</span> <span class="nv">lsp</span><span class="p">))</span>
+</code></pre></div><h3 id="lsp-ui">lsp-ui</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">lsp-ui</span>
+  <span class="nb">:commands</span> <span class="nv">lsp-ui-mode</span>
+  <span class="nb">:custom</span>
+  <span class="c1">; lsp-ui-doc</span>
+  <span class="p">(</span><span class="nv">lsp-ui-doc-enable</span>              <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-doc-position</span>            <span class="ss">&#39;at-point</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-doc-border</span>              <span class="s">&#34;white&#34;</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-doc-header</span>              <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-doc-include-signature</span>   <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-doc-max-width</span>           <span class="mi">120</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-doc-max-height</span>          <span class="mi">30</span><span class="p">)</span>
+
+  <span class="c1">; lsp-ui-sidebar</span>
+  <span class="p">(</span><span class="nv">lsp-ui-sideline-enable</span>         <span class="no">nil</span><span class="p">)</span>
+
+  <span class="c1">; lsp-ui-peek</span>
+  <span class="p">(</span><span class="nv">lsp-ui-peek-enable</span>             <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-peek-peek-height</span>        <span class="mi">20</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-peek-list-width</span>         <span class="mi">50</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-peek-fontify</span>            <span class="ss">&#39;on-demand</span><span class="p">))</span>
+</code></pre></div><h2 id="auto-complete">Auto Complete</h2>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">company-lsp</span>
+  <span class="nb">:commands</span> <span class="nv">company-lsp</span>
+  <span class="nb">:diminish</span> <span class="nv">company-mode</span>
+  <span class="nb">:config</span>
+  <span class="p">(</span><span class="nb">push</span> <span class="ss">&#39;company-lsp</span> <span class="nv">company-backends</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">global-company-mode</span><span class="p">)</span>
+  <span class="nb">:custom</span>
+  <span class="p">(</span><span class="nv">company-minimum-prefix-length</span>     <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">company-idle-delay</span>                <span class="mi">0</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">company-lsp-async</span>                 <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">company-tooltip-align-annotations</span> <span class="no">t</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">company-box</span>
+  <span class="nb">:after</span> <span class="nv">company</span>
+  <span class="nb">:diminish</span> <span class="nv">company-box-mode</span>
+  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">global-company-mode</span> <span class="o">.</span> <span class="nv">company-box-mode</span><span class="p">)</span>
+  <span class="nb">:custom</span>
+  <span class="p">(</span><span class="nv">company-box-backends-colors</span>       <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">company-box-show-single-candidate</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">company-box-max-candidates</span>        <span class="mi">50</span><span class="p">))</span>
+</code></pre></div><p>To fix the alignment issues caused by <code>mixed-pitch-mode</code> in non-prog buffers we must use this package.</p>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">company-posframe</span>
+  <span class="nb">:after</span> <span class="nv">company</span>
+  <span class="nb">:diminish</span> <span class="nv">company-posframe-mode</span>
+  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">global-company-mode</span> <span class="o">.</span> <span class="nv">company-box-mode</span><span class="p">)</span>
+  <span class="nb">:config</span>
+  <span class="p">(</span><span class="nv">company-posframe-mode</span> <span class="mi">1</span><span class="p">))</span>
+</code></pre></div><h2 id="languages">Languages</h2>
+<h3 id="c-plus-plus">C++</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">ccls</span>
+  <span class="nb">:config</span>
+  <span class="c1">;(setq ccls-executable &#34;ccls&#34;</span>
+  <span class="c1">;      lsp-prefer-flymake nil)</span>
+  <span class="c1">;(setq-default flycheck-disabled-checkers &#39;(c/c++-clang c/c++-cppcheck c/c++-gcc))</span>
+  <span class="nb">:hook</span> <span class="p">((</span><span class="nv">c-mode</span> <span class="nv">c++-mode</span> <span class="nv">objc-mode</span> <span class="nv">cuda-mode</span><span class="p">)</span> <span class="o">.</span>
+         <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;ccls</span><span class="p">)</span> <span class="p">(</span><span class="nv">lsp</span><span class="p">))))</span>
+</code></pre></div><h4 id="xrefs">XRefs</h4>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">ivy-xref</span>
+  <span class="nb">:config</span>
+  <span class="p">(</span><span class="nb">setq</span> <span class="nv">xref-show-definitions-function</span> <span class="nf">#&#39;</span><span class="nv">ivy-xref-show-defs</span>
+        <span class="nv">xref-show-xrefs-function</span>       <span class="nf">#&#39;</span><span class="nv">ivy-xref-show-xrefs</span><span class="p">))</span>
+</code></pre></div><h3 id="python">Python</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">lsp-python-ms</span>
+  <span class="nb">:init</span> <span class="p">(</span><span class="nb">setq</span> <span class="nv">lsp-python-ms-auto-install-server</span> <span class="no">t</span><span class="p">)</span>
+  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">python-mode</span> <span class="o">.</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
+                          <span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;lsp-python-ms</span><span class="p">)</span>
+                          <span class="p">(</span><span class="nv">lsp</span><span class="p">))))</span>
+</code></pre></div><h3 id="golang">Golang</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">go-mode</span>
+  <span class="nb">:mode</span> <span class="s">&#34;\\.go\\&#39;&#34;</span>
+  <span class="nb">:bind</span> <span class="p">(</span><span class="nb">:map</span> <span class="nv">go-mode-map</span>
+         <span class="p">(</span><span class="s">&#34;C-c C-n&#34;</span> <span class="o">.</span> <span class="nv">go-run</span><span class="p">))</span>
+  <span class="nb">:hook</span> <span class="p">((</span><span class="nv">go-mode</span> <span class="o">.</span> <span class="nv">lsp-deferred</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">before-save</span> <span class="o">.</span> <span class="nv">lsp-format-buffer</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">before-save</span> <span class="o">.</span> <span class="nv">lsp-organize-imports</span><span class="p">)))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">company-go</span>
+  <span class="nb">:init</span>
+  <span class="nb">:custom</span>
+  <span class="p">(</span><span class="nv">company-go-show-annotation</span> <span class="no">t</span><span class="p">)</span>
+  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">go-mode</span> <span class="o">.</span>
+            <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
+              <span class="p">(</span><span class="nf">set</span> <span class="p">(</span><span class="nf">make-local-variable</span> <span class="ss">&#39;company-backends</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">company-go</span><span class="p">)))))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">go-eldoc</span>
+  <span class="nb">:defer</span> <span class="no">t</span>
+  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">go-mode</span> <span class="o">.</span> <span class="nv">go-eldoc-setup</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">go-guru</span>
+  <span class="nb">:defer</span> <span class="no">t</span>
+  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">go-mode</span> <span class="o">.</span> <span class="nv">go-guru-hl-identifier-mode</span><span class="p">))</span>
+</code></pre></div><h3 id="haskell">Haskell</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;(use-package haskell-mode</span>
+<span class="c1">;  :custom</span>
+<span class="c1">;  (haskell-process-type &#39;cabal-repl)</span>
+<span class="c1">;  (haskell-process-load-or-reload-prompt t)</span>
+<span class="c1">;  (haskell-process-auto-import-loaded-modules t)</span>
+<span class="c1">;  (haskell-process-log t)</span>
+<span class="c1">;  (haskell-tags-on-save t)</span>
+<span class="c1">;  :config</span>
+<span class="c1">;  (haskell-indentation-mode -1)</span>
+<span class="c1">;  (interactive-haskell-mode)</span>
+<span class="c1">;</span>
+<span class="c1">;  (setq-local tab-stop-list &#39;(2 4))</span>
+<span class="c1">;  (setq indent-line-function &#39;indent-relative)</span>
+<span class="c1">;  (setq tab-width 2)</span>
+<span class="c1">;  (setq-local evil-shift-width 2))</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">lsp-haskell</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">ormolu</span><span class="p">)</span>
+</code></pre></div><h3 id="javascript-typescript">Javascript/Typescript</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">tide</span>
+  <span class="nb">:mode</span> <span class="s">&#34;\\.ts\\&#39;&#34;</span>
+  <span class="nb">:ensure</span> <span class="no">t</span>
+  <span class="nb">:after</span> <span class="p">(</span><span class="nv">typescript-mode</span> <span class="nv">company</span> <span class="nv">flycheck</span><span class="p">)</span>
+  <span class="nb">:hook</span> <span class="p">((</span><span class="nv">typescript-mode</span> <span class="o">.</span> <span class="nv">tide-setup</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">typescript-mode</span> <span class="o">.</span> <span class="nv">tide-hl-identifier-mode</span><span class="p">)))</span>
+</code></pre></div><h3 id="web">Web</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">web-mode</span>
+  <span class="nb">:config</span>
+  <span class="p">(</span><span class="nb">setq</span> <span class="nv">web-mode-enable-current-element-highlight</span> <span class="no">t</span><span class="p">)</span>
+  <span class="nb">:mode</span> <span class="p">(</span><span class="s">&#34;\\.ts\\&#39;&#34;</span> <span class="s">&#34;\\.html?\\&#39;&#34;</span> <span class="s">&#34;\\.css?\\&#39;&#34;</span> <span class="s">&#34;\\.js\\&#39;&#34;</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">company-web</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">css-mode</span><span class="p">)</span>
+</code></pre></div><h4 id="vue">Vue</h4>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">vue-mode</span>
+  <span class="nb">:custom-face</span> <span class="p">(</span><span class="nv">mmm-default-submode-face</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="nb">:background</span> <span class="s">&#34;#181818&#34;</span>
+                                              <span class="nb">:extend</span> <span class="no">t</span><span class="p">)))))</span>
+</code></pre></div><h4 id="emmet">Emmet</h4>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">emmet-mode</span>
+  <span class="nb">:preface</span> <span class="p">(</span><span class="nb">defvar</span> <span class="nv">emmet-mode-keymap</span> <span class="p">(</span><span class="nf">make-sparse-keymap</span><span class="p">))</span>
+  <span class="nb">:bind</span> <span class="p">(</span><span class="nb">:map</span> <span class="nv">emmet-mode-keymap</span>
+          <span class="p">(</span><span class="s">&#34;C-TAB&#34;</span> <span class="o">.</span> <span class="nv">emmet-expand-line</span><span class="p">))</span>
+  <span class="nb">:hook</span> <span class="p">((</span><span class="nv">css-mode</span> <span class="nv">web-mode</span> <span class="nv">html-mode</span><span class="p">)</span> <span class="o">.</span> <span class="nv">emmet-mode</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-web-mode-hook</span> <span class="p">()</span>
+  <span class="s">&#34;Hooks for Web mode.&#34;</span>
+  <span class="p">(</span><span class="nb">setq</span> <span class="nv">web-mode-markup-indent-offset</span> <span class="mi">2</span>
+        <span class="nv">web-mode-code-indent-offset</span>   <span class="mi">2</span>
+        <span class="nv">web-mode-css-indent-offset</span>    <span class="mi">2</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nf">set</span> <span class="p">(</span><span class="nf">make-local-variable</span> <span class="ss">&#39;company-backends</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">company-css</span> <span class="nv">company-web-html</span> <span class="nv">company-yasnippet</span> <span class="nv">company-files</span><span class="p">)))</span>
+
+<span class="c1">;(add-hook &#39;web-mode-hook &#39;prog-mode-hook)</span>
+<span class="c1">;(add-hook &#39;web-mode-hook &#39;my-web-mode-hook)</span>
+<span class="c1">;(add-hook &#39;web-mode-hook &#39;company-mode)</span>
+
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;web-mode-before-auto-complete-hooks</span>
+    <span class="o">&#39;</span><span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
+     <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">web-mode-cur-language</span>
+        <span class="p">(</span><span class="nv">web-mode-language-at-pos</span><span class="p">)))</span>
+               <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nv">string=</span> <span class="nv">web-mode-cur-language</span> <span class="s">&#34;php&#34;</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">yas-activate-extra-mode</span> <span class="ss">&#39;php-mode</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">yas-deactivate-extra-mode</span> <span class="ss">&#39;php-mode</span><span class="p">))</span>
+               <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nv">string=</span> <span class="nv">web-mode-cur-language</span> <span class="s">&#34;css&#34;</span><span class="p">)</span>
+         <span class="p">(</span><span class="nb">setq</span> <span class="nv">emmet-use-css-transform</span> <span class="no">t</span><span class="p">)</span>
+         <span class="p">(</span><span class="nb">setq</span> <span class="nv">emmet-use-css-transform</span> <span class="no">nil</span><span class="p">)))))</span>
+</code></pre></div><h2 id="file-types">File Types</h2>
+<h3 id="org">Org</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">+org/dwim-at-point</span> <span class="p">(</span><span class="kp">&amp;optional</span> <span class="nv">arg</span><span class="p">)</span>
+  <span class="s">&#34;Do-what-I-mean at point.
+</span><span class="s">If on a:
+</span><span class="s">- checkbox list item or todo heading: toggle it.
+</span><span class="s">- clock: update its time.
+</span><span class="s">- headline: cycle ARCHIVE subtrees, toggle latex fragments and inline images in
+</span><span class="s">  subtree; update statistics cookies/checkboxes and ToCs.
+</span><span class="s">- footnote reference: jump to the footnote&#39;s definition
+</span><span class="s">- footnote definition: jump to the first reference of this footnote
+</span><span class="s">- table-row or a TBLFM: recalculate the table&#39;s formulas
+</span><span class="s">- table-cell: clear it and go into insert mode. If this is a formula cell,
+</span><span class="s">  recaluclate it instead.
+</span><span class="s">- babel-call: execute the source block
+</span><span class="s">- statistics-cookie: update it.
+</span><span class="s">- latex fragment: toggle it.
+</span><span class="s">- link: follow it
+</span><span class="s">- otherwise, refresh all inline images in current tree.&#34;</span>
+  <span class="p">(</span><span class="nb">interactive</span> <span class="s">&#34;P&#34;</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">context</span> <span class="p">(</span><span class="nv">org-element-context</span><span class="p">))</span>
+         <span class="p">(</span><span class="nv">type</span> <span class="p">(</span><span class="nv">org-element-type</span> <span class="nv">context</span><span class="p">)))</span>
+    <span class="c1">;; skip over unimportant contexts</span>
+    <span class="p">(</span><span class="nb">while</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">context</span> <span class="p">(</span><span class="nf">memq</span> <span class="nv">type</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">verbatim</span> <span class="nv">code</span> <span class="nv">bold</span> <span class="nv">italic</span> <span class="nv">underline</span> <span class="nv">strike-through</span> <span class="nv">subscript</span> <span class="nv">superscript</span><span class="p">)))</span>
+      <span class="p">(</span><span class="nb">setq</span> <span class="nv">context</span> <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:parent</span> <span class="nv">context</span><span class="p">)</span>
+            <span class="nv">type</span> <span class="p">(</span><span class="nv">org-element-type</span> <span class="nv">context</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nb">pcase</span> <span class="nv">type</span>
+      <span class="p">(</span><span class="o">`</span><span class="nv">headline</span>
+       <span class="p">(</span><span class="nb">cond</span> <span class="p">((</span><span class="nf">memq</span> <span class="p">(</span><span class="nv">bound-and-true-p</span> <span class="nv">org-goto-map</span><span class="p">)</span>
+                    <span class="p">(</span><span class="nf">current-active-maps</span><span class="p">))</span>
+              <span class="p">(</span><span class="nv">org-goto-ret</span><span class="p">))</span>
+             <span class="p">((</span><span class="nb">and</span> <span class="p">(</span><span class="nf">fboundp</span> <span class="ss">&#39;toc-org-insert-toc</span><span class="p">)</span>
+                   <span class="p">(</span><span class="nf">member</span> <span class="s">&#34;TOC&#34;</span> <span class="p">(</span><span class="nv">org-get-tags</span><span class="p">)))</span>
+              <span class="p">(</span><span class="nv">toc-org-insert-toc</span><span class="p">)</span>
+              <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Updating table of contents&#34;</span><span class="p">))</span>
+             <span class="p">((</span><span class="nv">string=</span> <span class="s">&#34;ARCHIVE&#34;</span> <span class="p">(</span><span class="nf">car-safe</span> <span class="p">(</span><span class="nv">org-get-tags</span><span class="p">)))</span>
+              <span class="p">(</span><span class="nv">org-force-cycle-archived</span><span class="p">))</span>
+             <span class="p">((</span><span class="nb">or</span> <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:todo-type</span> <span class="nv">context</span><span class="p">)</span>
+                  <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:scheduled</span> <span class="nv">context</span><span class="p">))</span>
+              <span class="p">(</span><span class="nv">org-todo</span>
+               <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">eq</span> <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:todo-type</span> <span class="nv">context</span><span class="p">)</span> <span class="ss">&#39;done</span><span class="p">)</span>
+                   <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nf">car</span> <span class="p">(</span><span class="nv">+org-get-todo-keywords-for</span> <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:todo-keyword</span> <span class="nv">context</span><span class="p">)))</span>
+                       <span class="ss">&#39;todo</span><span class="p">)</span>
+                 <span class="ss">&#39;done</span><span class="p">))))</span>
+       <span class="c1">;; Update any metadata or inline previews in this subtree</span>
+       <span class="p">(</span><span class="nv">org-update-checkbox-count</span><span class="p">)</span>
+       <span class="p">(</span><span class="nv">org-update-parent-todo-statistics</span><span class="p">)</span>
+       <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nf">fboundp</span> <span class="ss">&#39;toc-org-insert-toc</span><span class="p">)</span>
+                  <span class="p">(</span><span class="nf">member</span> <span class="s">&#34;TOC&#34;</span> <span class="p">(</span><span class="nv">org-get-tags</span><span class="p">)))</span>
+         <span class="p">(</span><span class="nv">toc-org-insert-toc</span><span class="p">)</span>
+         <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;Updating table of contents&#34;</span><span class="p">))</span>
+       <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">beg</span> <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nv">org-before-first-heading-p</span><span class="p">)</span>
+                       <span class="p">(</span><span class="nf">line-beginning-position</span><span class="p">)</span>
+                     <span class="p">(</span><span class="nb">save-excursion</span> <span class="p">(</span><span class="nv">org-back-to-heading</span><span class="p">)</span> <span class="p">(</span><span class="nf">point</span><span class="p">))))</span>
+              <span class="p">(</span><span class="nv">end</span> <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nv">org-before-first-heading-p</span><span class="p">)</span>
+                       <span class="p">(</span><span class="nf">line-end-position</span><span class="p">)</span>
+                     <span class="p">(</span><span class="nb">save-excursion</span> <span class="p">(</span><span class="nv">org-end-of-subtree</span><span class="p">)</span> <span class="p">(</span><span class="nf">point</span><span class="p">))))</span>
+              <span class="p">(</span><span class="nv">overlays</span> <span class="p">(</span><span class="nb">ignore-errors</span> <span class="p">(</span><span class="nf">overlays-in</span> <span class="nv">beg</span> <span class="nv">end</span><span class="p">)))</span>
+              <span class="p">(</span><span class="nv">latex-overlays</span>
+               <span class="p">(</span><span class="nv">cl-find-if</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">o</span><span class="p">)</span> <span class="p">(</span><span class="nf">eq</span> <span class="p">(</span><span class="nf">overlay-get</span> <span class="nv">o</span> <span class="ss">&#39;org-overlay-type</span><span class="p">)</span> <span class="ss">&#39;org-latex-overlay</span><span class="p">))</span>
+                           <span class="nv">overlays</span><span class="p">))</span>
+              <span class="p">(</span><span class="nv">image-overlays</span>
+               <span class="p">(</span><span class="nv">cl-find-if</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">o</span><span class="p">)</span> <span class="p">(</span><span class="nf">overlay-get</span> <span class="nv">o</span> <span class="ss">&#39;org-image-overlay</span><span class="p">))</span>
+                           <span class="nv">overlays</span><span class="p">)))</span>
+         <span class="p">(</span><span class="nv">+org--toggle-inline-images-in-subtree</span> <span class="nv">beg</span> <span class="nv">end</span><span class="p">)</span>
+         <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">image-overlays</span> <span class="nv">latex-overlays</span><span class="p">)</span>
+             <span class="p">(</span><span class="nv">org-clear-latex-preview</span> <span class="nv">beg</span> <span class="nv">end</span><span class="p">)</span>
+           <span class="p">(</span><span class="nv">org--latex-preview-region</span> <span class="nv">beg</span> <span class="nv">end</span><span class="p">))))</span>
+
+      <span class="p">(</span><span class="o">`</span><span class="nv">clock</span> <span class="p">(</span><span class="nv">org-clock-update-time-maybe</span><span class="p">))</span>
+
+      <span class="p">(</span><span class="o">`</span><span class="nv">footnote-reference</span>
+       <span class="p">(</span><span class="nv">org-footnote-goto-definition</span> <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:label</span> <span class="nv">context</span><span class="p">)))</span>
+
+      <span class="p">(</span><span class="o">`</span><span class="nv">footnote-definition</span>
+       <span class="p">(</span><span class="nv">org-footnote-goto-previous-reference</span> <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:label</span> <span class="nv">context</span><span class="p">)))</span>
+
+      <span class="p">((</span><span class="nb">or</span> <span class="o">`</span><span class="nv">planning</span> <span class="o">`</span><span class="nv">timestamp</span><span class="p">)</span>
+       <span class="p">(</span><span class="nv">org-follow-timestamp-link</span><span class="p">))</span>
+
+      <span class="p">((</span><span class="nb">or</span> <span class="o">`</span><span class="nv">table</span> <span class="o">`</span><span class="nv">table-row</span><span class="p">)</span>
+       <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nv">org-at-TBLFM-p</span><span class="p">)</span>
+           <span class="p">(</span><span class="nv">org-table-calc-current-TBLFM</span><span class="p">)</span>
+         <span class="p">(</span><span class="nb">ignore-errors</span>
+           <span class="p">(</span><span class="nb">save-excursion</span>
+             <span class="p">(</span><span class="nf">goto-char</span> <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:contents-begin</span> <span class="nv">context</span><span class="p">))</span>
+             <span class="p">(</span><span class="nv">org-call-with-arg</span> <span class="ss">&#39;org-table-recalculate</span> <span class="p">(</span><span class="nb">or</span> <span class="nv">arg</span> <span class="no">t</span><span class="p">))))))</span>
+
+      <span class="p">(</span><span class="o">`</span><span class="nv">table-cell</span>
+       <span class="p">(</span><span class="nv">org-table-blank-field</span><span class="p">)</span>
+       <span class="p">(</span><span class="nv">org-table-recalculate</span> <span class="nv">arg</span><span class="p">)</span>
+       <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">string-empty-p</span> <span class="p">(</span><span class="nv">string-trim</span> <span class="p">(</span><span class="nv">org-table-get-field</span><span class="p">)))</span>
+                  <span class="p">(</span><span class="nv">bound-and-true-p</span> <span class="nv">evil-local-mode</span><span class="p">))</span>
+         <span class="p">(</span><span class="nv">evil-change-state</span> <span class="ss">&#39;insert</span><span class="p">)))</span>
+
+      <span class="p">((</span><span class="nb">or</span> <span class="o">`</span><span class="nv">src-block</span> <span class="o">`</span><span class="nv">inline-src-block</span><span class="p">)</span>
+       <span class="p">(</span><span class="nv">org-babel-execute-src-block</span> <span class="nv">arg</span><span class="p">))</span>
+
+      <span class="p">((</span><span class="nb">or</span> <span class="o">`</span><span class="nv">latex-fragment</span> <span class="o">`</span><span class="nv">latex-environment</span><span class="p">)</span>
+       <span class="p">(</span><span class="nv">org-latex-preview</span> <span class="nv">arg</span><span class="p">))</span>
+
+      <span class="p">(</span><span class="o">`</span><span class="nv">link</span>
+       <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">lineage</span> <span class="p">(</span><span class="nv">org-element-lineage</span> <span class="nv">context</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">link</span><span class="p">)</span> <span class="no">t</span><span class="p">))</span>
+              <span class="p">(</span><span class="nv">path</span> <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:path</span> <span class="nv">lineage</span><span class="p">)))</span>
+         <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nf">equal</span> <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:type</span> <span class="nv">lineage</span><span class="p">)</span> <span class="s">&#34;img&#34;</span><span class="p">)</span>
+                 <span class="p">(</span><span class="nb">and</span> <span class="nv">path</span> <span class="p">(</span><span class="nv">image-type-from-file-name</span> <span class="nv">path</span><span class="p">)))</span>
+             <span class="p">(</span><span class="nv">+org--toggle-inline-images-in-subtree</span>
+              <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:begin</span> <span class="nv">lineage</span><span class="p">)</span>
+              <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:end</span> <span class="nv">lineage</span><span class="p">))</span>
+           <span class="p">(</span><span class="nv">org-open-at-point</span> <span class="nv">arg</span><span class="p">))))</span>
+
+      <span class="p">((</span><span class="nv">guard</span> <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:checkbox</span> <span class="p">(</span><span class="nv">org-element-lineage</span> <span class="nv">context</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">item</span><span class="p">)</span> <span class="no">t</span><span class="p">)))</span>
+       <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">match</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">org-at-item-checkbox-p</span><span class="p">)</span> <span class="p">(</span><span class="nv">match-string</span> <span class="mi">1</span><span class="p">))))</span>
+         <span class="p">(</span><span class="nv">org-toggle-checkbox</span> <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nf">equal</span> <span class="nv">match</span> <span class="s">&#34;[ ]&#34;</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">16</span><span class="p">)))))</span>
+
+      <span class="p">(</span><span class="nv">_</span>
+       <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">org-in-regexp</span> <span class="nv">org-ts-regexp-both</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
+               <span class="p">(</span><span class="nv">org-in-regexp</span> <span class="nv">org-tsr-regexp-both</span> <span class="no">nil</span>  <span class="no">t</span><span class="p">)</span>
+               <span class="p">(</span><span class="nv">org-in-regexp</span> <span class="nv">org-link-any-re</span> <span class="no">nil</span> <span class="no">t</span><span class="p">))</span>
+           <span class="p">(</span><span class="nf">call-interactively</span> <span class="nf">#&#39;</span><span class="nv">org-open-at-point</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">+org--toggle-inline-images-in-subtree</span>
+          <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:begin</span> <span class="nv">context</span><span class="p">)</span>
+          <span class="p">(</span><span class="nv">org-element-property</span> <span class="nb">:end</span> <span class="nv">context</span><span class="p">)))))))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">org</span>
+  <span class="nb">:config</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;org-src-lang-modes</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;x86asm&#34;</span> <span class="o">.</span> <span class="nv">asm</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;cmake&#34;</span> <span class="o">.</span> <span class="nv">text</span><span class="p">))</span>
+
+  <span class="nb">:custom</span>
+    <span class="p">(</span><span class="nv">org-directory</span> <span class="s">&#34;~/org&#34;</span><span class="p">)</span>
+
+  <span class="nb">:hook</span> <span class="p">((</span><span class="nv">org-mode</span> <span class="o">.</span> <span class="nv">org-indent-mode</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">org-mode</span> <span class="o">.</span> <span class="nv">flyspell-mode</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">org-mode</span> <span class="o">.</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
+                       <span class="p">(</span><span class="nb">dolist</span>
+                        <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">face</span><span class="p">)</span>
+                          <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="nv">face</span> <span class="no">nil</span> <span class="nb">:inherit</span> <span class="ss">&#39;fixed-pitch</span><span class="p">))</span>
+                        <span class="p">(</span><span class="nf">list</span> <span class="ss">&#39;org-code</span>
+                              <span class="ss">&#39;org-link</span>
+                              <span class="ss">&#39;org-block</span>
+                              <span class="ss">&#39;org-table</span>
+                              <span class="ss">&#39;org-block-begin-line</span>
+                              <span class="ss">&#39;org-block-end-line</span>
+                              <span class="ss">&#39;org-meta-line</span>
+                              <span class="ss">&#39;org-document-info-keyword</span><span class="p">))))))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;(use-package evil-org</span>
+<span class="c1">;  :ensure t</span>
+<span class="c1">;  :after org</span>
+<span class="c1">;  :hook (org-mode . (lambda () evil-org-mode))</span>
+<span class="c1">;  :bind (:map evil-org-mode-map</span>
+<span class="c1">;          (&#34;d&#34; . evil-backward-char))</span>
+<span class="c1">;  :config</span>
+<span class="c1">;  (require &#39;evil-org-agenda)</span>
+<span class="c1">;  (evil-org-agenda-set-keys))</span>
+</code></pre></div><h3 id="latex">LaTeX</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">company-auctex</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">company-math</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;LaTeX-mode-hook</span> <span class="ss">&#39;TeX-fold-mode</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;LaTeX-mode-hook</span> <span class="ss">&#39;latex-math-mode</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;LaTeX-mode-hook</span> <span class="ss">&#39;prettify-symbols-mode</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;LaTeX-mode-hook</span> <span class="ss">&#39;TeX-fold-buffer</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;org</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">setq</span> <span class="nv">org-format-latex-options</span> <span class="p">(</span><span class="nf">plist-put</span> <span class="nv">org-format-latex-options</span> <span class="nb">:scale</span> <span class="mf">2.0</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">+org-update-latex-preview-background-color</span> <span class="p">(</span><span class="kp">&amp;rest</span> <span class="nv">_</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">setq-default</span>
+   <span class="nv">org-format-latex-options</span>
+   <span class="p">(</span><span class="nf">plist-put</span> <span class="nv">org-format-latex-options</span>
+              <span class="nb">:background</span>
+              <span class="p">(</span><span class="nv">face-attribute</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nv">cadr</span> <span class="p">(</span><span class="nf">assq</span> <span class="ss">&#39;default</span> <span class="nv">face-remapping-alist</span><span class="p">))</span>
+                                  <span class="ss">&#39;default</span><span class="p">)</span>
+                              <span class="nb">:background</span> <span class="no">nil</span> <span class="no">t</span><span class="p">))))</span>
+<span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;load-theme</span> <span class="nb">:after</span> <span class="ss">&#39;+org-update-latex-preview-background-color</span><span class="p">)</span>
+</code></pre></div><h2 id="configuration-files">Configuration Files</h2>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">yaml-mode</span>
+  <span class="nb">:mode</span> <span class="p">(</span><span class="s">&#34;\\.yml$&#34;</span> <span class="o">.</span> <span class="nv">yaml-mode</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">protobuf-mode</span>
+  <span class="nb">:mode</span> <span class="p">(</span><span class="s">&#34;\\.pb$&#34;</span> <span class="o">.</span> <span class="nv">protobuf-mode</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">dockerfile-mode</span>
+  <span class="nb">:mode</span> <span class="p">(</span><span class="s">&#34;Dockerfile&#34;</span> <span class="o">.</span> <span class="nv">dockerfile-mode</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">toml-mode</span>
+  <span class="nb">:mode</span> <span class="p">(</span><span class="s">&#34;\\.toml$&#34;</span> <span class="o">.</span> <span class="nv">toml-mode</span><span class="p">))</span>
+</code></pre></div><h2 id="spelling">Spelling</h2>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">flycheck</span>
+  <span class="nb">:init</span> <span class="p">(</span><span class="nv">global-flycheck-mode</span><span class="p">)</span>
+  <span class="nb">:diminish</span> <span class="nv">flycheck-mode</span>
+  <span class="nb">:custom</span>
+  <span class="p">(</span><span class="nv">flycheck-global-modes</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">not</span> <span class="nv">org-mode</span><span class="p">)))</span>
+</code></pre></div><h2 id="snippets">Snippets</h2>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">yasnippet</span>
+  <span class="nb">:defer</span> <span class="mi">3</span> <span class="c1">;; takes a while to load, so do it async</span>
+  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">after-init</span> <span class="o">.</span> <span class="nv">yas-global-mode</span><span class="p">)</span>
+  <span class="nb">:diminish</span> <span class="nv">yas-minor-mode</span>
+  <span class="nb">:bind</span> <span class="p">(</span><span class="nb">:map</span> <span class="nv">yas-minor-mode-map</span>
+          <span class="p">(</span><span class="s">&#34;TAB&#34;</span> <span class="o">.</span> <span class="nv">yas-expand</span><span class="p">))</span>
+  <span class="nb">:custom</span> <span class="p">(</span><span class="nv">yas-prompt-functions</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">yas-completing-prompt</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">yasnippet-snippets</span>
+  <span class="nb">:custom</span> <span class="p">(</span><span class="nv">yas-snippet-dirs</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;~/.emacs.d/snippets&#34;</span><span class="p">)))</span>
+</code></pre></div><h2 id="tools">Tools</h2>
+<h3 id="pdf-tools">PDF Tools</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;auto-mode-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;\\.pdf\\&#39;&#34;</span> <span class="o">.</span> <span class="nv">pdf-tools-install</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;pdf-view-mode-hook</span>
+          <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nb">setq</span> <span class="nv">header-line-format</span> <span class="no">nil</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">setq</span> <span class="nv">TeX-view-program-selection</span> <span class="o">&#39;</span><span class="p">((</span><span class="nv">output-pdf</span> <span class="s">&#34;PDF Tools&#34;</span><span class="p">))</span>
+      <span class="nv">TeX-source-correlate-start-server</span> <span class="no">t</span><span class="p">)</span>
+
+<span class="c1">;; Update PDF buffers after successful LaTeX runs</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;TeX-after-compilation-finished-functions</span>
+           <span class="nf">#&#39;</span><span class="nv">TeX-revert-document-buffer</span><span class="p">)</span>
+</code></pre></div><h3 id="undo-tree">Undo Tree</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">undo-tree</span>
+  <span class="nb">:config</span>
+  <span class="p">(</span><span class="nv">global-undo-tree-mode</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">evil-set-undo-system</span> <span class="ss">&#39;undo-tree</span><span class="p">))</span>
+</code></pre></div><h3 id="ivy-counsel-swiper-and-projectile">Ivy, Counsel, Swiper, and Projectile</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/find-file</span> <span class="p">()</span>
+  <span class="s">&#34;Call </span><span class="ss">`counsel-projectile-find-file&#39;</span><span class="s"> if </span><span class="ss">`projectile-project-p&#39;</span><span class="s">, otherwise fallback to </span><span class="ss">`counsel-find-files&#39;</span><span class="s">.&#34;</span>
+  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">if</span> <span class="p">(</span><span class="nv">projectile-project-p</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">counsel-projectile-find-file</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">counsel-find-file</span><span class="p">)))</span>
+</code></pre></div><h4 id="ivy">Ivy</h4>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">ivy</span>
+  <span class="nb">:bind</span> <span class="p">(</span><span class="nb">:map</span> <span class="nv">ivy-mode-map</span>
+          <span class="p">(</span><span class="s">&#34;C-&#39;&#34;</span> <span class="o">.</span> <span class="nv">ivy-avy</span><span class="p">))</span>
+  <span class="nb">:config</span>
+  <span class="p">(</span><span class="nv">ivy-mode</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="nb">:custom</span>
+  <span class="p">(</span><span class="nv">ivy-use-virtual-buffers</span>   <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">ivy-height</span>                <span class="mi">10</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">ivy-count-format</span>          <span class="s">&#34;&#34;</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">ivy-initial-inputs-alist</span>  <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">ivy-re-builders-alist</span>     <span class="o">&#39;</span><span class="p">((</span><span class="no">t</span> <span class="o">.</span> <span class="nv">ivy--regex-ignore-order</span><span class="p">))))</span>
+</code></pre></div><h4 id="counsel">Counsel</h4>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">counsel</span>
+  <span class="nb">:after</span> <span class="p">(</span><span class="nv">ivy</span> <span class="nv">projectile</span> <span class="nv">swiper</span><span class="p">)</span>
+  <span class="nb">:bind</span> <span class="p">(</span><span class="nb">:map</span> <span class="nv">evil-normal-state-map</span>
+          <span class="p">(</span><span class="s">&#34;SPC SPC&#34;</span> <span class="o">.</span> <span class="nv">counsel-M-x</span><span class="p">)</span>
+          <span class="p">(</span><span class="s">&#34;SPC C-p&#34;</span> <span class="o">.</span> <span class="nv">counsel-projectile-switch-project</span><span class="p">)</span>
+          <span class="p">(</span><span class="s">&#34;C-p&#34;</span> <span class="o">.</span> <span class="nv">dz/find-file</span><span class="p">)))</span>
+</code></pre></div><h4 id="swiper">Swiper</h4>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">swiper</span><span class="p">)</span>
+</code></pre></div><h4 id="projectile">Projectile</h4>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">projectile</span>
+  <span class="nb">:config</span>
+  <span class="p">(</span><span class="nv">projectile-mode</span><span class="p">)</span>
+  <span class="nb">:custom</span>
+  <span class="p">(</span><span class="nv">projectile-enable-caching</span>     <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">projectile-completion-system</span> <span class="ss">&#39;ivy</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">counsel-projectile</span>
+  <span class="nb">:after</span> <span class="p">(</span><span class="nv">counsel</span> <span class="nv">projectile</span><span class="p">))</span>
+</code></pre></div><h3 id="magit">Magit</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">magit</span><span class="p">)</span>
+</code></pre></div><h3 id="org-export">Org Export</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">ox-hugo</span> <span class="nb">:after</span> <span class="nv">ox</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">ox-reveal</span> <span class="nb">:after</span> <span class="nv">ox</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;ox-beamer</span><span class="p">)</span>
+</code></pre></div><h2 id="terminal-emulator">Terminal Emulator</h2>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">@dz/vterm-init</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">setq</span> <span class="nv">mode-line-format</span>       <span class="no">nil</span>
+        <span class="nv">confirm-kill-processes</span> <span class="no">nil</span>
+        <span class="nv">hscroll-margin</span>         <span class="mi">0</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/open-vterm</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">split-window-vertically</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">vterm</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">use-package</span> <span class="nv">vterm</span>
+  <span class="nb">:preface</span> <span class="p">(</span><span class="nb">setq</span> <span class="nv">vterm-install</span> <span class="no">t</span><span class="p">)</span>
+  <span class="nb">:commands</span> <span class="nv">vterm</span> <span class="nv">vterm-mode</span>
+  <span class="nb">:hook</span> <span class="p">(</span><span class="nv">vterm-mode</span> <span class="o">.</span> <span class="nv">@dz/vterm-init</span><span class="p">)</span>
+  <span class="nb">:config</span>
+
+  <span class="c1">;; Once vterm is dead, the vterm buffer is useless.</span>
+  <span class="p">(</span><span class="nb">setq</span> <span class="nv">vterm-kill-buffer-on-exit</span> <span class="no">t</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">+vterm-goto-insert-point-h</span> <span class="p">()</span>
+    <span class="s">&#34;Go to the point we were at when we left insert mode.&#34;</span>
+    <span class="p">(</span><span class="nb">when</span> <span class="nv">+vterm--insert-point</span>
+      <span class="p">(</span><span class="nf">goto-char</span> <span class="nv">+vterm--insert-point</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">setq-local</span> <span class="nv">+vterm--insert-point</span> <span class="no">nil</span><span class="p">)))</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">+vterm-remember-insert-point-h</span> <span class="p">()</span>
+    <span class="s">&#34;Remember point when leaving insert mode.&#34;</span>
+    <span class="p">(</span><span class="nb">setq-local</span> <span class="nv">+vterm--insert-point</span> <span class="p">(</span><span class="nf">point</span><span class="p">)))</span>
+
+  <span class="c1">;; Restore the point&#39;s location when leaving and re-entering insert mode.</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;vterm-mode-hook</span>
+    <span class="p">(</span><span class="nb">defun</span> <span class="nv">+vterm-init-remember-point-h</span> <span class="p">()</span>
+      <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;evil-insert-state-exit-hook</span> <span class="nf">#&#39;</span><span class="nv">+vterm-remember-insert-point-h</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;evil-insert-state-entry-hook</span> <span class="nf">#&#39;</span><span class="nv">+vterm-goto-insert-point-h</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)))</span>
+
+  <span class="nb">:general</span> <span class="p">(</span><span class="nb">:prefix</span> <span class="s">&#34;SPC&#34;</span>
+            <span class="nb">:keymaps</span> <span class="ss">&#39;normal</span>
+            <span class="s">&#34;o t&#34;</span> <span class="nf">#&#39;</span><span class="nv">dz/open-vterm</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">use-package</span> <span class="nv">vterm-toggle</span>
+  <span class="nb">:bind</span> <span class="p">(</span><span class="s">&#34;C-c t&#34;</span> <span class="o">.</span> <span class="nf">#&#39;</span><span class="nv">vterm-toggle</span><span class="p">))</span>
+</code></pre></div><h2 id="miscellaneous-dz-functions">Miscellaneous dz/functions</h2>
+<h3 id="wrap-org-source-code-blocks">Wrap org source code blocks</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">setq</span> <span class="nv">def-language</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/org-wrap-source</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">lang</span> <span class="p">(</span><span class="nf">read-string</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;Language [%s]: &#34;</span> <span class="nv">def-language</span><span class="p">)</span> <span class="no">nil</span> <span class="no">nil</span> <span class="nv">def-language</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">start</span> <span class="p">(</span><span class="nf">min</span> <span class="p">(</span><span class="nf">point</span><span class="p">)</span> <span class="p">(</span><span class="nv">mark</span><span class="p">)))</span>
+        <span class="p">(</span><span class="nv">end</span> <span class="p">(</span><span class="nf">max</span> <span class="p">(</span><span class="nf">point</span><span class="p">)</span> <span class="p">(</span><span class="nv">mark</span><span class="p">))))</span>
+    <span class="p">(</span><span class="nf">goto-char</span> <span class="nv">end</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nf">bolp</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">newline</span><span class="p">))</span>
+    <span class="p">(</span><span class="nf">insert</span> <span class="s">&#34;#+END_SRC\n&#34;</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">goto-char</span> <span class="nv">start</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nf">bolp</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">newline</span><span class="p">))</span>
+    <span class="p">(</span><span class="nb">setq</span> <span class="nv">def-language</span> <span class="nv">lang</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">insert</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;#+BEGIN_SRC %s\n&#34;</span> <span class="nv">def-language</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nf">define-key</span> <span class="nv">evil-visual-state-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;SPC w&#34;</span><span class="p">)</span> <span class="ss">&#39;dz/org-wrap-source</span><span class="p">)</span>
+</code></pre></div><h3 id="open-configuration">Open configuration</h3>
+<div class="highlight"><pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/open-config</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">find-file</span> <span class="s">&#34;~/.emacs.d/init.org&#34;</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nf">define-key</span> <span class="nv">evil-normal-state-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;SPC o c&#34;</span><span class="p">)</span> <span class="ss">&#39;dz/open-config</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">define-key</span> <span class="nv">evil-normal-state-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;SPC o a&#34;</span><span class="p">)</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">find-file</span> <span class="s">&#34;~/org/agenda.org&#34;</span><span class="p">)))</span>
+</code></pre></div>
+    </section>
+  </article>
+</main>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="application/javascript">(function() {
+     var $window = $(window);
+     if ($window.width() >= 1400) { 
+         var $toc = $('#TableOfContents');
+         if ($toc.length > 0) {
+             function onScroll(){
+                 var currentScroll = $window.scrollTop();
+                 var h = $('.content h1, .content h2, .content h3, .content h4, .content h5, .content h6, .h-feed h2');
+                 var id = "";
+                 h.each(function (i, e) {
+                     e = $(e);
+                     if (e.offset().top - 10 <= currentScroll) {
+                         id = e.attr('id');
+                     }
+                 });
+                 var current = $toc.find('a.current');
+                 if (current.length == 1 && current.eq(0).attr('href') == '#' + id) return true;
+
+                 current.each(function (i, e) {
+                     $(e).removeClass('current').siblings('ul').hide();
+                 });
+                 $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+                     $(e).children('a').addClass('current').siblings('ul').show();
+                 });
+             }
+             $window.on('scroll', onScroll);
+             $(document).ready(function() {
+                 $toc.find('a').parent('li').find('ul').hide();
+                 onScroll();
+                 document.getElementsByClassName('hugotoc')[0].style.display = '';
+             });}}})();</script>
+
+
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-172736282-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</div>
+    </body>
+</html>
