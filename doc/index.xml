@@ -13,7 +13,7 @@
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0100</pubDate>
       
       <guid>https://mircodezorzi.github.io/doc/emacs-configuration/</guid>
-      <description>Table of Contents  Meta Packages General  Personal information Reduce filesystem clutter Cleanup UI Better defaults Beacon Font Theme Display battery in modeline Indent guides Cursorline Indentation Windows Relative line numbers Key chords Workgroups   Evil Mode Language Server  lsp-mode lsp-ui   Auto Complete Languages  C++ Python Golang Haskell Javascript/Typescript Web   File Types  Org LaTeX   Configuration Files Spelling Snippets Tools  PDF Tools Undo Tree Ivy, Counsel, Swiper, and Projectile Magit Org Export   Terminal Emulator Miscellaneous dz/functions  Wrap org source code blocks Open configuration      Meta Enable lexical scoping for the current file.</description>
+      <description>Table of Contents  Introduction Meta Packages General  Personal information Reduce filesystem clutter Cleanup UI Saner defaults Beacon Font Theme Display battery in modeline Indent guides Cursorline Indentation Windows Relative line numbers Key chords   Tools  Terminal Emulator Treemacs Undo Tree Magit Git Gutter Ivy   Evil Mode Language Server  lsp-mode lsp-ui XRefs   Auto Complete Languages  C++ Python Golang Haskell Javascript/Typescript Web   File Types  Org LaTeX   Configuration Files Spelling Snippets Miscellaneous dz/functions  Wrap org source code blocks Open configuration      Introduction What follows is my literate emacs configuration.</description>
     </item>
     
     <item>
