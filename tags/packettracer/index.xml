@@ -6,33 +6,14 @@
     <description>Recent content in packettracer on (&gt;&gt;=) :: mircodz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 05 Dec 2020 00:00:00 +0100</lastBuildDate><atom:link href="https://mircodezorzi.github.io/tags/packettracer/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 27 Nov 2020 00:00:00 +0100</lastBuildDate><atom:link href="https://mircodezorzi.github.io/tags/packettracer/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Reversing Packet Tracer Part 2: Shenanigans</title>
-      <link>https://mircodezorzi.github.io/doc/reversing-packet-tracer-part-2/</link>
-      <pubDate>Sat, 05 Dec 2020 00:00:00 +0100</pubDate>
-      
-      <guid>https://mircodezorzi.github.io/doc/reversing-packet-tracer-part-2/</guid>
-      <description>Table of Contents  Bypassing Login 100%    Bypassing Login TODO everything
-1606495110527~K501UW~{a46d0802-d1d6-4341-adf4-3acacef612cb}~a0a1523a-a35b-41a7-b8ad-4cdc9f70e3f0~1615148676 v143 = 2LL; if ( v218 &amp;amp;&amp;amp; (v218 = 0, v143 = 2LL, !CAppWindow::IS_PTSA) ) { QWidget::hide(&amp;amp;v284); v180 = (CNetspaceLogin *)operator new(0x80uLL); CNetspaceLogin::CNetspaceLogin(v180, 0LL); 1500 lines prior</description>
-    </item>
-    
-    <item>
-      <title>Reversing Packet Tracer a parte: pka2xml-aws</title>
-      <link>https://mircodezorzi.github.io/doc/pka2xml-aws/</link>
-      <pubDate>Fri, 04 Dec 2020 00:00:00 +0100</pubDate>
-      
-      <guid>https://mircodezorzi.github.io/doc/pka2xml-aws/</guid>
-      <description>Table of Contents  Backend  Installing the C++ Lambda Runtime Setting up CMake The code Compiling   Frontend    After having finally finished writing a small tool based on the research from part 1 - which can be found here - I decided to distract myself even further and I&#39;ve decided embark on a new jurney; porting the tool to the aws C++ lambda runtime and create a small frontend to go with it.</description>
-    </item>
-    
-    <item>
-      <title>Reversing Packet Tracer Part 1: Network Simulation Files</title>
-      <link>https://mircodezorzi.github.io/doc/reversing-packet-tracer-part-1/</link>
+      <title>Reversing Packet Tracer</title>
+      <link>https://mircodezorzi.github.io/doc/reversing-packet-tracer/</link>
       <pubDate>Fri, 27 Nov 2020 00:00:00 +0100</pubDate>
       
-      <guid>https://mircodezorzi.github.io/doc/reversing-packet-tracer-part-1/</guid>
-      <description>Table of Contents  Preface Reversing  Stage 1: decryptPTSave Stage 2: decipher Stage 3: deobfuscateBytes Stage 4: qUncompress   Putting it All Together Resources    Preface As a high school IT student I find myself using Packet Tracer almost on a daily basis.</description>
+      <guid>https://mircodezorzi.github.io/doc/reversing-packet-tracer/</guid>
+      <description>Table of Contents  Preface Reversing  Stage 1: decryptPTSave Stage 2: decipher Stage 3: deobfuscateBytes Stage 4: qUncompress   Putting it All Together Other Shenanigans  Bypassing Login 100%   Resources    Preface As a high school IT student I find myself using Packet Tracer almost on a daily basis.</description>
     </item>
     
   </channel>
