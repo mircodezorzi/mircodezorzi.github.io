@@ -1,0 +1,136 @@
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.2/pako.min.js" integrity="sha512-IjkvjWp4tSkhkQRb9gFwCcMhBWZLPKc7Zo8ifb6qxORyehV072QgRVG3F0fwAaJh0fnEFNLc2+XggoC5wvW24g==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" integrity="sha512-GZ1RIgZaSc8rnco/8CXfRdCpDxRCphenIiZ2ztLy3XQfCbQUSCuk8IudvNHxkRA3oUg6q0qejgN/qqyG1duv5Q==" crossorigin="anonymous"></script>
+  <style type="text/css" media="screen">
+    #editor {
+      height: 600px;
+      width: 800px;
+    }
+    #loading {
+      display: none
+    }
+  </style>
+  <script charset="utf-8">
+const toBase64 = file => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => resolve(reader.result);
+  reader.onerror = error => reject(error);
+});
+
+const b64toBlob = (base64, type = 'application/octet-stream') =>
+  fetch(`data:${type};base64,${base64}`).then(res => res.blob());
+
+async function loadFile(file) {
+  return await file.text();
+}
+
+async function Update() {
+  const file = document.querySelector('#file').files[0];
+  if (file.name.endsWith('.pka')) {
+    document.querySelector('#decode').disabled = false;
+    document.querySelector('#retrofit').disabled = false;
+    document.querySelector('#encode').disabled = true;
+  } else if (file.name.endsWith('.xml')) {
+    document.querySelector('#decode').disabled = true;
+    document.querySelector('#retrofit').disabled = true;
+    document.querySelector('#encode').disabled = false;
+  } else {
+    document.querySelector('#decode').disabled = true;
+    document.querySelector('#retrofit').disabled = true;
+    document.querySelector('#encode').disabled = true;
+  }
+}
+
+async function Decode() {
+  document.querySelector('#loading').style["display"] = "inline";
+
+  const file = document.querySelector('#file').files[0];
+  fetch('https://1nlsyfjbcb.execute-api.eu-south-1.amazonaws.com/default/pka2xml', {
+    method: 'POST',
+    body: JSON.stringify({
+      file: await toBase64(file),
+      action: 'decode',
+    })
+  }).then(response => response.text())
+  .then(b64toBlob)
+  .then(blob => blob.arrayBuffer())
+  .then(result => {
+    const data = pako.inflate(new Uint8Array(result));
+    const str = new TextDecoder("utf-8").decode(data);
+
+    const b = new Blob([str], { type: 'application/octet-stream' });
+    const a = document.createElement('a');
+    a.download = document.querySelector('#file').files[0].name.replace('.pka', '.xml');
+    a.href = window.URL.createObjectURL(b);
+    a.click();
+  }).catch(err => {
+      console.log(`err: ${err}`);
+  }).finally(() => {
+    document.querySelector('#loading').style["display"] = "none";
+  });
+}
+
+async function Retrofit() {
+  document.querySelector('#loading').style["display"] = "inline";
+
+  const file = document.querySelector('#file').files[0];
+  fetch('https://1nlsyfjbcb.execute-api.eu-south-1.amazonaws.com/default/pka2xml', {
+    method: 'POST',
+    body: JSON.stringify({
+      file: await toBase64(file),
+      action: 'retrofit',
+    })
+  }).then(response => response.text())
+  .then(b64toBlob)
+  .then(result => {
+    const a = document.createElement('a');
+    a.download = document.querySelector('#file').files[0].name;
+    a.href = window.URL.createObjectURL(result);
+    a.click();
+  }).catch(err => {
+    console.log(`err: ${err}`);
+  }).finally(() => {
+    document.querySelector('#loading').style["display"] = "none";
+  });
+}
+
+async function Encode() {
+  document.querySelector('#loading').style["display"] = "inline";
+
+  const file = document.querySelector('#file').files[0];
+  const compressed = pako.deflate(new TextEncoder().encode(loadFile(file)));
+  const b = new Blob([compressed], { type: 'application/octet-stream' });
+
+  fetch('https://1nlsyfjbcb.execute-api.eu-south-1.amazonaws.com/default/pka2xml', {
+    method: 'POST',
+    body: JSON.stringify({
+      file: await toBase64(b),
+      action: 'encode',
+      length: file.size,
+    })
+  }).then(response => response.text())
+  .then(b64toBlob)
+  .then(result => {
+    const a = document.createElement('a');
+    a.download = document.querySelector('#file').files[0].name.replace('.xml', '.pka');
+    a.href = window.URL.createObjectURL(result);
+    a.click();
+  }).catch(err => {
+    console.log(`err: ${err}`);
+  }).finally(() => {
+    document.querySelector('#loading').style["display"] = "none";
+  });
+}
+</script>
+</head>
+<body>
+  <input type="file" id="file" onChange="Update()">
+  <hr>
+  <button disabled id="encode" onclick="Encode()">Encode</button>
+  <button disabled id="decode" onclick="Decode()">Decode</button>
+  <button disabled id="retrofit" onclick="Retrofit()">Retrofit</button>
+  <p id="loading">Loading...</p>
+</body>
+</html>

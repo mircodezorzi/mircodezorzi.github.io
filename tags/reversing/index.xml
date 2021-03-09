@@ -13,7 +13,7 @@
       <pubDate>Fri, 27 Nov 2020 00:00:00 +0100</pubDate>
       
       <guid>https://mircodezorzi.github.io/doc/reversing-packet-tracer/</guid>
-      <description>Table of Contents  Preface Reversing  Stage 1: decryptPTSave Stage 2: decipher Stage 3: deobfuscateBytes Stage 4: qUncompress   Putting it All Together Other Shenanigans  Bypassing Login 100%   Resources    Preface As a high school IT student I find myself using Packet Tracer almost on a daily basis.</description>
+      <description>Table of Contents  Preface Reversing  Stage 1: decryptPTSave Stage 2: decipher Stage 3: deobfuscateBytes Stage 4: qUncompress   Putting it All Together Patching  Bypassing Login 100%   Resources    Please note that this article is still a draft.</description>
     </item>
     
   </channel>

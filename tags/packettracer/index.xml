@@ -6,14 +6,23 @@
     <description>Recent content in packettracer on (&gt;&gt;=) :: mircodz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Nov 2020 00:00:00 +0100</lastBuildDate><atom:link href="https://mircodezorzi.github.io/tags/packettracer/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Dec 2020 00:00:00 +0100</lastBuildDate><atom:link href="https://mircodezorzi.github.io/tags/packettracer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reversing Packet Tracer a parte: pka2xml-aws</title>
+      <link>https://mircodezorzi.github.io/doc/pka2xml-aws/</link>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://mircodezorzi.github.io/doc/pka2xml-aws/</guid>
+      <description>Table of Contents  Preface Backend  Installing the C++ Lambda Runtime Setting up CMake The code Compiling   Frontend    As with the previous post, this is a work in progress, as soon as I can I&amp;rsquo;m going to include all the steps to set-up serverless.</description>
+    </item>
+    
     <item>
       <title>Reversing Packet Tracer</title>
       <link>https://mircodezorzi.github.io/doc/reversing-packet-tracer/</link>
       <pubDate>Fri, 27 Nov 2020 00:00:00 +0100</pubDate>
       
       <guid>https://mircodezorzi.github.io/doc/reversing-packet-tracer/</guid>
-      <description>Table of Contents  Preface Reversing  Stage 1: decryptPTSave Stage 2: decipher Stage 3: deobfuscateBytes Stage 4: qUncompress   Putting it All Together Other Shenanigans  Bypassing Login 100%   Resources    Preface As a high school IT student I find myself using Packet Tracer almost on a daily basis.</description>
+      <description>Table of Contents  Preface Reversing  Stage 1: decryptPTSave Stage 2: decipher Stage 3: deobfuscateBytes Stage 4: qUncompress   Putting it All Together Patching  Bypassing Login 100%   Resources    Please note that this article is still a draft.</description>
     </item>
     
   </channel>

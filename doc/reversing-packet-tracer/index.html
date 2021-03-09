@@ -58,7 +58,7 @@ if (!doNotTrack) {
       <h1 class="title">Reversing Packet Tracer</h1>
       <div class="meta date-posted">Posted on Nov 27, 2020
       
-        <div class="meta date-updated">(Updated on Feb 24, 2021)</div>
+        <div class="meta date-updated">(Updated on Mar 9, 2021)</div>
       
       </div>
     </div>
@@ -94,7 +94,7 @@ if (!doNotTrack) {
       </ul>
     </li>
     <li><a href="#putting-it-all-together">Putting it All Together</a></li>
-    <li><a href="#other-shenanigans">Other Shenanigans</a>
+    <li><a href="#patching">Patching</a>
       <ul>
         <li><a href="#bypassing-login">Bypassing Login</a></li>
         <li><a href="#100">100%</a></li>
@@ -160,7 +160,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 <li><a href="#putting-it-all-together">Putting it All Together</a></li>
-<li><a href="#other-shenanigans">Other Shenanigans</a>
+<li><a href="#patching">Patching</a>
 <ul>
 <li><a href="#bypassing-login">Bypassing Login</a></li>
 <li><a href="#100">100%</a></li>
@@ -170,6 +170,7 @@ if (!doNotTrack) {
 </ul>
 </div>
 <!--endtoc-->
+<p>Please note that this article is still a draft. As soon as I&rsquo;m able to I&rsquo;ll make sure to finish writing the rest.</p>
 <h2 id="preface">Preface</h2>
 <p>As a high school IT student I find myself using Packet Tracer almost on a daily basis. As much as I think it&rsquo;s a great piece of software, there&rsquo;s one thing that has been bothering me since I started using it, and it&rsquo;s probably the most annoying aspect of the tool; the need to login with a cisco account each and every time. Being a lazy programmer who can&rsquo;t be bothered to enter his password every few days I set out to reverse engineer Packet Tracer and patch the binary to completely bypass the need to login.</p>
 <p>Me being me, I immediately got distrarcted by a more alluring task: reversing the encoding and decoding of Packet Tracer Simulation Files.</p>
@@ -464,7 +465,7 @@ if (!doNotTrack) {
 
   <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div><h2 id="other-shenanigans">Other Shenanigans</h2>
+</code></pre></div><h2 id="patching">Patching</h2>
 <h3 id="bypassing-login">Bypassing Login</h3>
 <p>TODO everything</p>
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">1606495110527~K501UW~{a46d0802-d1d6-4341-adf4-3acacef612cb}~a0a1523a-a35b-41a7-b8ad-4cdc9f70e3f0~1615148676
@@ -690,10 +691,10 @@ last login    |       |                                     |                   
 .text:0000000000DFF5E0
 </code></pre><h2 id="resources">Resources</h2>
 <ul>
-<li><a href="https://github.com/mircodezorzi/pka2xml/blob/master/decompiled/decipher.cpp">decipher.cpp</a></li>
-<li><a href="https://github.com/mircodezorzi/pka2xml/blob/master/decompiled/decrypt.cpp">decrypt.cpp</a></li>
-<li><a href="https://github.com/mircodezorzi/pka2xml/blob/master/decompiled/decryptFileBytes.cpp">decryptFileBytes.cpp</a></li>
-<li><a href="https://github.com/mircodezorzi/pka2xml/blob/master/decompiled/deobfuscateBytes.cpp">deobfuscateBytes.cpp</a></li>
+<li><a href="https://github.com/mircodezorzi/pka2xml/blob/master/reversing/decompiled/decipher.cpp">decipher.cpp</a></li>
+<li><a href="https://github.com/mircodezorzi/pka2xml/blob/master/reversing/decompiled/decrypt.cpp">decrypt.cpp</a></li>
+<li><a href="https://github.com/mircodezorzi/pka2xml/blob/master/reversing/decompiled/decryptFileBytes.cpp">decryptFileBytes.cpp</a></li>
+<li><a href="https://github.com/mircodezorzi/pka2xml/blob/master/reversing/decompiled/deobfuscateBytes.cpp">deobfuscateBytes.cpp</a></li>
 </ul>
 
     </section>
