@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> My Emacs Configuration | (&gt;&gt;=) :: mircodz</title>
+  <meta name="description" content="CTF player with NoPwnIntended and mhackeroni.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="My Emacs Configuration" />
+<meta property="og:description" content="Introduction Meta Packages General  Personal information Reduce filesystem clutter Cleanup UI Saner defaults Beacon Theme Display battery in modeline Indent guides Cursorline Indentation Origami ialign Relative line numbers Key chords Fix scrolling   Tools  Terminal Emulator Treemacs Undo Tree Magit Git Gutter Ivy   Evil Mode Language Server  lsp-mode lsp-ui XRefs   Auto Complete Languages  C&#43;&#43; Python Scala Golang Javascript/Typescript Web  Vue Emmet     Org LaTeX Configuration Files  Terraform Yaml Protobuf CMake Dockerfile Toml   Spelling Snippets Miscellaneous dz/functions  Wrap org source code blocks Open configuration     Introduction What follows is my literate emacs configuration." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/posts/emacs/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-01-26T00:00:00&#43;01:00" />
+<meta property="article:modified_time" content="2021-05-17T17:41:09&#43;02:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="My Emacs Configuration"/>
+<meta name="twitter:description" content="Introduction Meta Packages General  Personal information Reduce filesystem clutter Cleanup UI Saner defaults Beacon Theme Display battery in modeline Indent guides Cursorline Indentation Origami ialign Relative line numbers Key chords Fix scrolling   Tools  Terminal Emulator Treemacs Undo Tree Magit Git Gutter Ivy   Evil Mode Language Server  lsp-mode lsp-ui XRefs   Auto Complete Languages  C&#43;&#43; Python Scala Golang Javascript/Typescript Web  Vue Emmet     Org LaTeX Configuration Files  Terraform Yaml Protobuf CMake Dockerfile Toml   Spelling Snippets Miscellaneous dz/functions  Wrap org source code blocks Open configuration     Introduction What follows is my literate emacs configuration."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://example.com/css/style-white.css">
+  
+   <link rel="stylesheet" href="https://example.com/css/syntax.css"> 
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://example.com/images/favicon.ico" />
+
+  
+  
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">~/home</a></li>
+         
+        <li><a href="/posts">~/posts</a></li>
+         
+        <li><a href="/tags">~/tags</a></li>
+         
+        <li><a href="/about">~/about</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" https://example.com/about/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fexample.com%2fposts%2femacs%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&text=My%20Emacs%20Configuration" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&is_video=false&description=My%20Emacs%20Configuration" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=My%20Emacs%20Configuration&body=Check out this article: https%3a%2f%2fexample.com%2fposts%2femacs%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&name=My%20Emacs%20Configuration&description=Introduction%20Meta%20Packages%20General%20%20Personal%20information%20Reduce%20filesystem%20clutter%20Cleanup%20UI%20Saner%20defaults%20Beacon%20Theme%20Display%20battery%20in%20modeline%20Indent%20guides%20Cursorline%20Indentation%20Origami%20ialign%20Relative%20line%20numbers%20Key%20chords%20Fix%20scrolling%20%20%20Tools%20%20Terminal%20Emulator%20Treemacs%20Undo%20Tree%20Magit%20Git%20Gutter%20Ivy%20%20%20Evil%20Mode%20Language%20Server%20%20lsp-mode%20lsp-ui%20XRefs%20%20%20Auto%20Complete%20Languages%20%20C%2b%2b%20Python%20Scala%20Golang%20Javascript%2fTypescript%20Web%20%20Vue%20Emmet%20%20%20%20%20Org%20LaTeX%20Configuration%20Files%20%20Terraform%20Yaml%20Protobuf%20CMake%20Dockerfile%20Toml%20%20%20Spelling%20Snippets%20Miscellaneous%20dz%2ffunctions%20%20Wrap%20org%20source%20code%20blocks%20Open%20configuration%20%20%20%20%20Introduction%20What%20follows%20is%20my%20literate%20emacs%20configuration." aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fexample.com%2fposts%2femacs%2f&t=My%20Emacs%20Configuration" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#meta">Meta</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#general">General</a>
+      <ul>
+        <li><a href="#personal-information">Personal information</a></li>
+        <li><a href="#reduce-filesystem-clutter">Reduce filesystem clutter</a></li>
+        <li><a href="#cleanup-ui">Cleanup UI</a></li>
+        <li><a href="#saner-defaults">Saner defaults</a></li>
+        <li><a href="#beacon">Beacon</a></li>
+        <li><a href="#theme">Theme</a></li>
+        <li><a href="#display-battery-in-modeline">Display battery in modeline</a></li>
+        <li><a href="#indent-guides">Indent guides</a></li>
+        <li><a href="#cursorline">Cursorline</a></li>
+        <li><a href="#indentation">Indentation</a></li>
+        <li><a href="#origami">Origami</a></li>
+        <li><a href="#ialign">ialign</a></li>
+        <li><a href="#relative-line-numbers">Relative line numbers</a></li>
+        <li><a href="#key-chords">Key chords</a></li>
+        <li><a href="#fix-scrolling">Fix scrolling</a></li>
+      </ul>
+    </li>
+    <li><a href="#tools">Tools</a>
+      <ul>
+        <li><a href="#terminal-emulator">Terminal Emulator</a></li>
+        <li><a href="#treemacs">Treemacs</a></li>
+        <li><a href="#undo-tree">Undo Tree</a></li>
+        <li><a href="#magit">Magit</a></li>
+        <li><a href="#git-gutter">Git Gutter</a></li>
+        <li><a href="#ivy">Ivy</a></li>
+      </ul>
+    </li>
+    <li><a href="#evil-mode">Evil Mode</a></li>
+    <li><a href="#language-server">Language Server</a>
+      <ul>
+        <li><a href="#lsp-mode">lsp-mode</a></li>
+        <li><a href="#lsp-ui">lsp-ui</a></li>
+        <li><a href="#xrefs">XRefs</a></li>
+      </ul>
+    </li>
+    <li><a href="#auto-complete">Auto Complete</a></li>
+    <li><a href="#languages">Languages</a>
+      <ul>
+        <li><a href="#c-plus-plus">C++</a></li>
+        <li><a href="#python">Python</a></li>
+        <li><a href="#scala">Scala</a></li>
+        <li><a href="#golang">Golang</a></li>
+        <li><a href="#javascript-typescript">Javascript/Typescript</a></li>
+        <li><a href="#web">Web</a>
+          <ul>
+            <li><a href="#vue">Vue</a></li>
+            <li><a href="#emmet">Emmet</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#org">Org</a></li>
+    <li><a href="#latex">LaTeX</a></li>
+    <li><a href="#configuration-files">Configuration Files</a>
+      <ul>
+        <li><a href="#terraform">Terraform</a></li>
+        <li><a href="#yaml">Yaml</a></li>
+        <li><a href="#protobuf">Protobuf</a></li>
+        <li><a href="#cmake">CMake</a></li>
+        <li><a href="#dockerfile">Dockerfile</a></li>
+        <li><a href="#toml">Toml</a></li>
+      </ul>
+    </li>
+    <li><a href="#spelling">Spelling</a></li>
+    <li><a href="#snippets">Snippets</a></li>
+    <li><a href="#miscellaneous-dz-functions">Miscellaneous dz/functions</a>
+      <ul>
+        <li><a href="#wrap-org-source-code-blocks">Wrap org source code blocks</a></li>
+        <li><a href="#open-configuration">Open configuration</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        My Emacs Configuration
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2021-01-26 00:00:00 &#43;0100 CET" itemprop="datePublished">2021-01-26</time>
+          
+        </div>
+        
+        
+        <div class="article-read-time">
+          <i class="far fa-clock"></i>
+          
+          9 minute read
+        </div>
+        
+        
+        
+        <div class="article-tag">
+            <i class="fas fa-tag"></i>
+            
+            
+            <a class="tag-link" href="/tags/emacs" rel="tag">emacs</a>
+            
+        </div>
+        
+      </div>
+    </header>
+
+  
+    <div class="content" itemprop="articleBody">
+      <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#meta">Meta</a></li>
+<li><a href="#packages">Packages</a></li>
+<li><a href="#general">General</a>
+<ul>
+<li><a href="#personal-information">Personal information</a></li>
+<li><a href="#reduce-filesystem-clutter">Reduce filesystem clutter</a></li>
+<li><a href="#cleanup-ui">Cleanup UI</a></li>
+<li><a href="#saner-defaults">Saner defaults</a></li>
+<li><a href="#beacon">Beacon</a></li>
+<li><a href="#theme">Theme</a></li>
+<li><a href="#display-battery-in-modeline">Display battery in modeline</a></li>
+<li><a href="#indent-guides">Indent guides</a></li>
+<li><a href="#cursorline">Cursorline</a></li>
+<li><a href="#indentation">Indentation</a></li>
+<li><a href="#origami">Origami</a></li>
+<li><a href="#ialign">ialign</a></li>
+<li><a href="#relative-line-numbers">Relative line numbers</a></li>
+<li><a href="#key-chords">Key chords</a></li>
+<li><a href="#fix-scrolling">Fix scrolling</a></li>
+</ul>
+</li>
+<li><a href="#tools">Tools</a>
+<ul>
+<li><a href="#terminal-emulator">Terminal Emulator</a></li>
+<li><a href="#treemacs">Treemacs</a></li>
+<li><a href="#undo-tree">Undo Tree</a></li>
+<li><a href="#magit">Magit</a></li>
+<li><a href="#git-gutter">Git Gutter</a></li>
+<li><a href="#ivy">Ivy</a></li>
+</ul>
+</li>
+<li><a href="#evil-mode">Evil Mode</a></li>
+<li><a href="#language-server">Language Server</a>
+<ul>
+<li><a href="#lsp-mode">lsp-mode</a></li>
+<li><a href="#lsp-ui">lsp-ui</a></li>
+<li><a href="#xrefs">XRefs</a></li>
+</ul>
+</li>
+<li><a href="#auto-complete">Auto Complete</a></li>
+<li><a href="#languages">Languages</a>
+<ul>
+<li><a href="#c-plus-plus">C++</a></li>
+<li><a href="#python">Python</a></li>
+<li><a href="#scala">Scala</a></li>
+<li><a href="#golang">Golang</a></li>
+<li><a href="#javascript-typescript">Javascript/Typescript</a></li>
+<li><a href="#web">Web</a>
+<ul>
+<li><a href="#vue">Vue</a></li>
+<li><a href="#emmet">Emmet</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org">Org</a></li>
+<li><a href="#latex">LaTeX</a></li>
+<li><a href="#configuration-files">Configuration Files</a>
+<ul>
+<li><a href="#terraform">Terraform</a></li>
+<li><a href="#yaml">Yaml</a></li>
+<li><a href="#protobuf">Protobuf</a></li>
+<li><a href="#cmake">CMake</a></li>
+<li><a href="#dockerfile">Dockerfile</a></li>
+<li><a href="#toml">Toml</a></li>
+</ul>
+</li>
+<li><a href="#spelling">Spelling</a></li>
+<li><a href="#snippets">Snippets</a></li>
+<li><a href="#miscellaneous-dz-functions">Miscellaneous dz/functions</a>
+<ul>
+<li><a href="#wrap-org-source-code-blocks">Wrap org source code blocks</a></li>
+<li><a href="#open-configuration">Open configuration</a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<figure><img src="https://mircodezorzi.github.io/doc/emacs-configuration/210224-2201-11.png"/>
+</figure>
+
+<h2 id="introduction">Introduction</h2>
+<p>What follows is my literate emacs configuration. Feel free to copy any snippet you wish, as I did with many other configuration over the past year or so.</p>
+<h2 id="meta">Meta</h2>
+<p>Enable lexical scoping for the current file.</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;; -*- lexical-binding: t -*-</span>
+</code></pre></div><p>Enable native compilation</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="k">setq</span> <span class="nv">package-native-compile</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div><p>Automatically update configuration file when saving the document.</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="k">setq</span> <span class="nv">user-emacs-directory</span> <span class="s">&#34;~/code/dotfiles/roles/emacs/files/.emacs.d/&#34;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">tangle-init</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">equal</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)</span>
+               <span class="p">(</span><span class="nv">expand-file-name</span> <span class="p">(</span><span class="nv">concat</span> <span class="nv">user-emacs-directory</span> <span class="s">&#34;init.org&#34;</span><span class="p">)))</span>
+    <span class="c1">;; Avoid running hooks when tangling.</span>
+    <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">prog-mode-hook</span> <span class="no">nil</span><span class="p">))</span>
+      <span class="p">(</span><span class="nv">org-babel-tangle</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">byte-compile-file</span> <span class="p">(</span><span class="nv">concat</span> <span class="nv">user-emacs-directory</span> <span class="s">&#34;init.el&#34;</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;after-save-hook</span> <span class="ss">&#39;tangle-init</span><span class="p">)</span>
+</code></pre></div><p>Tweak garbage collection configuration during initialization.</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">last-file-name-handler-alist</span> <span class="nv">file-name-handler-alist</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">gc-cons-threshold</span> <span class="mi">402653184</span>
+      <span class="nv">gc-cons-percentage</span> <span class="mf">0.6</span>
+      <span class="nv">file-name-handler-alist</span> <span class="no">nil</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;emacs-startup-hook</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">gc-cons-threshold</span> <span class="mi">16777216</span>
+        <span class="nv">gc-cons-percentage</span> <span class="mf">0.1</span>
+        <span class="nv">file-name-handler-alist</span> <span class="nv">last-file-name-handler-alist</span><span class="p">))</span>
+</code></pre></div><h2 id="packages">Packages</h2>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+</code></pre></div><p>Include extra package repositories.</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="k">setq</span> <span class="nv">package-archives</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&#34;elpa&#34;</span> <span class="o">.</span> <span class="s">&#34;https://elpa.gnu.org/packages/&#34;</span><span class="p">)</span>
+                         <span class="p">(</span><span class="s">&#34;melpa&#34;</span> <span class="o">.</span> <span class="s">&#34;https://melpa.org/packages/&#34;</span><span class="p">)))</span>
+</code></pre></div><p>Install <code>use-package</code> package manager.</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="ss">&#39;use-package</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">package-install</span> <span class="ss">&#39;use-package</span><span class="p">))</span>
+<span class="p">(</span><span class="nf">require</span> <span class="ss">&#39;use-package</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">setf</span> <span class="nv">use-package-always-ensure</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div><p>In case some packages are missing, install them.</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="k">let*</span> <span class="p">((</span><span class="nv">package--builtins</span> <span class="no">nil</span><span class="p">)</span>
+       <span class="p">(</span><span class="nv">packages</span>
+        <span class="o">&#39;</span><span class="p">(</span><span class="nv">auctex</span>
+          <span class="nv">all-the-icons</span>
+          <span class="nv">base16-theme</span>
+          <span class="nv">beacon</span>
+          <span class="nv">ccls</span>
+          <span class="nv">company-auctex</span>
+          <span class="nv">company-box</span>
+          <span class="nv">company-go</span>
+          <span class="nv">company-lsp</span>
+          <span class="nv">company-math</span>
+          <span class="nv">company-posframe</span>
+          <span class="nv">company-web</span>
+          <span class="nv">counsel</span>
+          <span class="nv">counsel-projectile</span>
+          <span class="nv">dockerfile-mode</span>
+          <span class="nv">emmet-mode</span>
+          <span class="nv">evil</span>
+          <span class="nv">general</span>
+          <span class="nv">go-eldoc</span>
+          <span class="nv">go-guru</span>
+          <span class="nv">go-mode</span>
+          <span class="nv">highlight-indent-guides</span>
+          <span class="nv">ivy</span>
+          <span class="nv">ivy-xref</span>
+          <span class="nv">key-chord</span>
+          <span class="nv">lsp-mode</span>
+          <span class="nv">lsp-python-ms</span>
+          <span class="nv">lsp-treemacs</span>
+          <span class="nv">lsp-ui</span>
+          <span class="nv">magit</span>
+          <span class="nv">mixed-pitch</span>
+          <span class="nv">org</span>
+          <span class="nv">ormolu</span>
+          <span class="nv">ox-hugo</span>
+          <span class="nv">pdf-tools</span>
+          <span class="nv">ialign</span>
+          <span class="nv">dimmer</span>
+          <span class="nv">projectile</span>
+          <span class="nv">protobuf-mode</span>
+          <span class="nv">swiper</span>
+          <span class="nv">tide</span>
+          <span class="nv">toml-mode</span>
+          <span class="nv">treemacs</span>
+          <span class="nv">treemacs-all-the-icons</span>
+          <span class="nv">treemacs-projectile</span>
+          <span class="nv">undo-tree</span>
+          <span class="nf">use-package</span>
+          <span class="nv">vterm</span>
+          <span class="nv">vterm-toggle</span>
+          <span class="nv">web-mode</span>
+          <span class="nv">yasnippet-snippets</span>
+          <span class="nv">yaml-mode</span><span class="p">)))</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">packages</span> <span class="p">(</span><span class="nv">seq-remove</span> <span class="ss">&#39;package-installed-p</span> <span class="nv">packages</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nb">when</span> <span class="nv">packages</span>
+      <span class="c1">;; Install uninstalled packages.</span>
+      <span class="p">(</span><span class="nv">package-refresh-contents</span><span class="p">)</span>
+      <span class="p">(</span><span class="nf">mapc</span> <span class="ss">&#39;package-install</span> <span class="nv">packages</span><span class="p">))))</span>
+</code></pre></div><h2 id="general">General</h2>
+<h3 id="personal-information">Personal information</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="k">setq</span> <span class="nv">user-full-name</span>    <span class="s">&#34;Mirco De Zorzi&#34;</span>
+      <span class="nv">user-mail-address</span> <span class="s">&#34;mircodezorzi@protonmail.com&#34;</span><span class="p">)</span>
+</code></pre></div><h3 id="reduce-filesystem-clutter">Reduce filesystem clutter</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nb">defvar</span> <span class="nv">emacs-autosave-directory</span>
+  <span class="p">(</span><span class="nv">concat</span> <span class="nv">user-emacs-directory</span> <span class="s">&#34;autosaves/&#34;</span><span class="p">))</span>
+
+<span class="c1">;; Sets all files to be backed up and auto saved in a single directory.</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">backup-directory-alist</span>
+      <span class="o">`</span><span class="p">((</span><span class="s">&#34;.*&#34;</span> <span class="o">.</span> <span class="o">,</span><span class="nv">emacs-autosave-directory</span><span class="p">))</span>
+      <span class="nv">auto-save-file-name-transforms</span>
+      <span class="o">`</span><span class="p">((</span><span class="s">&#34;.*&#34;</span> <span class="o">,</span><span class="nv">emacs-autosave-directory</span> <span class="no">t</span><span class="p">)))</span>
+
+<span class="c1">;; Don&#39;t generate lock files. Prevents Angular from breaking.</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">create-lockfiles</span> <span class="no">nil</span><span class="p">)</span>
+</code></pre></div><h3 id="cleanup-ui">Cleanup UI</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">mode</span>
+         <span class="o">&#39;</span><span class="p">(</span><span class="nv">menu-bar-mode</span>
+           <span class="nv">tool-bar-mode</span>
+           <span class="nv">tooltip-mode</span>
+           <span class="nv">scroll-bar-mode</span>
+           <span class="nv">blink-cursor-mode</span><span class="p">))</span>
+  <span class="p">(</span><span class="nf">funcall</span> <span class="nv">mode</span> <span class="mi">0</span><span class="p">))</span>
+</code></pre></div><h3 id="saner-defaults">Saner defaults</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="k">setq</span> <span class="nv">inhibit-startup-screen</span>    <span class="no">t</span>
+      <span class="nv">initial-scratch-message</span>   <span class="no">nil</span>
+      <span class="nv">sentence-end-double-space</span> <span class="no">nil</span>
+      <span class="nv">use-dialog-box</span>            <span class="no">nil</span>
+      <span class="nv">mark-even-if-inactive</span>     <span class="no">nil</span>
+      <span class="nv">kill-whole-line</span>           <span class="no">t</span>
+      <span class="nv">case-fold-search</span>          <span class="no">nil</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;default</span> <span class="no">nil</span> <span class="ss">:font</span> <span class="s">&#34;Source Code Pro 14&#34;</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">electric-indent-inhibit</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">setq-default</span> <span class="nv">indent-tabs-mode</span> <span class="no">nil</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">defalias</span> <span class="ss">&#39;yes-or-no-p</span> <span class="ss">&#39;y-or-n-p</span><span class="p">)</span> <span class="c1">;; Accept &#39;y&#39; in lieu of &#39;yes&#39;.</span>
+</code></pre></div><h3 id="beacon">Beacon</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">beacon</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">beacon-mode</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="ss">:custom</span>
+  <span class="p">(</span><span class="nv">beacon-blink-when-window-changes</span> <span class="no">t</span><span class="p">)</span> <span class="c1">;; Only flash on window/buffer changes.</span>
+  <span class="p">(</span><span class="nv">beacon-blink-when-window-scrolls</span> <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">beacon-blink-when-point-moves</span>    <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">beacon-blink-duration</span>            <span class="mf">.2</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">beacon-blink-delay</span>               <span class="mf">.2</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">beacon-size</span>                      <span class="mi">20</span><span class="p">))</span>
+</code></pre></div><h3 id="theme">Theme</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/dark-theme</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">i</span> <span class="nv">custom-enabled-themes</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">disable-theme</span> <span class="nv">i</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">load-theme</span> <span class="ss">&#39;base16-gruvbox-material-dark-medium</span> <span class="no">t</span><span class="p">))</span>
+</code></pre></div><p>When working on org and latex documents I like to use the default Emacs light theme.</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/light-theme</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">i</span> <span class="nv">custom-enabled-themes</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">disable-theme</span> <span class="nv">i</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">load-theme</span> <span class="ss">&#39;base16-atelier-forest-light</span> <span class="no">t</span><span class="p">))</span>
+</code></pre></div><p>Use dark theme by default.</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">base16-theme</span>
+  <span class="ss">:config</span> <span class="p">(</span><span class="nv">dz/dark-theme</span><span class="p">))</span>
+</code></pre></div><h3 id="display-battery-in-modeline">Display battery in modeline</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">display-time-mode</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nf">equal</span> <span class="s">&#34;Battery status not avalible&#34;</span>
+               <span class="p">(</span><span class="nv">battery</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">display-battery-mode</span> <span class="mi">1</span><span class="p">))</span>
+</code></pre></div><h3 id="indent-guides">Indent guides</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">highlight-indent-guides</span>
+  <span class="ss">:hook</span> <span class="p">(</span><span class="nv">prog-mode</span> <span class="o">.</span> <span class="nv">highlight-indent-guides-mode</span><span class="p">)</span>
+  <span class="ss">:custom</span>
+  <span class="p">(</span><span class="nv">highlight-indent-guides-method</span> <span class="ss">&#39;character</span><span class="p">))</span>
+</code></pre></div><h3 id="cursorline">Cursorline</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">global-hl-line-mode</span> <span class="no">t</span><span class="p">)</span>
+</code></pre></div><h3 id="indentation">Indentation</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">setq-default</span>
+    <span class="nv">electric-indent-inhibit</span> <span class="no">t</span> <span class="c1">;; Disable annoying indentation behaviour.</span>
+    <span class="nv">indent-tabs-mode</span>        <span class="no">nil</span>
+    <span class="nv">tab-width</span>               <span class="mi">4</span>
+    <span class="nv">evil-shift-width</span>        <span class="mi">4</span><span class="p">)</span>
+</code></pre></div><p>Stolen from <a href="http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html">binchen</a></p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/indent-setup</span> <span class="p">(</span><span class="nv">n</span><span class="p">)</span>
+  <span class="c1">;; java/c/c++</span>
+  <span class="p">(</span><span class="nv">setq-local</span> <span class="nv">c-basic-offset</span> <span class="nv">n</span><span class="p">)</span>
+  <span class="c1">;; web development</span>
+  <span class="p">(</span><span class="nv">setq-local</span> <span class="nv">web-mode-markup-indent-offset</span> <span class="nv">n</span>
+              <span class="nv">web-mode-css-indent-offset</span>    <span class="nv">n</span>
+              <span class="nv">web-mode-code-indent-offset</span>   <span class="nv">n</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/indent-tabs</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">setq-local</span> <span class="nv">indent-tabs-mode</span> <span class="no">t</span><span class="p">)</span> <span class="c1">;; Use tab instead of space.</span>
+  <span class="p">(</span><span class="nv">dz/indent-setup</span> <span class="mi">4</span><span class="p">))</span>            <span class="c1">;; Indent 4 spaces width.</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/indent-spaces</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">setq-local</span> <span class="nv">indent-tabs-mode</span> <span class="no">nil</span><span class="p">)</span> <span class="c1">;; Use space instead of tab.</span>
+  <span class="p">(</span><span class="nv">dz/indent-setup</span> <span class="mi">2</span><span class="p">))</span>              <span class="c1">;; Indent 2 spaces width.</span>
+</code></pre></div><h3 id="origami">Origami</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">origami</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:config</span> <span class="p">(</span><span class="nv">origami-mode</span><span class="p">))</span>
+</code></pre></div><h3 id="ialign">ialign</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">ialign</span>
+  <span class="ss">:defer</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre></div><h3 id="relative-line-numbers">Relative line numbers</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">linum-relative</span>
+  <span class="ss">:hook</span> <span class="p">(</span><span class="nv">prog-mode</span> <span class="o">.</span> <span class="nv">display-line-numbers-mode</span><span class="p">)</span>
+  <span class="ss">:custom</span>
+  <span class="p">(</span><span class="nv">linum-relative-backend</span>        <span class="ss">&#39;display-line-numbers-mode</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">linum-relative-current-symbol</span> <span class="s">&#34;&#34;</span><span class="p">))</span>
+</code></pre></div><h3 id="key-chords">Key chords</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">key-chord</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">key-chord-mode</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">key-chord-two-keys-delay</span> <span class="mf">0.05</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">key-chord-define-global</span> <span class="s">&#34;eu&#34;</span> <span class="ss">&#39;evil-normal-state</span><span class="p">))</span>
+</code></pre></div><h3 id="fix-scrolling">Fix scrolling</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="k">setq</span>
+  <span class="nv">scroll-conservatively</span> <span class="mi">1000</span>                     <span class="c1">;; Only &#39;jump&#39; when moving this far</span>
+  <span class="nv">scroll-margin</span>         <span class="mi">4</span>                        <span class="c1">;; Scroll N lines to screen edge</span>
+  <span class="nv">scroll-step</span>           <span class="mi">1</span>                        <span class="c1">;; Keyboard scroll one line at a time</span>
+
+  <span class="nv">mouse-wheel-scroll-amount</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">6</span> <span class="p">((</span><span class="nv">shift</span><span class="p">)</span> <span class="o">.</span> <span class="mi">1</span><span class="p">))</span>   <span class="c1">;; Mouse scroll N lines</span>
+  <span class="nv">mouse-wheel-progressive-speed</span> <span class="no">nil</span>              <span class="c1">;; Don&#39;t accelerate scrolling</span>
+  <span class="nv">redisplay-dont-pause</span> <span class="no">t</span>                         <span class="c1">;; Don&#39;t pause display on input</span>
+
+  <span class="c1">;; Always redraw immediately when scrolling, more responsive and doesn&#39;t hang!</span>
+  <span class="nv">fast-but-imprecise-scrolling</span> <span class="no">nil</span>
+  <span class="nv">jit-lock-defer-time</span>          <span class="mi">0</span><span class="p">)</span>
+</code></pre></div><h2 id="tools">Tools</h2>
+<h3 id="terminal-emulator">Terminal Emulator</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">@dz/vterm-init</span> <span class="p">()</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">mode-line-format</span>       <span class="no">nil</span>
+        <span class="nv">confirm-kill-processes</span> <span class="no">nil</span>
+        <span class="nv">hscroll-margin</span>         <span class="mi">0</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/open-vterm</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">split-window-vertically</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">vterm-toggle</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nf">use-package</span> <span class="nv">vterm</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:preface</span> <span class="p">(</span><span class="k">setq</span> <span class="nv">vterm-install</span> <span class="no">t</span><span class="p">)</span>
+  <span class="ss">:commands</span> <span class="nv">vterm</span> <span class="nv">vterm-mode</span>
+  <span class="ss">:hook</span> <span class="p">(</span><span class="nv">vterm-mode</span> <span class="o">.</span> <span class="nv">@dz/vterm-init</span><span class="p">)</span>
+  <span class="ss">:config</span>
+
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">vterm-toggle</span>
+    <span class="ss">:defer</span> <span class="mi">3</span>
+    <span class="ss">:bind</span> <span class="p">(</span><span class="s">&#34;C-c t&#34;</span> <span class="o">.</span> <span class="nf">#&#39;</span><span class="nv">vterm-toggle</span><span class="p">))</span>
+
+  <span class="c1">;; Once vterm is dead, the vterm buffer is useless.</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">vterm-kill-buffer-on-exit</span> <span class="no">t</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">+vterm-goto-insert-point-h</span> <span class="p">()</span>
+    <span class="s">&#34;Go to the point we were at when we left insert mode.&#34;</span>
+    <span class="p">(</span><span class="nb">when</span> <span class="nv">+vterm--insert-point</span>
+      <span class="p">(</span><span class="nv">goto-char</span> <span class="nv">+vterm--insert-point</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">setq-local</span> <span class="nv">+vterm--insert-point</span> <span class="no">nil</span><span class="p">)))</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">+vterm-remember-insert-point-h</span> <span class="p">()</span>
+    <span class="s">&#34;Remember point when leaving insert mode.&#34;</span>
+    <span class="p">(</span><span class="nv">setq-local</span> <span class="nv">+vterm--insert-point</span> <span class="p">(</span><span class="nv">point</span><span class="p">)))</span>
+
+  <span class="c1">;; Restore the point&#39;s location when leaving and re-entering insert mode.</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;vterm-mode-hook</span>
+    <span class="p">(</span><span class="nb">defun</span> <span class="nv">+vterm-init-remember-point-h</span> <span class="p">()</span>
+      <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;evil-insert-state-exit-hook</span> <span class="nf">#&#39;</span><span class="nv">+vterm-remember-insert-point-h</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;evil-insert-state-entry-hook</span> <span class="nf">#&#39;</span><span class="nv">+vterm-goto-insert-point-h</span> <span class="no">nil</span> <span class="no">t</span><span class="p">))))</span>
+</code></pre></div><h3 id="treemacs">Treemacs</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">treemacs</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">all-the-icons</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">lsp-treemacs</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">treemacs-projectile</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">treemacs-all-the-icons</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;treemacs-mode-hook</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">text-scale-decrease</span> <span class="mi">2</span><span class="p">)))</span>
+
+  <span class="p">(</span><span class="nv">treemacs-follow-mode</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-filewatch-mode</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-fringe-indicator-mode</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-load-theme</span> <span class="s">&#34;all-the-icons&#34;</span><span class="p">)</span>
+
+  <span class="ss">:custom</span>
+  <span class="p">(</span><span class="nv">treemacs-deferred-git-apply-delay</span>      <span class="mf">0.5</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-directory-name-transformer</span>    <span class="nf">#&#39;identity</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-display-in-side-window</span>        <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-eldoc-display</span>                 <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-file-event-delay</span>              <span class="mi">5000</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-file-extension-regex</span>          <span class="nv">treemacs-last-period-regex-value</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-file-follow-delay</span>             <span class="mf">0.2</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-file-name-transformer</span>         <span class="nf">#&#39;identity</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-follow-after-init</span>             <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-git-command-pipe</span>              <span class="s">&#34;&#34;</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-goto-tag-strategy</span>             <span class="ss">&#39;refetch-index</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-indentation</span>                   <span class="mi">2</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-indentation-string</span>            <span class="s">&#34; &#34;</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-is-never-other-window</span>         <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-max-git-entries</span>               <span class="mi">5000</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-missing-project-action</span>        <span class="ss">&#39;ask</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-no-png-images</span>                 <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-no-delete-other-windows</span>       <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-project-follow-cleanup</span>        <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-persist-file</span>                  <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">&#34;.cache/treemacs-persist&#34;</span> <span class="nv">user-emacs-directory</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">treemacs-position</span>                      <span class="ss">&#39;left</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-recenter-distance</span>             <span class="mf">0.1</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-recenter-after-file-follow</span>    <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-recenter-after-tag-follow</span>     <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-recenter-after-project-jump</span>   <span class="ss">&#39;always</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-recenter-after-project-expand</span> <span class="ss">&#39;on-distance</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-show-cursor</span>                   <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-show-hidden-files</span>             <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-silent-filewatch</span>              <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-silent-refresh</span>                <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-sorting</span>                       <span class="ss">&#39;alphabetic-asc</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-space-between-root-nodes</span>      <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-tag-follow-cleanup</span>            <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-tag-follow-delay</span>              <span class="mf">1.5</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-user-mode-line-format</span>         <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">treemacs-width</span>                         <span class="mi">35</span><span class="p">))</span>
+</code></pre></div><h3 id="undo-tree">Undo Tree</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">undo-tree</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:after</span> <span class="nv">evil</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">global-undo-tree-mode</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">evil-set-undo-system</span> <span class="ss">&#39;undo-tree</span><span class="p">))</span>
+</code></pre></div><h3 id="magit">Magit</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">magit</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="ss">:map</span> <span class="nv">evil-normal-state-map</span>
+    <span class="p">(</span><span class="s">&#34;SPC C-c&#34;</span> <span class="o">.</span> <span class="nv">magit-dispatch</span><span class="p">)))</span>
+</code></pre></div><h3 id="git-gutter">Git Gutter</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">git-gutter</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:config</span>
+
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">git-gutter-fringe</span>
+    <span class="ss">:diminish</span> <span class="nv">git-gutter-mode</span>
+    <span class="ss">:config</span>
+
+    <span class="c1">;; subtle diff indicators in the fringe</span>
+    <span class="c1">;; places the git gutter outside the margins.</span>
+    <span class="p">(</span><span class="nv">setq-default</span> <span class="nv">fringes-outside-margins</span> <span class="no">t</span><span class="p">)</span>
+      <span class="c1">;; thin fringe bitmaps</span>
+    <span class="p">(</span><span class="nv">define-fringe-bitmap</span> <span class="ss">&#39;git-gutter-fr:added</span>
+      <span class="nv">[224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span>
+       <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span>
+       <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span>
+       <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span>
+       <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="nv">224]</span> <span class="no">nil</span> <span class="no">nil</span> <span class="ss">&#39;center</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">define-fringe-bitmap</span> <span class="ss">&#39;git-gutter-fr:modified</span>
+      <span class="nv">[224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span>
+       <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span>
+       <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span>
+       <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span>
+       <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="mi">224</span> <span class="nv">224]</span> <span class="no">nil</span> <span class="no">nil</span> <span class="ss">&#39;center</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">define-fringe-bitmap</span> <span class="ss">&#39;git-gutter-fr:deleted</span>
+      <span class="nv">[0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">128</span> <span class="mi">192</span> <span class="mi">224</span> <span class="mi">240</span> <span class="nv">248]</span> <span class="no">nil</span> <span class="no">nil</span> <span class="ss">&#39;center</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nv">global-git-gutter-mode</span><span class="p">))</span>
+</code></pre></div><h3 id="ivy">Ivy</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/find-file</span> <span class="p">()</span>
+  <span class="s">&#34;Call `counsel-projectile-find-file&#39; if `projectile-project-p&#39;, otherwise fallback to `counsel-find-files&#39;.&#34;</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">projectile-project-p</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">counsel-projectile-find-file</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">counsel-find-file</span><span class="p">)))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">ivy</span>
+  <span class="ss">:custom</span>
+  <span class="p">(</span><span class="nv">enable-recursive-minibuffers</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">ivy-height</span>                   <span class="mi">10</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">ivy-initial-inputs-alist</span>     <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">ivy-count-format</span>             <span class="s">&#34;[%d/%d] &#34;</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">ivy-use-virtual-buffers</span>      <span class="no">t</span><span class="p">)</span>
+
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">ivy-mode</span> <span class="mi">1</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">ivy-posframe</span>
+    <span class="ss">:diminish</span> <span class="nv">ivy-posframe-mode</span>
+    <span class="ss">:config</span>
+    <span class="p">(</span><span class="k">setq</span> <span class="nv">ivy-posframe-display-functions-alist</span>
+      <span class="o">&#39;</span><span class="p">((</span><span class="no">t</span> <span class="o">.</span> <span class="nv">ivy-posframe-display-at-frame-top-center</span><span class="p">)))</span>
+    <span class="ss">:hook</span> <span class="p">(</span><span class="nv">ivy-mode</span> <span class="o">.</span> <span class="nv">ivy-posframe-enable</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">swiper</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">counsel</span>
+    <span class="ss">:after</span> <span class="nv">evil</span>
+    <span class="ss">:config</span> <span class="p">(</span><span class="nv">counsel-mode</span><span class="p">)</span>
+    <span class="ss">:bind</span> <span class="p">(</span><span class="ss">:map</span> <span class="nv">evil-normal-state-map</span>
+            <span class="p">(</span><span class="s">&#34;SPC SPC&#34;</span> <span class="o">.</span> <span class="nv">counsel-M-x</span><span class="p">)</span>
+            <span class="p">(</span><span class="s">&#34;SPC C-p&#34;</span> <span class="o">.</span> <span class="nv">counsel-projectile-switch-project</span><span class="p">)</span>
+            <span class="p">(</span><span class="s">&#34;C-p&#34;</span>     <span class="o">.</span> <span class="nv">dz/find-file</span><span class="p">)))</span>
+
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">projectile</span>
+    <span class="ss">:config</span> <span class="p">(</span><span class="nv">projectile-mode</span><span class="p">)</span>
+    <span class="ss">:custom</span>
+    <span class="p">(</span><span class="nv">projectile-enable-caching</span>     <span class="no">t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">projectile-completion-system</span> <span class="ss">&#39;ivy</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">counsel-projectile</span>
+    <span class="ss">:after</span> <span class="p">(</span><span class="nv">counsel</span> <span class="nv">projectile</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nv">ivy-posframe-mode</span><span class="p">)</span> <span class="c1">;; for some reason ivy-posframe-mode only works when enabled from here</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">find-file-right</span> <span class="p">(</span><span class="nv">filename</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">split-window-right</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">other-window</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">find-file</span> <span class="nv">filename</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">find-file-below</span> <span class="p">(</span><span class="nv">filename</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">split-window-below</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">other-window</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">find-file</span> <span class="nv">filename</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">command</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">counsel-projectile-find-file</span>
+                     <span class="nv">counsel-find-file</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">ivy-set-actions</span> <span class="nv">command</span>
+    <span class="o">&#39;</span><span class="p">((</span><span class="s">&#34;|&#34;</span> <span class="nv">find-file-right</span> <span class="s">&#34;open right&#34;</span><span class="p">)</span>
+      <span class="p">(</span><span class="s">&#34;%&#34;</span> <span class="nv">find-file-below</span> <span class="s">&#34;open below&#34;</span><span class="p">)))))</span>
+</code></pre></div><h2 id="evil-mode">Evil Mode</h2>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">evil</span>
+  <span class="ss">:config</span> <span class="p">(</span><span class="nv">evil-mode</span><span class="p">)</span>
+
+  <span class="ss">:custom</span>
+  <span class="p">(</span><span class="nv">scroll-step</span>                            <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">scroll-conservatively</span>                  <span class="mi">10000</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">evil-search-module</span>                     <span class="ss">&#39;evil-search</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">evil-ex-complete-emacs-commands</span>        <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">evil-shift-round</span>                       <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">evil-vsplit-window-right</span>               <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">evil-split-window-below</span>                <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">evil-want-C-u-scroll</span>                   <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">popup-use-optimized-column-computation</span> <span class="no">nil</span><span class="p">)</span>
+
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">general</span>
+    <span class="ss">:config</span> <span class="p">(</span><span class="nv">general-override-mode</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nv">general-define-key</span>
+    <span class="ss">:states</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">insert</span><span class="p">)</span>
+      <span class="s">&#34;TAB&#34;</span> <span class="ss">&#39;tab-to-tab-stop</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">general-define-key</span>
+    <span class="ss">:states</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">normal</span> <span class="nv">visual</span> <span class="nv">motion</span><span class="p">)</span>
+      <span class="s">&#34;d&#34;</span> <span class="ss">&#39;evil-backward-char</span>
+      <span class="s">&#34;n&#34;</span> <span class="ss">&#39;evil-forward-char</span>
+      <span class="s">&#34;h&#34;</span> <span class="ss">&#39;evil-next-line</span>
+      <span class="s">&#34;t&#34;</span> <span class="ss">&#39;evil-previous-line</span>
+
+      <span class="s">&#34;s&#34;</span> <span class="ss">&#39;evil-ex</span>
+
+      <span class="s">&#34;j&#34;</span> <span class="ss">&#39;evil-delete</span>
+      <span class="s">&#34;k&#34;</span> <span class="ss">&#39;evil-find-char-to</span>
+
+      <span class="s">&#34;l&#34;</span> <span class="ss">&#39;evil-search-next</span>
+      <span class="s">&#34;L&#34;</span> <span class="ss">&#39;evil-search-previous</span>
+
+      <span class="s">&#34;D&#34;</span> <span class="ss">&#39;evil-beginning-of-line</span>
+      <span class="s">&#34;N&#34;</span> <span class="ss">&#39;evil-end-of-line</span>
+      <span class="s">&#34;H&#34;</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;5h&#34;</span><span class="p">)</span>
+      <span class="s">&#34;T&#34;</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;5t&#34;</span><span class="p">)</span>
+
+      <span class="s">&#34;C-d&#34;</span> <span class="ss">&#39;evil-window-left</span>
+      <span class="s">&#34;C-h&#34;</span> <span class="ss">&#39;evil-window-down</span>
+      <span class="s">&#34;C-t&#34;</span> <span class="ss">&#39;evil-window-up</span>
+      <span class="s">&#34;C-n&#34;</span> <span class="ss">&#39;evil-window-right</span><span class="p">))</span>
+</code></pre></div><h2 id="language-server">Language Server</h2>
+<h3 id="lsp-mode">lsp-mode</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">lsp-mode</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:commands</span> <span class="nv">lsp</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="ss">:map</span> <span class="nv">evil-normal-state-map</span>
+          <span class="p">(</span><span class="s">&#34;g r&#34;</span> <span class="o">.</span> <span class="nv">lsp-find-references</span><span class="p">)</span>
+          <span class="p">(</span><span class="s">&#34;g d&#34;</span> <span class="o">.</span> <span class="nv">lsp-find-definition</span><span class="p">)</span>
+
+          <span class="p">(</span><span class="s">&#34;g D&#34;</span> <span class="o">.</span> <span class="nv">lsp-ui-peek-find-definitions</span><span class="p">)</span>
+          <span class="p">(</span><span class="s">&#34;g R&#34;</span> <span class="o">.</span> <span class="nv">lsp-ui-peek-find-references</span><span class="p">)</span>
+          <span class="p">(</span><span class="s">&#34;g I&#34;</span> <span class="o">.</span> <span class="nv">lsp-ui-peek-find-implementation</span><span class="p">)</span>
+
+          <span class="p">(</span><span class="s">&#34;SPC s&#34;</span> <span class="o">.</span> <span class="nv">swiper-isearch</span><span class="p">))</span>
+  <span class="ss">:custom</span> <span class="p">(</span><span class="nv">lsp-eldoc-hook</span> <span class="no">nil</span><span class="p">)</span>
+  <span class="ss">:hook</span> <span class="p">((</span><span class="nv">typescript-mode</span>
+          <span class="nv">c++-mode</span>
+          <span class="nv">c-mode</span>
+          <span class="nv">java-mode</span>
+          <span class="nv">latex-mode</span>
+          <span class="nv">python-mode</span><span class="p">)</span> <span class="o">.</span> <span class="nv">lsp</span><span class="p">))</span>
+</code></pre></div><h3 id="lsp-ui">lsp-ui</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;; disable annoying breadcrumbs</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">lsp-headerline-breadcrumb-enable</span> <span class="no">nil</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nf">use-package</span> <span class="nv">lsp-ui</span>
+  <span class="ss">:commands</span> <span class="nv">lsp-ui-mode</span>
+  <span class="ss">:custom</span>
+
+  <span class="c1">; lsp-ui-doc</span>
+
+  <span class="p">(</span><span class="nv">lsp-ui-doc-enable</span>              <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-doc-position</span>            <span class="ss">&#39;at-point</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-doc-border</span> <span class="p">(</span><span class="nv">face-foreground</span> <span class="ss">&#39;default</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">lsp-ui-doc-header</span>              <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-doc-include-signature</span>   <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-doc-max-width</span>           <span class="mi">120</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-doc-max-height</span>          <span class="mi">30</span><span class="p">)</span>
+
+  <span class="c1">; lsp-ui-sidebar</span>
+  <span class="p">(</span><span class="nv">lsp-ui-sideline-enable</span>         <span class="no">nil</span><span class="p">)</span>
+
+  <span class="c1">; lsp-ui-peek</span>
+  <span class="p">(</span><span class="nv">lsp-ui-peek-enable</span>             <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-peek-peek-height</span>        <span class="mi">20</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-peek-list-width</span>         <span class="mi">50</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">lsp-ui-peek-fontify</span>            <span class="ss">&#39;on-demand</span><span class="p">))</span>
+</code></pre></div><h3 id="xrefs">XRefs</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">ivy-xref</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:after</span> <span class="nv">ivy</span>
+  <span class="ss">:custom</span>
+  <span class="p">(</span><span class="nv">xref-show-definitions-function</span> <span class="nf">#&#39;</span><span class="nv">ivy-xref-show-defs</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">xref-show-xrefs-function</span>       <span class="nf">#&#39;</span><span class="nv">ivy-xref-show-xrefs</span><span class="p">))</span>
+</code></pre></div><h2 id="auto-complete">Auto Complete</h2>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">company-lsp</span>
+  <span class="ss">:commands</span> <span class="nv">company-lsp</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nb">push</span> <span class="ss">&#39;company-lsp</span> <span class="nv">company-backends</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">global-company-mode</span><span class="p">)</span>
+  <span class="ss">:custom</span>
+  <span class="p">(</span><span class="nv">company-minimum-prefix-length</span>     <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">company-idle-delay</span>                <span class="mi">0</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">company-lsp-async</span>                 <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">company-tooltip-align-annotations</span> <span class="no">t</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">company-box</span>
+  <span class="ss">:after</span> <span class="nv">company</span>
+  <span class="ss">:diminish</span> <span class="nv">company-box-mode</span>
+  <span class="ss">:hook</span> <span class="p">(</span><span class="nv">global-company-mode</span> <span class="o">.</span> <span class="nv">company-box-mode</span><span class="p">)</span>
+  <span class="ss">:custom</span>
+  <span class="p">(</span><span class="nv">company-box-backends-colors</span>       <span class="no">nil</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">company-box-show-single-candidate</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">company-box-max-candidates</span>        <span class="mi">50</span><span class="p">))</span>
+</code></pre></div><p>To fix the alignment issues caused by <code>mixed-pitch-mode</code> in non-prog buffers we must use this package.</p>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">company-posframe</span>
+  <span class="ss">:after</span> <span class="nv">company</span>
+  <span class="ss">:diminish</span> <span class="nv">company-posframe-mode</span>
+  <span class="ss">:hook</span> <span class="p">(</span><span class="nv">global-company-mode</span> <span class="o">.</span> <span class="nv">company-box-mode</span><span class="p">)</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">company-posframe-mode</span> <span class="mi">1</span><span class="p">))</span>
+</code></pre></div><h2 id="languages">Languages</h2>
+<h3 id="c-plus-plus">C++</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">ccls</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:config</span> <span class="p">(</span><span class="nv">setq-default</span> <span class="nv">flycheck-disabled-checkers</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">c/c++-clang</span> <span class="nv">c/c++-cppcheck</span> <span class="nv">c/c++-gcc</span><span class="p">)))</span>
+</code></pre></div><h3 id="python">Python</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">lsp-python-ms</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:init</span> <span class="p">(</span><span class="k">setq</span> <span class="nv">lsp-python-ms-auto-install-server</span> <span class="no">t</span><span class="p">))</span>
+</code></pre></div><h3 id="scala">Scala</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">scala-mode</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:interpreter</span>
+    <span class="p">(</span><span class="s">&#34;scala&#34;</span> <span class="o">.</span> <span class="nv">scala-mode</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nf">use-package</span> <span class="nv">sbt-mode</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:commands</span> <span class="nv">sbt-start</span> <span class="nv">sbt-command</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">substitute-key-definition</span>
+   <span class="ss">&#39;minibuffer-complete-word</span>
+   <span class="ss">&#39;self-insert-command</span>
+   <span class="nv">minibuffer-local-completion-map</span><span class="p">)</span>
+   <span class="p">(</span><span class="k">setq</span> <span class="nv">sbt:program-options</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;-Dsbt.supershell=false&#34;</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nf">use-package</span> <span class="nv">lsp-metals</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:config</span> <span class="p">(</span><span class="k">setq</span> <span class="nv">lsp-metals-treeview-show-when-views-received</span> <span class="no">t</span><span class="p">))</span>
+</code></pre></div><h3 id="golang">Golang</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">go-mode</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:mode</span> <span class="s">&#34;\\.go\\&#39;&#34;</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="ss">:map</span> <span class="nv">go-mode-map</span>
+         <span class="p">(</span><span class="s">&#34;C-c C-n&#34;</span> <span class="o">.</span> <span class="nv">go-run</span><span class="p">))</span>
+  <span class="ss">:hook</span> <span class="p">((</span><span class="nv">go-mode</span>     <span class="o">.</span> <span class="nv">lsp-deferred</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">before-save</span> <span class="o">.</span> <span class="nv">lsp-format-buffer</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">before-save</span> <span class="o">.</span> <span class="nv">lsp-organize-imports</span><span class="p">)))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">company-go</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:after</span> <span class="nv">go-mode</span>
+  <span class="ss">:custom</span>
+  <span class="p">(</span><span class="nv">company-go-show-annotation</span> <span class="no">t</span><span class="p">)</span>
+  <span class="ss">:hook</span> <span class="p">(</span><span class="nv">go-mode</span> <span class="o">.</span>
+            <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
+              <span class="p">(</span><span class="nf">set</span> <span class="p">(</span><span class="nv">make-local-variable</span> <span class="ss">&#39;company-backends</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">company-go</span><span class="p">)))))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">go-eldoc</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:after</span> <span class="nv">go-mode</span>
+  <span class="ss">:hook</span> <span class="p">(</span><span class="nv">go-mode</span> <span class="o">.</span> <span class="nv">go-eldoc-setup</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">go-guru</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:after</span> <span class="nv">go-mode</span>
+  <span class="ss">:hook</span> <span class="p">(</span><span class="nv">go-mode</span> <span class="o">.</span> <span class="nv">go-guru-hl-identifier-mode</span><span class="p">))</span>
+</code></pre></div><h3 id="javascript-typescript">Javascript/Typescript</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">tide</span>
+  <span class="ss">:mode</span> <span class="s">&#34;\\.ts\\&#39;&#34;</span>
+  <span class="ss">:ensure</span> <span class="no">t</span>
+  <span class="ss">:after</span> <span class="p">(</span><span class="nv">typescript-mode</span> <span class="nv">company</span> <span class="nv">flycheck</span><span class="p">)</span>
+  <span class="ss">:hook</span> <span class="p">((</span><span class="nv">typescript-mode</span> <span class="o">.</span> <span class="nv">tide-setup</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">typescript-mode</span> <span class="o">.</span> <span class="nv">tide-hl-identifier-mode</span><span class="p">)))</span>
+</code></pre></div><h3 id="web">Web</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">web-mode</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">web-mode-enable-current-element-highlight</span> <span class="no">t</span><span class="p">)</span>
+  <span class="ss">:mode</span> <span class="p">(</span><span class="s">&#34;\\.ts\\&#39;&#34;</span> <span class="s">&#34;\\.html?\\&#39;&#34;</span> <span class="s">&#34;\\.css?\\&#39;&#34;</span> <span class="s">&#34;\\.js\\&#39;&#34;</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">company-web</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:after</span> <span class="nv">web-mode</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">css-mode</span>
+  <span class="ss">:defer</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre></div><h4 id="vue">Vue</h4>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">vue-mode</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;mmm-mode-hook</span>
+            <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
+              <span class="p">(</span><span class="nv">set-face-background</span> <span class="ss">&#39;mmm-default-submode-face</span> <span class="no">nil</span><span class="p">))))</span>
+</code></pre></div><h4 id="emmet">Emmet</h4>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">emmet-mode</span>
+  <span class="ss">:preface</span> <span class="p">(</span><span class="nb">defvar</span> <span class="nv">emmet-mode-keymap</span> <span class="p">(</span><span class="nv">make-sparse-keymap</span><span class="p">))</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="ss">:map</span> <span class="nv">emmet-mode-keymap</span>
+          <span class="p">(</span><span class="s">&#34;C-TAB&#34;</span> <span class="o">.</span> <span class="nv">emmet-expand-line</span><span class="p">))</span>
+  <span class="ss">:hook</span> <span class="p">((</span><span class="nv">css-mode</span> <span class="nv">web-mode</span> <span class="nv">html-mode</span><span class="p">)</span> <span class="o">.</span> <span class="nv">emmet-mode</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">web-mode</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:mode</span> <span class="p">(</span><span class="s">&#34;\\.php\\&#39;&#34;</span> <span class="s">&#34;\\.html\\&#39;&#34;</span><span class="p">)</span>
+
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">my-web-mode-hook</span> <span class="p">()</span>
+    <span class="s">&#34;Hooks for Web mode.&#34;</span>
+    <span class="p">(</span><span class="k">setq</span> <span class="nv">web-mode-markup-indent-offset</span> <span class="mi">2</span>
+          <span class="nv">web-mode-code-indent-offset</span>   <span class="mi">2</span>
+          <span class="nv">web-mode-css-indent-offset</span>    <span class="mi">2</span><span class="p">)</span>
+
+    <span class="p">(</span><span class="nf">set</span> <span class="p">(</span><span class="nv">make-local-variable</span> <span class="ss">&#39;company-backends</span><span class="p">)</span>
+      <span class="o">&#39;</span><span class="p">(</span><span class="nv">company-css</span>
+        <span class="nv">company-web-html</span>
+        <span class="nv">company-yasnippet</span>
+        <span class="nv">company-files</span><span class="p">)))</span>
+
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;web-mode-hook</span> <span class="ss">&#39;prog-mode-hook</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;web-mode-hook</span> <span class="ss">&#39;my-web-mode-hook</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;web-mode-hook</span> <span class="ss">&#39;company-mode</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;web-mode-before-auto-complete-hooks</span>
+      <span class="o">&#39;</span><span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
+       <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">web-mode-cur-language</span>
+          <span class="p">(</span><span class="nv">web-mode-language-at-pos</span><span class="p">)))</span>
+                 <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nf">string=</span> <span class="nv">web-mode-cur-language</span> <span class="s">&#34;php&#34;</span><span class="p">)</span>
+           <span class="p">(</span><span class="nv">yas-activate-extra-mode</span> <span class="ss">&#39;php-mode</span><span class="p">)</span>
+           <span class="p">(</span><span class="nv">yas-deactivate-extra-mode</span> <span class="ss">&#39;php-mode</span><span class="p">))</span>
+                 <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nf">string=</span> <span class="nv">web-mode-cur-language</span> <span class="s">&#34;css&#34;</span><span class="p">)</span>
+           <span class="p">(</span><span class="k">setq</span> <span class="nv">emmet-use-css-transform</span> <span class="no">t</span><span class="p">)</span>
+           <span class="p">(</span><span class="k">setq</span> <span class="nv">emmet-use-css-transform</span> <span class="no">nil</span><span class="p">))))))</span>
+</code></pre></div><h2 id="org">Org</h2>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/org-faces</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nf">require</span> <span class="ss">&#39;color</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-block-begin-line</span> <span class="no">nil</span> <span class="ss">:slant</span> <span class="ss">&#39;italic</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-block-end-line</span> <span class="no">nil</span> <span class="ss">:slant</span> <span class="ss">&#39;italic</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">set-face-attribute</span> <span class="ss">&#39;org-block</span> <span class="no">nil</span> <span class="ss">:background</span>
+                      <span class="p">(</span><span class="nv">color-darken-name</span>
+                        <span class="p">(</span><span class="nv">face-attribute</span> <span class="ss">&#39;default</span> <span class="ss">:background</span><span class="p">)</span> <span class="mi">3</span><span class="p">)))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">org</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:config</span>
+
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">ox-hugo</span>
+    <span class="ss">:after</span> <span class="nv">ox</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">ox-reveal</span>
+    <span class="ss">:after</span> <span class="nv">ox</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">org-bullets</span>
+    <span class="ss">:hook</span> <span class="p">(</span><span class="nv">org-mode</span> <span class="o">.</span> <span class="nv">org-bullets-mode</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">org-log-done</span> <span class="ss">&#39;time</span><span class="p">)</span> <span class="c1">;; mark done tasks with current time</span>
+  <span class="p">(</span><span class="nv">electric-indent-mode</span><span class="p">)</span> <span class="c1">;; remove annoying indent behaviour</span>
+  <span class="p">(</span><span class="nf">require</span> <span class="ss">&#39;ox</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">org-format-latex-options</span> <span class="p">(</span><span class="nv">plist-put</span> <span class="nv">org-format-latex-options</span> <span class="ss">:scale</span> <span class="mf">2.0</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">+org-update-latex-preview-background-color</span> <span class="p">(</span><span class="k">&amp;rest</span> <span class="nv">_</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">setq-default</span>
+     <span class="nv">org-format-latex-options</span>
+     <span class="p">(</span><span class="nv">plist-put</span> <span class="nv">org-format-latex-options</span>
+                <span class="ss">:background</span>
+                <span class="p">(</span><span class="nv">face-attribute</span> <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nf">cadr</span> <span class="p">(</span><span class="nv">assq</span> <span class="ss">&#39;default</span> <span class="nv">face-remapping-alist</span><span class="p">))</span>
+                                    <span class="ss">&#39;default</span><span class="p">)</span>
+                                <span class="ss">:background</span> <span class="no">nil</span> <span class="no">t</span><span class="p">))))</span>
+
+  <span class="p">(</span><span class="nv">advice-add</span> <span class="ss">&#39;load-theme</span> <span class="ss">:after</span> <span class="ss">&#39;+org-update-latex-preview-background-color</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">org-latex-listings</span> <span class="ss">&#39;minted</span>
+        <span class="nv">org-latex-packages-alist</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&#34;&#34;</span> <span class="s">&#34;minted&#34;</span><span class="p">))</span>
+        <span class="nv">org-latex-pdf-process</span>
+        <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f&#34;</span>
+          <span class="s">&#34;pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f&#34;</span><span class="p">))</span>
+
+  <span class="ss">:custom</span> <span class="p">(</span><span class="nv">org-directory</span> <span class="s">&#34;~/org&#34;</span><span class="p">)</span>
+
+  <span class="ss">:hook</span> <span class="p">((</span><span class="nv">org-mode</span> <span class="o">.</span> <span class="nv">org-indent-mode</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">org-mode</span> <span class="o">.</span> <span class="nv">flyspell-mode</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">org-mode</span> <span class="o">.</span> <span class="nv">dz/org-faces</span><span class="p">)))</span>
+</code></pre></div><h2 id="latex">LaTeX</h2>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">company-auctex</span> <span class="ss">:defer</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">use-package</span> <span class="nv">company-math</span> <span class="ss">:defer</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c1">;(add-hook &#39;latex-mode-hook &#39;TeX-fold-mode)</span>
+<span class="c1">;(add-hook &#39;latex-mode-hook &#39;latex-math-mode)</span>
+<span class="c1">;(add-hook &#39;LaTeX-mode-hook &#39;prettify-symbols-mode)</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;latex-mode-hook</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;org-latex-classes</span>
+               <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;report&#34;</span>
+                 <span class="s">&#34;\\documentclass{report}&#34;</span>
+                 <span class="p">(</span><span class="s">&#34;\\section{%s}&#34;</span> <span class="o">.</span> <span class="s">&#34;\\section*{%s}&#34;</span><span class="p">)</span>
+                 <span class="p">(</span><span class="s">&#34;\\subsection{%s}&#34;</span> <span class="o">.</span> <span class="s">&#34;\\subsection*{%s}&#34;</span><span class="p">)</span>
+                 <span class="p">(</span><span class="s">&#34;\\subsubsection{%s}&#34;</span> <span class="o">.</span> <span class="s">&#34;\\subsubsection*{%s}&#34;</span><span class="p">)</span>
+                 <span class="p">(</span><span class="s">&#34;\\paragraph{%s}&#34;</span> <span class="o">.</span> <span class="s">&#34;\\paragraph*{%s}&#34;</span><span class="p">)</span>
+                 <span class="p">(</span><span class="s">&#34;\\subparagraph{%s}&#34;</span> <span class="o">.</span> <span class="s">&#34;\\subparagraph*{%s}&#34;</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;auto-mode-alist</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;\\.pdf\\&#39;&#34;</span> <span class="o">.</span> <span class="nv">pdf-tools-install</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;pdf-view-mode-hook</span>
+          <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="k">setq</span> <span class="nv">header-line-format</span> <span class="no">nil</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">setq</span> <span class="nv">TeX-view-program-selection</span> <span class="o">&#39;</span><span class="p">((</span><span class="nv">output-pdf</span> <span class="s">&#34;PDF Tools&#34;</span><span class="p">))</span>
+      <span class="nv">TeX-source-correlate-start-server</span> <span class="no">t</span><span class="p">)</span>
+
+<span class="c1">;; Update PDF buffers after successful LaTeX runs</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;TeX-after-compilation-finished-functions</span>
+           <span class="nf">#&#39;</span><span class="nv">TeX-revert-document-buffer</span><span class="p">)</span>
+</code></pre></div><h2 id="configuration-files">Configuration Files</h2>
+<h3 id="terraform">Terraform</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">terraform-mode</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:mode</span> <span class="p">(</span><span class="s">&#34;\\.tf$&#34;</span> <span class="o">.</span> <span class="nv">terraform-mode</span><span class="p">)</span>
+  <span class="ss">:diminish</span> <span class="nv">terraform-mode</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">company-terraform</span>
+    <span class="ss">:defer</span> <span class="mi">3</span>
+    <span class="ss">:after</span> <span class="nv">company-mode</span>
+    <span class="ss">:config</span> <span class="p">(</span><span class="nv">company-terraform-init</span><span class="p">)))</span>
+</code></pre></div><h3 id="yaml">Yaml</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">yaml-mode</span>
+  <span class="ss">:mode</span> <span class="p">(</span><span class="s">&#34;\\.yml$&#34;</span> <span class="o">.</span> <span class="nv">yaml-mode</span><span class="p">))</span>
+</code></pre></div><h3 id="protobuf">Protobuf</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">protobuf-mode</span>
+  <span class="ss">:mode</span> <span class="p">(</span><span class="s">&#34;\\.pb$&#34;</span> <span class="o">.</span> <span class="nv">protobuf-mode</span><span class="p">))</span>
+</code></pre></div><h3 id="cmake">CMake</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">cmake-mode</span>
+  <span class="ss">:mode</span> <span class="p">(</span><span class="s">&#34;CMakeLists\\.txt\\&#39;&#34;</span> <span class="o">.</span> <span class="nv">cmake-mode</span><span class="p">))</span>
+</code></pre></div><h3 id="dockerfile">Dockerfile</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">dockerfile-mode</span>
+  <span class="ss">:mode</span> <span class="p">(</span><span class="s">&#34;Dockerfile&#34;</span> <span class="o">.</span> <span class="nv">dockerfile-mode</span><span class="p">))</span>
+</code></pre></div><h3 id="toml">Toml</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">toml-mode</span>
+  <span class="ss">:mode</span> <span class="p">(</span><span class="s">&#34;\\.toml$&#34;</span> <span class="o">.</span> <span class="nv">toml-mode</span><span class="p">))</span>
+</code></pre></div><h2 id="spelling">Spelling</h2>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">flycheck</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:init</span> <span class="p">(</span><span class="nv">global-flycheck-mode</span><span class="p">)</span>
+  <span class="ss">:diminish</span> <span class="nv">flycheck-mode</span>
+  <span class="ss">:custom</span> <span class="p">(</span><span class="nv">flycheck-global-modes</span> <span class="o">&#39;</span><span class="p">(</span><span class="nf">not</span> <span class="nv">org-mode</span><span class="p">)))</span>
+</code></pre></div><h2 id="snippets">Snippets</h2>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">yasnippet</span>
+  <span class="ss">:defer</span> <span class="mi">3</span>
+  <span class="ss">:hook</span> <span class="p">(</span><span class="nv">after-init</span> <span class="o">.</span> <span class="nv">yas-global-mode</span><span class="p">)</span>
+  <span class="ss">:diminish</span> <span class="nv">yas-minor-mode</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="ss">:map</span> <span class="nv">yas-minor-mode-map</span>
+          <span class="p">(</span><span class="s">&#34;TAB&#34;</span> <span class="o">.</span> <span class="nv">yas-expand</span><span class="p">))</span>
+  <span class="ss">:custom</span> <span class="p">(</span><span class="nv">yas-prompt-functions</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">yas-completing-prompt</span><span class="p">))</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nf">use-package</span> <span class="nv">yasnippet-snippets</span>
+    <span class="ss">:defer</span> <span class="mi">3</span>
+    <span class="ss">:after</span> <span class="nv">yasnippet</span>
+    <span class="ss">:custom</span> <span class="p">(</span><span class="nv">yas-snippet-dirs</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;~/.emacs.d/snippets&#34;</span><span class="p">))))</span>
+
+</code></pre></div><h2 id="miscellaneous-dz-functions">Miscellaneous dz/functions</h2>
+<h3 id="wrap-org-source-code-blocks">Wrap org source code blocks</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="k">setq</span> <span class="nv">def-language</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/org-wrap-source</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">lang</span> <span class="p">(</span><span class="nv">read-string</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;Language [%s]: &#34;</span> <span class="nv">def-language</span><span class="p">)</span> <span class="no">nil</span> <span class="no">nil</span> <span class="nv">def-language</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">start</span> <span class="p">(</span><span class="nf">min</span> <span class="p">(</span><span class="nv">point</span><span class="p">)</span> <span class="p">(</span><span class="nv">mark</span><span class="p">)))</span>
+        <span class="p">(</span><span class="nv">end</span> <span class="p">(</span><span class="nf">max</span> <span class="p">(</span><span class="nv">point</span><span class="p">)</span> <span class="p">(</span><span class="nv">mark</span><span class="p">))))</span>
+    <span class="p">(</span><span class="nv">goto-char</span> <span class="nv">end</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">bolp</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">newline</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">insert</span> <span class="s">&#34;#+END_SRC\n&#34;</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">goto-char</span> <span class="nv">start</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">bolp</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">newline</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">setq</span> <span class="nv">def-language</span> <span class="nv">lang</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">insert</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;#+BEGIN_SRC %s\n&#34;</span> <span class="nv">def-language</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">evil-visual-state-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;SPC w&#34;</span><span class="p">)</span> <span class="ss">&#39;dz/org-wrap-source</span><span class="p">)</span>
+</code></pre></div><h3 id="open-configuration">Open configuration</h3>
+<div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/open-config</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">find-file</span> <span class="s">&#34;~/.emacs.d/init.org&#34;</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">evil-normal-state-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;SPC o c&#34;</span><span class="p">)</span> <span class="ss">&#39;dz/open-config</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">evil-normal-state-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;SPC o a&#34;</span><span class="p">)</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">find-file</span> <span class="s">&#34;~/org/agenda.org&#34;</span><span class="p">)))</span>
+</code></pre></div>
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">~/home</a></li>
+         
+          <li><a href="/posts">~/posts</a></li>
+         
+          <li><a href="/tags">~/tags</a></li>
+         
+          <li><a href="/about">~/about</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#meta">Meta</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#general">General</a>
+      <ul>
+        <li><a href="#personal-information">Personal information</a></li>
+        <li><a href="#reduce-filesystem-clutter">Reduce filesystem clutter</a></li>
+        <li><a href="#cleanup-ui">Cleanup UI</a></li>
+        <li><a href="#saner-defaults">Saner defaults</a></li>
+        <li><a href="#beacon">Beacon</a></li>
+        <li><a href="#theme">Theme</a></li>
+        <li><a href="#display-battery-in-modeline">Display battery in modeline</a></li>
+        <li><a href="#indent-guides">Indent guides</a></li>
+        <li><a href="#cursorline">Cursorline</a></li>
+        <li><a href="#indentation">Indentation</a></li>
+        <li><a href="#origami">Origami</a></li>
+        <li><a href="#ialign">ialign</a></li>
+        <li><a href="#relative-line-numbers">Relative line numbers</a></li>
+        <li><a href="#key-chords">Key chords</a></li>
+        <li><a href="#fix-scrolling">Fix scrolling</a></li>
+      </ul>
+    </li>
+    <li><a href="#tools">Tools</a>
+      <ul>
+        <li><a href="#terminal-emulator">Terminal Emulator</a></li>
+        <li><a href="#treemacs">Treemacs</a></li>
+        <li><a href="#undo-tree">Undo Tree</a></li>
+        <li><a href="#magit">Magit</a></li>
+        <li><a href="#git-gutter">Git Gutter</a></li>
+        <li><a href="#ivy">Ivy</a></li>
+      </ul>
+    </li>
+    <li><a href="#evil-mode">Evil Mode</a></li>
+    <li><a href="#language-server">Language Server</a>
+      <ul>
+        <li><a href="#lsp-mode">lsp-mode</a></li>
+        <li><a href="#lsp-ui">lsp-ui</a></li>
+        <li><a href="#xrefs">XRefs</a></li>
+      </ul>
+    </li>
+    <li><a href="#auto-complete">Auto Complete</a></li>
+    <li><a href="#languages">Languages</a>
+      <ul>
+        <li><a href="#c-plus-plus">C++</a></li>
+        <li><a href="#python">Python</a></li>
+        <li><a href="#scala">Scala</a></li>
+        <li><a href="#golang">Golang</a></li>
+        <li><a href="#javascript-typescript">Javascript/Typescript</a></li>
+        <li><a href="#web">Web</a>
+          <ul>
+            <li><a href="#vue">Vue</a></li>
+            <li><a href="#emmet">Emmet</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#org">Org</a></li>
+    <li><a href="#latex">LaTeX</a></li>
+    <li><a href="#configuration-files">Configuration Files</a>
+      <ul>
+        <li><a href="#terraform">Terraform</a></li>
+        <li><a href="#yaml">Yaml</a></li>
+        <li><a href="#protobuf">Protobuf</a></li>
+        <li><a href="#cmake">CMake</a></li>
+        <li><a href="#dockerfile">Dockerfile</a></li>
+        <li><a href="#toml">Toml</a></li>
+      </ul>
+    </li>
+    <li><a href="#spelling">Spelling</a></li>
+    <li><a href="#snippets">Snippets</a></li>
+    <li><a href="#miscellaneous-dz-functions">Miscellaneous dz/functions</a>
+      <ul>
+        <li><a href="#wrap-org-source-code-blocks">Wrap org source code blocks</a></li>
+        <li><a href="#open-configuration">Open configuration</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fexample.com%2fposts%2femacs%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&text=My%20Emacs%20Configuration" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&is_video=false&description=My%20Emacs%20Configuration" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=My%20Emacs%20Configuration&body=Check out this article: https%3a%2f%2fexample.com%2fposts%2femacs%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&name=My%20Emacs%20Configuration&description=Introduction%20Meta%20Packages%20General%20%20Personal%20information%20Reduce%20filesystem%20clutter%20Cleanup%20UI%20Saner%20defaults%20Beacon%20Theme%20Display%20battery%20in%20modeline%20Indent%20guides%20Cursorline%20Indentation%20Origami%20ialign%20Relative%20line%20numbers%20Key%20chords%20Fix%20scrolling%20%20%20Tools%20%20Terminal%20Emulator%20Treemacs%20Undo%20Tree%20Magit%20Git%20Gutter%20Ivy%20%20%20Evil%20Mode%20Language%20Server%20%20lsp-mode%20lsp-ui%20XRefs%20%20%20Auto%20Complete%20Languages%20%20C%2b%2b%20Python%20Scala%20Golang%20Javascript%2fTypescript%20Web%20%20Vue%20Emmet%20%20%20%20%20Org%20LaTeX%20Configuration%20Files%20%20Terraform%20Yaml%20Protobuf%20CMake%20Dockerfile%20Toml%20%20%20Spelling%20Snippets%20Miscellaneous%20dz%2ffunctions%20%20Wrap%20org%20source%20code%20blocks%20Open%20configuration%20%20%20%20%20Introduction%20What%20follows%20is%20my%20literate%20emacs%20configuration." aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fexample.com%2fposts%2femacs%2f&t=My%20Emacs%20Configuration" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2021  (&gt;&gt;=) :: mircodz 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">~/home</a></li>
+         
+        <li><a href="/posts">~/posts</a></li>
+         
+        <li><a href="/tags">~/tags</a></li>
+         
+        <li><a href="/about">~/about</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+
+
+</html>

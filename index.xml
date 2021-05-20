@@ -2,36 +2,36 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>(&gt;&gt;=) :: mircodz</title>
-    <link>https://mircodezorzi.github.io/</link>
+    <link>https://example.com/</link>
     <description>Recent content on (&gt;&gt;=) :: mircodz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0100</lastBuildDate><atom:link href="https://mircodezorzi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0100</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My Emacs Configuration</title>
-      <link>https://mircodezorzi.github.io/doc/emacs-configuration/</link>
+      <link>https://example.com/posts/emacs/</link>
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0100</pubDate>
       
-      <guid>https://mircodezorzi.github.io/doc/emacs-configuration/</guid>
-      <description>Table of Contents  Introduction Meta Packages General  Personal information Reduce filesystem clutter Cleanup UI Saner defaults Beacon Font Dashboard Theme Display battery in modeline Indent guides Cursorline Indentation Windows Relative line numbers Key chords   Tools  Terminal Emulator All The Icons Centaur Tabs Treemacs Undo Tree Magit Git Gutter Ivy   Evil Mode Language Server  lsp-mode lsp-ui XRefs   Auto Complete Languages  C++ Python Golang Haskell Javascript/Typescript Web   File Types  Org LaTeX   Configuration Files Spelling Snippets Miscellaneous dz/functions  Wrap org source code blocks Open configuration        Introduction What follows is my literate emacs configuration.</description>
+      <guid>https://example.com/posts/emacs/</guid>
+      <description>Introduction Meta Packages General  Personal information Reduce filesystem clutter Cleanup UI Saner defaults Beacon Theme Display battery in modeline Indent guides Cursorline Indentation Origami ialign Relative line numbers Key chords Fix scrolling   Tools  Terminal Emulator Treemacs Undo Tree Magit Git Gutter Ivy   Evil Mode Language Server  lsp-mode lsp-ui XRefs   Auto Complete Languages  C++ Python Scala Golang Javascript/Typescript Web  Vue Emmet     Org LaTeX Configuration Files  Terraform Yaml Protobuf CMake Dockerfile Toml   Spelling Snippets Miscellaneous dz/functions  Wrap org source code blocks Open configuration     Introduction What follows is my literate emacs configuration.</description>
     </item>
     
     <item>
-      <title>Reversing Packet Tracer a parte: pka2xml-aws</title>
-      <link>https://mircodezorzi.github.io/doc/pka2xml-aws/</link>
-      <pubDate>Fri, 04 Dec 2020 00:00:00 +0100</pubDate>
+      <title>About</title>
+      <link>https://example.com/about/</link>
+      <pubDate>Fri, 27 Nov 2020 00:00:00 +0100</pubDate>
       
-      <guid>https://mircodezorzi.github.io/doc/pka2xml-aws/</guid>
-      <description>Table of Contents  Preface Backend  Installing the C++ Lambda Runtime Setting up CMake The code Compiling   Frontend    As with the previous post, this is a work in progress, as soon as I can I&amp;rsquo;m going to include all the steps to set-up serverless.</description>
+      <guid>https://example.com/about/</guid>
+      <description>CTF player at NoPwnIntended and mhackeroni. https://spritze.rs/ https://mhackeroni.it/</description>
     </item>
     
     <item>
       <title>Reversing Packet Tracer</title>
-      <link>https://mircodezorzi.github.io/doc/reversing-packet-tracer/</link>
+      <link>https://example.com/posts/reversing-packet-tracer/</link>
       <pubDate>Fri, 27 Nov 2020 00:00:00 +0100</pubDate>
       
-      <guid>https://mircodezorzi.github.io/doc/reversing-packet-tracer/</guid>
-      <description>Table of Contents  Preface Reversing  Stage 1: decryptPTSave Stage 2: decipher Stage 3: deobfuscateBytes Stage 4: qUncompress   Putting it All Together Patching  Bypassing Login 100%   Resources    Please note that this article is still a draft.</description>
+      <guid>https://example.com/posts/reversing-packet-tracer/</guid>
+      <description>Reversing  Stage 1: decryptPTSave Stage 2: decipher Stage 3: deobfuscateBytes Stage 4: qUncompresss   Putting it All Together Patching  Bypassing Login   Forging  100%   Resources  Reversing Thankfully Cisco developers seem to have forgotten to strip the binary&amp;rsquo;s symbols of the Linux version, so we are going to take advantage of it; this will help up tremendously in the reversing process and it will save us a huge amount of time as we won&amp;rsquo;t have to locate the functions that were interested in.</description>
     </item>
     
   </channel>
