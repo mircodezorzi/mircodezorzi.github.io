@@ -9,25 +9,25 @@
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
   <meta property="og:title" content="My Emacs Configuration" />
-<meta property="og:description" content="Introduction Meta Packages General  Personal information Reduce filesystem clutter Cleanup UI Saner defaults Beacon Theme Display battery in modeline Indent guides Cursorline Indentation Origami ialign Relative line numbers Key chords Fix scrolling   Tools  Terminal Emulator Treemacs Undo Tree Magit Git Gutter Ivy   Evil Mode Language Server  lsp-mode lsp-ui XRefs   Auto Complete Languages  C&#43;&#43; Python Scala Golang Javascript/Typescript Web  Vue Emmet     Org LaTeX Configuration Files  Terraform Yaml Protobuf CMake Dockerfile Toml   Spelling Snippets Miscellaneous dz/functions  Wrap org source code blocks Open configuration     Introduction What follows is my literate emacs configuration." />
+<meta property="og:description" content="Introduction Meta Packages General  Personal information Reduce filesystem clutter Cleanup UI Saner defaults Beacon Theme Display battery in modeline Indent guides Cursorline Indentation Origami ialign Relative line numbers Key chords Fix scrolling   Tools  Terminal Emulator Treemacs Undo Tree Magit Git Gutter Ivy   Evil Mode Language Server  lsp-mode lsp-ui XRefs   Auto Complete Languages  C&#43;&#43; Python Scala Golang Javascript/Typescript Web  Vue Emmet     Org LaTeX Configuration Files  Terraform Yaml Protobuf CMake Dockerfile Toml   Spelling Snippets Miscellaneous dz/functions  Wrap org source code blocks Open configuration    Introduction  What follows is my literate emacs configuration." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://example.com/posts/emacs/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://mircodezorzi.github.io/posts/emacs/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-01-26T00:00:00&#43;01:00" />
-<meta property="article:modified_time" content="2021-05-17T17:41:09&#43;02:00" />
+<meta property="article:modified_time" content="2021-05-20T13:09:27&#43;02:00" />
 
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="My Emacs Configuration"/>
-<meta name="twitter:description" content="Introduction Meta Packages General  Personal information Reduce filesystem clutter Cleanup UI Saner defaults Beacon Theme Display battery in modeline Indent guides Cursorline Indentation Origami ialign Relative line numbers Key chords Fix scrolling   Tools  Terminal Emulator Treemacs Undo Tree Magit Git Gutter Ivy   Evil Mode Language Server  lsp-mode lsp-ui XRefs   Auto Complete Languages  C&#43;&#43; Python Scala Golang Javascript/Typescript Web  Vue Emmet     Org LaTeX Configuration Files  Terraform Yaml Protobuf CMake Dockerfile Toml   Spelling Snippets Miscellaneous dz/functions  Wrap org source code blocks Open configuration     Introduction What follows is my literate emacs configuration."/>
+<meta name="twitter:description" content="Introduction Meta Packages General  Personal information Reduce filesystem clutter Cleanup UI Saner defaults Beacon Theme Display battery in modeline Indent guides Cursorline Indentation Origami ialign Relative line numbers Key chords Fix scrolling   Tools  Terminal Emulator Treemacs Undo Tree Magit Git Gutter Ivy   Evil Mode Language Server  lsp-mode lsp-ui XRefs   Auto Complete Languages  C&#43;&#43; Python Scala Golang Javascript/Typescript Web  Vue Emmet     Org LaTeX Configuration Files  Terraform Yaml Protobuf CMake Dockerfile Toml   Spelling Snippets Miscellaneous dz/functions  Wrap org source code blocks Open configuration    Introduction  What follows is my literate emacs configuration."/>
 
   
   
     
   
   
-  <link rel="stylesheet" href="https://example.com/css/style-white.css">
+  <link rel="stylesheet" href="https://mircodezorzi.github.io/css/style-white.css">
   
-   <link rel="stylesheet" href="https://example.com/css/syntax.css"> 
+   <link rel="stylesheet" href="https://mircodezorzi.github.io/css/syntax.css"> 
   
   
   
@@ -38,7 +38,7 @@
   
 
   
-<link rel="icon" type="image/png" href="https://example.com/images/favicon.ico" />
+<link rel="icon" type="image/png" href="https://mircodezorzi.github.io/images/favicon.ico" />
 
   
   
@@ -72,7 +72,7 @@
       <ul>
         
         <li>
-          <a class="icon" href=" https://example.com/about/" aria-label="Previous">
+          <a class="icon" href=" https://mircodezorzi.github.io/about/" aria-label="Previous">
             <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
           </a>
         </li>
@@ -104,47 +104,47 @@
   
   
   <li>
-    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fexample.com%2fposts%2femacs%2f" aria-label="Facebook">
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f" aria-label="Facebook">
       <i class="fab fa-facebook " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&text=My%20Emacs%20Configuration" aria-label="Twitter">
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f&text=My%20Emacs%20Configuration" aria-label="Twitter">
       <i class="fab fa-twitter " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="Linkedin">
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="Linkedin">
       <i class="fab fa-linkedin " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&is_video=false&description=My%20Emacs%20Configuration" aria-label="Pinterest">
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f&is_video=false&description=My%20Emacs%20Configuration" aria-label="Pinterest">
       <i class="fab fa-pinterest " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="mailto:?subject=My%20Emacs%20Configuration&body=Check out this article: https%3a%2f%2fexample.com%2fposts%2femacs%2f" aria-label="Email">
+    <a class="icon" href="mailto:?subject=My%20Emacs%20Configuration&body=Check out this article: https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f" aria-label="Email">
       <i class="fas fa-envelope " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="Pocket">
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="Pocket">
       <i class="fab fa-get-pocket " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="reddit">
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="reddit">
       <i class="fab fa-reddit " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&name=My%20Emacs%20Configuration&description=Introduction%20Meta%20Packages%20General%20%20Personal%20information%20Reduce%20filesystem%20clutter%20Cleanup%20UI%20Saner%20defaults%20Beacon%20Theme%20Display%20battery%20in%20modeline%20Indent%20guides%20Cursorline%20Indentation%20Origami%20ialign%20Relative%20line%20numbers%20Key%20chords%20Fix%20scrolling%20%20%20Tools%20%20Terminal%20Emulator%20Treemacs%20Undo%20Tree%20Magit%20Git%20Gutter%20Ivy%20%20%20Evil%20Mode%20Language%20Server%20%20lsp-mode%20lsp-ui%20XRefs%20%20%20Auto%20Complete%20Languages%20%20C%2b%2b%20Python%20Scala%20Golang%20Javascript%2fTypescript%20Web%20%20Vue%20Emmet%20%20%20%20%20Org%20LaTeX%20Configuration%20Files%20%20Terraform%20Yaml%20Protobuf%20CMake%20Dockerfile%20Toml%20%20%20Spelling%20Snippets%20Miscellaneous%20dz%2ffunctions%20%20Wrap%20org%20source%20code%20blocks%20Open%20configuration%20%20%20%20%20Introduction%20What%20follows%20is%20my%20literate%20emacs%20configuration." aria-label="Tumblr">
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f&name=My%20Emacs%20Configuration&description=Introduction%20Meta%20Packages%20General%20%20Personal%20information%20Reduce%20filesystem%20clutter%20Cleanup%20UI%20Saner%20defaults%20Beacon%20Theme%20Display%20battery%20in%20modeline%20Indent%20guides%20Cursorline%20Indentation%20Origami%20ialign%20Relative%20line%20numbers%20Key%20chords%20Fix%20scrolling%20%20%20Tools%20%20Terminal%20Emulator%20Treemacs%20Undo%20Tree%20Magit%20Git%20Gutter%20Ivy%20%20%20Evil%20Mode%20Language%20Server%20%20lsp-mode%20lsp-ui%20XRefs%20%20%20Auto%20Complete%20Languages%20%20C%2b%2b%20Python%20Scala%20Golang%20Javascript%2fTypescript%20Web%20%20Vue%20Emmet%20%20%20%20%20Org%20LaTeX%20Configuration%20Files%20%20Terraform%20Yaml%20Protobuf%20CMake%20Dockerfile%20Toml%20%20%20Spelling%20Snippets%20Miscellaneous%20dz%2ffunctions%20%20Wrap%20org%20source%20code%20blocks%20Open%20configuration%20%20%20%20Introduction%20%20What%20follows%20is%20my%20literate%20emacs%20configuration." aria-label="Tumblr">
       <i class="fab fa-tumblr " aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fexample.com%2fposts%2femacs%2f&t=My%20Emacs%20Configuration" aria-label="Hacker News">
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f&t=My%20Emacs%20Configuration" aria-label="Hacker News">
       <i class="fab fa-hacker-news " aria-hidden="true"></i>
     </a>
   </li>
@@ -353,10 +353,10 @@
 </li>
 </ul>
 <!-- raw HTML omitted -->
-<figure><img src="https://mircodezorzi.github.io/doc/emacs-configuration/210224-2201-11.png"/>
+<h2 id="introduction">Introduction</h2>
+<figure><img src="https://mircodezorzi.github.io/doc/emacs-configuration/210520-1305-53.png"/>
 </figure>
 
-<h2 id="introduction">Introduction</h2>
 <p>What follows is my literate emacs configuration. Feel free to copy any snippet you wish, as I did with many other configuration over the past year or so.</p>
 <h2 id="meta">Meta</h2>
 <p>Enable lexical scoping for the current file.</p>
@@ -534,8 +534,8 @@
 <div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">setq-default</span>
     <span class="nv">electric-indent-inhibit</span> <span class="no">t</span> <span class="c1">;; Disable annoying indentation behaviour.</span>
     <span class="nv">indent-tabs-mode</span>        <span class="no">nil</span>
-    <span class="nv">tab-width</span>               <span class="mi">4</span>
-    <span class="nv">evil-shift-width</span>        <span class="mi">4</span><span class="p">)</span>
+    <span class="nv">tab-width</span>               <span class="mi">2</span>
+    <span class="nv">evil-shift-width</span>        <span class="mi">2</span><span class="p">)</span>
 </code></pre></div><p>Stolen from <a href="http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html">binchen</a></p>
 <div class="highlight"><pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/indent-setup</span> <span class="p">(</span><span class="nv">n</span><span class="p">)</span>
   <span class="c1">;; java/c/c++</span>
@@ -548,7 +548,7 @@
 <span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/indent-tabs</span> <span class="p">()</span>
   <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
   <span class="p">(</span><span class="nv">setq-local</span> <span class="nv">indent-tabs-mode</span> <span class="no">t</span><span class="p">)</span> <span class="c1">;; Use tab instead of space.</span>
-  <span class="p">(</span><span class="nv">dz/indent-setup</span> <span class="mi">4</span><span class="p">))</span>            <span class="c1">;; Indent 4 spaces width.</span>
+  <span class="p">(</span><span class="nv">dz/indent-setup</span> <span class="mi">2</span><span class="p">))</span>            <span class="c1">;; Indent 4 spaces width.</span>
 
 <span class="p">(</span><span class="nb">defun</span> <span class="nv">dz/indent-spaces</span> <span class="p">()</span>
   <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
@@ -1295,47 +1295,47 @@
   
   
   <li>
-    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fexample.com%2fposts%2femacs%2f" aria-label="Facebook">
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f" aria-label="Facebook">
       <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&text=My%20Emacs%20Configuration" aria-label="Twitter">
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f&text=My%20Emacs%20Configuration" aria-label="Twitter">
       <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="Linkedin">
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="Linkedin">
       <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&is_video=false&description=My%20Emacs%20Configuration" aria-label="Pinterest">
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f&is_video=false&description=My%20Emacs%20Configuration" aria-label="Pinterest">
       <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="mailto:?subject=My%20Emacs%20Configuration&body=Check out this article: https%3a%2f%2fexample.com%2fposts%2femacs%2f" aria-label="Email">
+    <a class="icon" href="mailto:?subject=My%20Emacs%20Configuration&body=Check out this article: https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f" aria-label="Email">
       <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="Pocket">
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="Pocket">
       <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="reddit">
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f&title=My%20Emacs%20Configuration" aria-label="reddit">
       <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fexample.com%2fposts%2femacs%2f&name=My%20Emacs%20Configuration&description=Introduction%20Meta%20Packages%20General%20%20Personal%20information%20Reduce%20filesystem%20clutter%20Cleanup%20UI%20Saner%20defaults%20Beacon%20Theme%20Display%20battery%20in%20modeline%20Indent%20guides%20Cursorline%20Indentation%20Origami%20ialign%20Relative%20line%20numbers%20Key%20chords%20Fix%20scrolling%20%20%20Tools%20%20Terminal%20Emulator%20Treemacs%20Undo%20Tree%20Magit%20Git%20Gutter%20Ivy%20%20%20Evil%20Mode%20Language%20Server%20%20lsp-mode%20lsp-ui%20XRefs%20%20%20Auto%20Complete%20Languages%20%20C%2b%2b%20Python%20Scala%20Golang%20Javascript%2fTypescript%20Web%20%20Vue%20Emmet%20%20%20%20%20Org%20LaTeX%20Configuration%20Files%20%20Terraform%20Yaml%20Protobuf%20CMake%20Dockerfile%20Toml%20%20%20Spelling%20Snippets%20Miscellaneous%20dz%2ffunctions%20%20Wrap%20org%20source%20code%20blocks%20Open%20configuration%20%20%20%20%20Introduction%20What%20follows%20is%20my%20literate%20emacs%20configuration." aria-label="Tumblr">
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f&name=My%20Emacs%20Configuration&description=Introduction%20Meta%20Packages%20General%20%20Personal%20information%20Reduce%20filesystem%20clutter%20Cleanup%20UI%20Saner%20defaults%20Beacon%20Theme%20Display%20battery%20in%20modeline%20Indent%20guides%20Cursorline%20Indentation%20Origami%20ialign%20Relative%20line%20numbers%20Key%20chords%20Fix%20scrolling%20%20%20Tools%20%20Terminal%20Emulator%20Treemacs%20Undo%20Tree%20Magit%20Git%20Gutter%20Ivy%20%20%20Evil%20Mode%20Language%20Server%20%20lsp-mode%20lsp-ui%20XRefs%20%20%20Auto%20Complete%20Languages%20%20C%2b%2b%20Python%20Scala%20Golang%20Javascript%2fTypescript%20Web%20%20Vue%20Emmet%20%20%20%20%20Org%20LaTeX%20Configuration%20Files%20%20Terraform%20Yaml%20Protobuf%20CMake%20Dockerfile%20Toml%20%20%20Spelling%20Snippets%20Miscellaneous%20dz%2ffunctions%20%20Wrap%20org%20source%20code%20blocks%20Open%20configuration%20%20%20%20Introduction%20%20What%20follows%20is%20my%20literate%20emacs%20configuration." aria-label="Tumblr">
       <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
     </a>
   </li>
   <li>
-    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fexample.com%2fposts%2femacs%2f&t=My%20Emacs%20Configuration" aria-label="Hacker News">
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fmircodezorzi.github.io%2fposts%2femacs%2f&t=My%20Emacs%20Configuration" aria-label="Hacker News">
       <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
     </a>
   </li>

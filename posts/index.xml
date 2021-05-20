@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on (&gt;&gt;=) :: mircodz</title>
-    <link>https://example.com/posts/</link>
+    <link>https://mircodezorzi.github.io/posts/</link>
     <description>Recent content in Posts on (&gt;&gt;=) :: mircodz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0100</lastBuildDate><atom:link href="https://example.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0100</lastBuildDate><atom:link href="https://mircodezorzi.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My Emacs Configuration</title>
-      <link>https://example.com/posts/emacs/</link>
+      <link>https://mircodezorzi.github.io/posts/emacs/</link>
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0100</pubDate>
       
-      <guid>https://example.com/posts/emacs/</guid>
-      <description>Introduction Meta Packages General  Personal information Reduce filesystem clutter Cleanup UI Saner defaults Beacon Theme Display battery in modeline Indent guides Cursorline Indentation Origami ialign Relative line numbers Key chords Fix scrolling   Tools  Terminal Emulator Treemacs Undo Tree Magit Git Gutter Ivy   Evil Mode Language Server  lsp-mode lsp-ui XRefs   Auto Complete Languages  C++ Python Scala Golang Javascript/Typescript Web  Vue Emmet     Org LaTeX Configuration Files  Terraform Yaml Protobuf CMake Dockerfile Toml   Spelling Snippets Miscellaneous dz/functions  Wrap org source code blocks Open configuration     Introduction What follows is my literate emacs configuration.</description>
+      <guid>https://mircodezorzi.github.io/posts/emacs/</guid>
+      <description>Introduction Meta Packages General  Personal information Reduce filesystem clutter Cleanup UI Saner defaults Beacon Theme Display battery in modeline Indent guides Cursorline Indentation Origami ialign Relative line numbers Key chords Fix scrolling   Tools  Terminal Emulator Treemacs Undo Tree Magit Git Gutter Ivy   Evil Mode Language Server  lsp-mode lsp-ui XRefs   Auto Complete Languages  C++ Python Scala Golang Javascript/Typescript Web  Vue Emmet     Org LaTeX Configuration Files  Terraform Yaml Protobuf CMake Dockerfile Toml   Spelling Snippets Miscellaneous dz/functions  Wrap org source code blocks Open configuration    Introduction  What follows is my literate emacs configuration.</description>
     </item>
     
     <item>
       <title>Reversing Packet Tracer</title>
-      <link>https://example.com/posts/reversing-packet-tracer/</link>
+      <link>https://mircodezorzi.github.io/posts/reversing-packet-tracer/</link>
       <pubDate>Fri, 27 Nov 2020 00:00:00 +0100</pubDate>
       
-      <guid>https://example.com/posts/reversing-packet-tracer/</guid>
+      <guid>https://mircodezorzi.github.io/posts/reversing-packet-tracer/</guid>
       <description>Reversing  Stage 1: decryptPTSave Stage 2: decipher Stage 3: deobfuscateBytes Stage 4: qUncompresss   Putting it All Together Patching  Bypassing Login   Forging  100%   Resources  Reversing Thankfully Cisco developers seem to have forgotten to strip the binary&amp;rsquo;s symbols of the Linux version, so we are going to take advantage of it; this will help up tremendously in the reversing process and it will save us a huge amount of time as we won&amp;rsquo;t have to locate the functions that were interested in.</description>
     </item>
     
